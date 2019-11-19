@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2019-11-19T08:54:27.432Z</updated>
+    <updated>2019-11-19T09:24:54.542Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -38,7 +38,7 @@ xhr.send();
 <li>在后台向服务器发送数据</li>
 </ul>
 <h2 id="ajax">ajax</h2>
-<pre><code class="language-typescript">$.ajax({
+<pre><code class="language-javascript">$.ajax({
     type:&quot;post&quot;,
     url:url,
     data:data,
@@ -147,7 +147,7 @@ xhr.send();
 </li>
 </ul>
 <p>我看了我们目前几个项目，都是基于 fetch 实现的，所以看了一下对上述坑的解决方案：</p>
-<pre><code class="language-javascript">import { message, Modal } from &quot;antd&quot;;
+<pre><code class="language-typescript">import { message, Modal } from &quot;antd&quot;;
 import { getLocal } from &quot;common/LocaleProvider&quot;;
 import omitEmpty from &quot;omit-empty&quot;;
 //import { removeUserInfo } from &quot;utils/user&quot;;

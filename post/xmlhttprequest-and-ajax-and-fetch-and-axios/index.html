@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>XmlHttpRequest &amp; Ajax &amp; Fetch &amp; Axios | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
-<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1574153664452">
+<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1574155380148">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://JoelynZhou.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://JoelynZhou.github.io">
-  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1574153664452" alt="">
+  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1574155380148" alt="">
   </a>
   <h1 class="site-title">
     JoelynZhou
@@ -115,7 +115,7 @@ xhr.send();
 <li>在后台向服务器发送数据</li>
 </ul>
 <h2 id="ajax">ajax</h2>
-<pre><code class="language-typescript">$.ajax({
+<pre><code class="language-javascript">$.ajax({
     type:&quot;post&quot;,
     url:url,
     data:data,
@@ -224,7 +224,7 @@ xhr.send();
 </li>
 </ul>
 <p>我看了我们目前几个项目，都是基于 fetch 实现的，所以看了一下对上述坑的解决方案：</p>
-<pre><code class="language-javascript">import { message, Modal } from &quot;antd&quot;;
+<pre><code class="language-typescript">import { message, Modal } from &quot;antd&quot;;
 import { getLocal } from &quot;common/LocaleProvider&quot;;
 import omitEmpty from &quot;omit-empty&quot;;
 //import { removeUserInfo } from &quot;utils/user&quot;;
