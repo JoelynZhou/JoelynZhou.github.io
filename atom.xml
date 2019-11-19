@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2019-11-19T09:24:54.542Z</updated>
+    <updated>2019-11-19T12:09:18.870Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -388,7 +388,7 @@ answer(permutations, n =&gt; n[3] == 2 &amp;&amp; n[2] != 1 &amp;&amp; n[1] != 2
         <id>https://JoelynZhou.github.io/post/2020-nian-du-ji-dahua-lianbiao</id>
         <link href="https://JoelynZhou.github.io/post/2020-nian-du-ji-dahua-lianbiao">
         </link>
-        <updated>2019-11-13T14:06:34.000Z</updated>
+        <updated>2019-11-01T14:06:34.000Z</updated>
         <content type="html"><![CDATA[<blockquote>
 <p><strong>关键词：专注</strong></p>
 </blockquote>
