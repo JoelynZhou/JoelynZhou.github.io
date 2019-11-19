@@ -1,0 +1,417 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>XmlHttpRequest &amp; Ajax &amp; Fetch &amp; Axios | JoelynZhou</title>
+<meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
+<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1574142523494">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://JoelynZhou.github.io/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://JoelynZhou.github.io">
+  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1574142523494" alt="">
+  </a>
+  <h1 class="site-title">
+    JoelynZhou
+  </h1>
+  <p class="site-description">
+    多读书 / 多看报 / 少吃零食 / 多睡觉
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              XmlHttpRequest &amp; Ajax &amp; Fetch &amp; Axios
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-11-18
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://JoelynZhou.github.io/tag/knkthWB-g" class="post-tag">
+                  # 前端
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="/post-images/xmlhttprequest-and-ajax-and-fetch-and-axios.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>[注：Image by <a href="https://pixabay.com/users/Dimhou-5987327/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4481566">Dimitri Houtteman</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4481566">Pixabay</a>]</p>
+<h2 id="xmlhttprequest">XmlHttpRequest</h2>
+<pre><code class="language-javascript">var xhr=new XMLHttpRequest();
+xhr.open(&quot;GET&quot;,url);
+xhr.responseType=&quot;json&quot;;
+
+xhr.onload=function(){
+    console.log(xhr.response);
+}
+
+xhr.onerror=function(){
+    console.log(&quot;error&quot;);
+}
+
+xhr.send();
+</code></pre>
+<ul>
+<li>在不重新加载页面的情况下更新页面</li>
+<li>在页面已加载后从服务器请求/接收数据</li>
+<li>在后台向服务器发送数据</li>
+</ul>
+<h2 id="ajax">ajax</h2>
+<pre><code class="language-typescript">$.ajax({
+    type:&quot;post&quot;,
+    url:url,
+    data:data,
+    dataType:dataType,
+    success:function(){},
+    error:function(){}
+})
+</code></pre>
+<ul>
+<li><strong>对原生 XHR 的封装</strong></li>
+<li>增加了对 JSONP 的支持</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>针对 MVC 编程，不符合前端 MVVM 的浪潮</li>
+<li>架构不清晰，如果有多个请求或者依赖关系，容易形成回调地狱</li>
+<li>为了 ajax 引入 jQuery 不合理</li>
+</ul>
+<h2 id="axios">axios</h2>
+<pre><code class="language-javascript">axios({
+    method:&quot;post&quot;,
+    url:url,
+    data:data,
+}).then(response=&gt;{
+    console.log(response);
+}).catch(err=&gt;{
+    console.log(err);
+})
+</code></pre>
+<ul>
+<li>从 node.js 创建 http 请求</li>
+<li>也是对原生 XHR 的封装，但是是 Promise 的实现版本，符合最新 ES 规范</li>
+<li>客户端支持防止 CSRF</li>
+<li><strong>提供了一些并发请求的接口</strong></li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>只支持现代浏览器</li>
+</ul>
+<h2 id="fetch">fetch</h2>
+<pre><code class="language-javascript">fetch(&quot;/users.json&quot;,{
+    method:&quot;post&quot;,
+    mode:&quot;no-cors&quot;,
+    data:{}
+}).then(function(response){
+    return response.json();
+}).then(function(data){
+    console.log(data);
+}).catch(function(e){
+    console.log(&quot;error&quot;);
+})
+</code></pre>
+<p>换成更简洁的箭头函数的写法：</p>
+<pre><code class="language-javascript">fetch(&quot;/users.json&quot;,{
+    method:&quot;post&quot;,
+    mode:&quot;no-cors&quot;,
+    data:{}
+}).then(response=&gt;{
+    return response.json();
+}).then(data=&gt;{
+    console.log(data);
+}).catch(e=&gt;{
+    console.log(&quot;error&quot;);
+})
+</code></pre>
+<p>换成 es7 async/await 的写法：</p>
+<pre><code class="language-javascript">try{
+    let response=await fetch(url);
+    let data=await response.json();
+    console.log(data);
+}catch(e){
+    console.log(&quot;error&quot;,e);
+}
+</code></pre>
+<blockquote>
+<p>Promise, generator/yield,await/async 都是现在和未来JS解决异步的标准做法，可以完美搭配使用。</p>
+</blockquote>
+<p>总结，Fetch 优点：</p>
+<ul>
+<li>语法简洁</li>
+<li>基于标准 Promise 实现，支持 async/await
+<ul>
+<li>因为旧版浏览器不支持 Promise，所以需要使用 polly-fill es6-promise</li>
+</ul>
+</li>
+<li>同构方便</li>
+<li>对跨域的处理
+<ul>
+<li>在配置中添加<code>mode:&quot;no-cors&quot;</code>即可</li>
+</ul>
+</li>
+</ul>
+<p>用 Fetch 遇到的坑：</p>
+<ul>
+<li>
+<p>Fetch 请求默认不带 cookie ，需要设置 <code>fetch(url,{credentials:&quot;include&quot;})</code></p>
+</li>
+<li>
+<p>服务器返回 400，500 并不会 reject，只有网络错误导致请求不能完成才会被 reject</p>
+</li>
+<li>
+<p>不能中断，没有 abort, terminate, onTImeout, cancel 方法</p>
+</li>
+<li>
+<p>不同于 XHR ，不能监测请求进度（但这样会比较简单）</p>
+</li>
+</ul>
+<p>我看了我们目前几个项目，都是基于 fetch 实现的，所以看了一下对上述坑的解决方案：</p>
+<pre><code class="language-typescript">import { message, Modal } from &quot;antd&quot;;
+import { getLocal } from &quot;common/LocaleProvider&quot;;
+import omitEmpty from &quot;omit-empty&quot;;
+//import { removeUserInfo } from &quot;utils/user&quot;;
+import { getSearchParamValue } from &quot;./url&quot;;
+
+function getApiDomain() {
+	const apiip = getSearchParamValue(&quot;apiip&quot;);
+	return apiip || window.location.host;
+}
+
+function checkStatus(response: Response): Response {
+	if (!response.ok) {
+		const error = new Error(response.statusText);
+		switch (response.status) {
+			case 401:
+				window.location.pathname = &quot;/login.html&quot;;
+				break;
+			case 500:
+				message.warn(&quot;server error&quot;);
+				break;
+			default:
+				return response;
+		}
+		throw error;
+	}
+	return response;
+}
+
+export function getApiUrl(method: string) {
+	method = method.replace(/\./g, &quot;/&quot;);
+	return `//${getApiDomain()}/api/${method}`;
+}
+
+export function doFetch(
+	url: string,
+	params: any,
+	fetchMethod?: &quot;POST&quot; | &quot;GET&quot;,
+	headers?: HeadersInit
+) {
+	const method = fetchMethod ? fetchMethod : &quot;post&quot;;
+	params = omitEmpty(params);
+	return fetch(url, {
+		method,
+		credentials: &quot;include&quot;,
+		headers,
+		body: JSON.stringify(params)
+	}).then(checkStatus);
+}
+
+const XLocale = new Headers({
+	&quot;x-locale&quot;: getLocal()
+});
+
+export function webapi&lt;T&gt;(method: string, params: any, apiURL?: string): Promise&lt;T&gt; {
+	let url = apiURL ? apiURL : getApiUrl(method);
+
+	// return doFetch(url, params)
+	return doFetch(url, params, &quot;POST&quot;, XLocale)
+		.then(
+			response =&gt;
+				response.json().then(json =&gt; ({
+					data: json,
+					status: response.status
+				})) as Promise&lt;{
+					data: any;
+					status: number;
+				}&gt;
+		)
+		.then&lt;T&gt;(response =&gt; {
+			if (response.status === 200 &amp;&amp; response.data.result.code !== 0) {
+				if (response.data.result.code === 1000) {
+					removeUserInfo();
+					parent.location.href = &quot;./login.html&quot;;
+				}
+				let msg = response.data.result.message;
+				if (response.data.result.code === 500) {
+					msg = msg ? msg : &quot;server error&quot;;
+				}
+				console.error(msg);
+				console.log(msg);
+				return Promise.reject({
+					status: 5001, // 专门为后端设置的专门接口信息错误
+					message: msg
+				});
+			}
+			if (response.status !== 200) {
+				return Promise.reject({
+					status: response.status,
+					message: &quot;后端接口信息：&quot; + response.data.message
+				});
+			}
+			return response.data;
+		})
+		.catch(err =&gt; {
+			const msg = err.message || &quot;&quot;;
+			return Promise.reject({
+				status: 5002,
+				message: msg.match(/Failed to fetch/gi) ? `网络不稳定，请稍后重试` : msg
+				// `接口：${method}挂了或者没有开启CORS跨域功能，请稍等！`
+			});
+		});
+}
+</code></pre>
+<h2 id="参考">参考</h2>
+<ul>
+<li>https://segmentfault.com/a/1190000012836882</li>
+</ul>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#xmlhttprequest">XmlHttpRequest</a></li>
+<li><a href="#ajax">ajax</a></li>
+<li><a href="#axios">axios</a></li>
+<li><a href="#fetch">fetch</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://JoelynZhou.github.io/post/luo-ji-tui-li-ti-cai-ming-ci">
+              <h3 class="post-title">
+                逻辑推理题-猜名次
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://JoelynZhou.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>

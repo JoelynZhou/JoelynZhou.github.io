@@ -1,0 +1,299 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>逻辑推理题-猜名次 | JoelynZhou</title>
+<meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
+<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1574142523494">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://JoelynZhou.github.io/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://JoelynZhou.github.io">
+  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1574142523494" alt="">
+  </a>
+  <h1 class="site-title">
+    JoelynZhou
+  </h1>
+  <p class="site-description">
+    多读书 / 多看报 / 少吃零食 / 多睡觉
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              逻辑推理题-猜名次
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-11-14
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+                <a href="https://JoelynZhou.github.io/tag/Edh7j7yJ1F" class="post-tag">
+                  # 逻辑推理
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://JoelynZhou.github.io/post-images/luo-ji-tui-li-ti-cai-ming-ci.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>[注：Image by <a href="https://pixabay.com/users/DaveFrancis-14230021/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4615685">Dave Francis</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4615685">Pixabay</a>]</p>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>有 A, B, C, D 和 E 共5个运动员，在一次比赛中，已知E肯定不是第二名或第三名，他们相互进行推测：<br>
+A 说，E 一定是第一名；<br>
+B 说，我是第二名；<br>
+C 说，A 是最后一名；<br>
+D 说，C 不是第一名；<br>
+E 说，D 是第一名；<br>
+结果只有实际排名第一和第二名的运动员猜对了，其他人都猜错了。<br>
+请编写一个程序，求出这5个运动员的名次。</p>
+</blockquote>
+<p>这个问题的常规思路其实很简单，把所有情况排列组合，有顺序，一共<img src="https://JoelynZhou.github.io/post-images/1573731742585.png" alt=""></p>
+<p>种情况，再遍历校验条件是否符合。所以，难点在于，怎么用编程实现这个排列组合。</p>
+<h3 id="解法一投机取巧粗暴遍历">解法一：投机取巧+粗暴遍历</h3>
+<pre><code class="language-javascript">/**
+ * 排列组合问题可以用二叉树来简单描述
+ * 思路：创建二叉树，遍历二叉树，条件校验
+ */
+const origin = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;];
+let output = [];
+for (let i = 12345; i &lt;= 54321; i++) {
+    // TODO
+    // 可以优化成寻找下一个比 12345 大的排列组合
+    const temp = [Math.floor(i / 10000), Math.floor(i / 1000 % 10), Math.floor(i / 100 % 10), Math.floor(i / 10 % 10), i % 10];
+    if (isValid(temp)) {
+        // 校验
+        check(temp);
+    } else {
+        continue;
+    }
+}
+console.log(output);
+
+function check(members) {
+    if (members[1] === 5 || members[2] === 5) {
+        return;
+    }
+    const list = [members[0] === 5, members[1] === 2, members[4] === 1, members[0] !== 3, members[0] === 4];
+    if (list[members[0] - 1] &amp;&amp; list[members[1] - 1] &amp;&amp; !list[members[2] - 1] &amp;&amp; !list[members[3] - 1] &amp;&amp; !list[members[4] - 1]) {
+        const res = [];
+        members.forEach(x =&gt; {
+            res.push(origin[x - 1]);
+        })
+        output.push(res);
+    }
+}
+
+function isValid(arr) {
+    let hash = {};
+    for (let i in arr) {
+        if (hash[arr[i]] || arr[i] &gt; 5 || arr[i] === 0) {
+            return false;
+        }
+        hash[arr[i]] = true;
+    }
+    return true;
+}
+</code></pre>
+<h3 id="解法二根据推论去反校验">解法二：根据推论去反校验</h3>
+<p>假设都对，推互斥</p>
+<pre><code class="language-javascript">function genPermutations(arr) {
+    const result = [];
+
+    function innerArr(temArr) {
+        for (let i = 0, len = arr.length; i &lt; len; i++) {
+            if (temArr.length == len - 1) {
+                if (temArr.indexOf(arr[i]) &lt; 0) {
+                    result.push(temArr.concat(arr[i]));
+                }
+                continue;
+            }
+            if (temArr.indexOf(arr[i]) &lt; 0) {
+                innerArr(temArr.concat(arr[i]));
+            }
+        }
+    }
+    innerArr([]);
+    return result;
+}
+
+var permutations = genPermutations([1, 2, 3, 4, 5])
+
+function answer(arr, fun) {
+    // 已知E肯定不是第二名或第三名
+    arr = arr.filter(n =&gt; n[4] !== 2 &amp;&amp; n[4] !== 3);
+    const result = arr.filter(fun)
+    if (result.length === 1) {
+        console.log(&quot;正确答案为&quot;, result);
+    } else {
+        console.log(&quot;错误猜想&quot;);
+    }
+}
+
+// 第一种组合
+// A说，E一定是第一名；=&gt; E = 1，A = 2 D = 1,
+answer(permutations, n =&gt; n[4] == 1 &amp;&amp; n[0] == 2 &amp;&amp; n[3] == 1)
+
+
+// 第二种组合
+// E说，D是第一名; =&gt; E = 2, D = 1,
+answer(permutations, n =&gt; n[4] == 2 &amp;&amp; n[3] == 1)
+
+//  第三种组合
+//  B说，我是第二名、C说，A是最后一名；=&gt; B = 2 C=1 A==5 E!=1  D != 1
+// =&gt;  B = 2 C=1 A==5
+answer(permutations, n =&gt; n[1] == 2 &amp;&amp; n[2] == 1 &amp;&amp; n[0] == 5)
+
+// 第四种组合 
+// D说，C不是第一名 
+// E说，D是第一名；
+// D ==2 =&gt; C!=1  B != 2 E!=1  A !=5
+answer(permutations, n =&gt; n[3] == 2 &amp;&amp; n[2] != 1 &amp;&amp; n[1] != 2 &amp;&amp; n[4] != 1 &amp;&amp; n[0] != 5);
+</code></pre>
+<h3 id="不用程序直接推导">不用程序直接推导</h3>
+<p>本来一个很简单的题，被编程搞得这么麻烦，就想知道如果自己算就要多久，果然不超过五分钟，就有了下面的结果：<br>
+<img src="https://JoelynZhou.github.io/post-images/1573731798117.png" alt=""></p>
+<p>┓( ´∀` )┏</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
+<li><a href="#%E8%A7%A3%E6%B3%95%E4%B8%80%E6%8A%95%E6%9C%BA%E5%8F%96%E5%B7%A7%E7%B2%97%E6%9A%B4%E9%81%8D%E5%8E%86">解法一：投机取巧+粗暴遍历</a></li>
+<li><a href="#%E8%A7%A3%E6%B3%95%E4%BA%8C%E6%A0%B9%E6%8D%AE%E6%8E%A8%E8%AE%BA%E5%8E%BB%E5%8F%8D%E6%A0%A1%E9%AA%8C">解法二：根据推论去反校验</a></li>
+<li><a href="#%E4%B8%8D%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9B%B4%E6%8E%A5%E6%8E%A8%E5%AF%BC">不用程序直接推导</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://JoelynZhou.github.io/post/2020-nian-du-ji-dahua-lianbiao">
+              <h3 class="post-title">
+                2020 年度计（da）划（lian）表
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://JoelynZhou.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,45 +1,476 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
-    <title>Gridea</title>
-    <updated>2019-11-19T03:45:46.793Z</updated>
+    <title>JoelynZhou</title>
+    <updated>2019-11-19T05:49:11.673Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>多读书 / 多看报 / 少吃零食 / 多睡觉</subtitle>
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2019, Gridea</rights>
+    <rights>All rights reserved 2019, JoelynZhou</rights>
     <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://JoelynZhou.github.io/post/hello-gridea</id>
-        <link href="https://JoelynZhou.github.io/post/hello-gridea">
+        <title type="html"><![CDATA[XmlHttpRequest & Ajax & Fetch & Axios]]></title>
+        <id>https://JoelynZhou.github.io/post/xmlhttprequest-and-ajax-and-fetch-and-axios</id>
+        <link href="https://JoelynZhou.github.io/post/xmlhttprequest-and-ajax-and-fetch-and-axios">
         </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+        <updated>2019-11-18T12:49:56.000Z</updated>
+        <content type="html"><![CDATA[<p>[注：Image by <a href="https://pixabay.com/users/Dimhou-5987327/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4481566">Dimitri Houtteman</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4481566">Pixabay</a>]</p>
+<h2 id="xmlhttprequest">XmlHttpRequest</h2>
+<pre><code class="language-javascript">var xhr=new XMLHttpRequest();
+xhr.open(&quot;GET&quot;,url);
+xhr.responseType=&quot;json&quot;;
+
+xhr.onload=function(){
+    console.log(xhr.response);
+}
+
+xhr.onerror=function(){
+    console.log(&quot;error&quot;);
+}
+
+xhr.send();
+</code></pre>
+<ul>
+<li>在不重新加载页面的情况下更新页面</li>
+<li>在页面已加载后从服务器请求/接收数据</li>
+<li>在后台向服务器发送数据</li>
+</ul>
+<h2 id="ajax">ajax</h2>
+<pre><code class="language-typescript">$.ajax({
+    type:&quot;post&quot;,
+    url:url,
+    data:data,
+    dataType:dataType,
+    success:function(){},
+    error:function(){}
+})
+</code></pre>
+<ul>
+<li><strong>对原生 XHR 的封装</strong></li>
+<li>增加了对 JSONP 的支持</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>针对 MVC 编程，不符合前端 MVVM 的浪潮</li>
+<li>架构不清晰，如果有多个请求或者依赖关系，容易形成回调地狱</li>
+<li>为了 ajax 引入 jQuery 不合理</li>
+</ul>
+<h2 id="axios">axios</h2>
+<pre><code class="language-javascript">axios({
+    method:&quot;post&quot;,
+    url:url,
+    data:data,
+}).then(response=&gt;{
+    console.log(response);
+}).catch(err=&gt;{
+    console.log(err);
+})
+</code></pre>
+<ul>
+<li>从 node.js 创建 http 请求</li>
+<li>也是对原生 XHR 的封装，但是是 Promise 的实现版本，符合最新 ES 规范</li>
+<li>客户端支持防止 CSRF</li>
+<li><strong>提供了一些并发请求的接口</strong></li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>只支持现代浏览器</li>
+</ul>
+<h2 id="fetch">fetch</h2>
+<pre><code class="language-javascript">fetch(&quot;/users.json&quot;,{
+    method:&quot;post&quot;,
+    mode:&quot;no-cors&quot;,
+    data:{}
+}).then(function(response){
+    return response.json();
+}).then(function(data){
+    console.log(data);
+}).catch(function(e){
+    console.log(&quot;error&quot;);
+})
+</code></pre>
+<p>换成更简洁的箭头函数的写法：</p>
+<pre><code class="language-javascript">fetch(&quot;/users.json&quot;,{
+    method:&quot;post&quot;,
+    mode:&quot;no-cors&quot;,
+    data:{}
+}).then(response=&gt;{
+    return response.json();
+}).then(data=&gt;{
+    console.log(data);
+}).catch(e=&gt;{
+    console.log(&quot;error&quot;);
+})
+</code></pre>
+<p>换成 es7 async/await 的写法：</p>
+<pre><code class="language-javascript">try{
+    let response=await fetch(url);
+    let data=await response.json();
+    console.log(data);
+}catch(e){
+    console.log(&quot;error&quot;,e);
+}
+</code></pre>
+<blockquote>
+<p>Promise, generator/yield,await/async 都是现在和未来JS解决异步的标准做法，可以完美搭配使用。</p>
+</blockquote>
+<p>总结，Fetch 优点：</p>
+<ul>
+<li>语法简洁</li>
+<li>基于标准 Promise 实现，支持 async/await
+<ul>
+<li>因为旧版浏览器不支持 Promise，所以需要使用 polly-fill es6-promise</li>
+</ul>
+</li>
+<li>同构方便</li>
+<li>对跨域的处理
+<ul>
+<li>在配置中添加<code>mode:&quot;no-cors&quot;</code>即可</li>
+</ul>
+</li>
+</ul>
+<p>用 Fetch 遇到的坑：</p>
+<ul>
+<li>
+<p>Fetch 请求默认不带 cookie ，需要设置 <code>fetch(url,{credentials:&quot;include&quot;})</code></p>
+</li>
+<li>
+<p>服务器返回 400，500 并不会 reject，只有网络错误导致请求不能完成才会被 reject</p>
+</li>
+<li>
+<p>不能中断，没有 abort, terminate, onTImeout, cancel 方法</p>
+</li>
+<li>
+<p>不同于 XHR ，不能监测请求进度（但这样会比较简单）</p>
+</li>
+</ul>
+<p>我看了我们目前几个项目，都是基于 fetch 实现的，所以看了一下对上述坑的解决方案：</p>
+<pre><code class="language-typescript">import { message, Modal } from &quot;antd&quot;;
+import { getLocal } from &quot;common/LocaleProvider&quot;;
+import omitEmpty from &quot;omit-empty&quot;;
+//import { removeUserInfo } from &quot;utils/user&quot;;
+import { getSearchParamValue } from &quot;./url&quot;;
+
+function getApiDomain() {
+	const apiip = getSearchParamValue(&quot;apiip&quot;);
+	return apiip || window.location.host;
+}
+
+function checkStatus(response: Response): Response {
+	if (!response.ok) {
+		const error = new Error(response.statusText);
+		switch (response.status) {
+			case 401:
+				window.location.pathname = &quot;/login.html&quot;;
+				break;
+			case 500:
+				message.warn(&quot;server error&quot;);
+				break;
+			default:
+				return response;
+		}
+		throw error;
+	}
+	return response;
+}
+
+export function getApiUrl(method: string) {
+	method = method.replace(/\./g, &quot;/&quot;);
+	return `//${getApiDomain()}/api/${method}`;
+}
+
+export function doFetch(
+	url: string,
+	params: any,
+	fetchMethod?: &quot;POST&quot; | &quot;GET&quot;,
+	headers?: HeadersInit
+) {
+	const method = fetchMethod ? fetchMethod : &quot;post&quot;;
+	params = omitEmpty(params);
+	return fetch(url, {
+		method,
+		credentials: &quot;include&quot;,
+		headers,
+		body: JSON.stringify(params)
+	}).then(checkStatus);
+}
+
+const XLocale = new Headers({
+	&quot;x-locale&quot;: getLocal()
+});
+
+export function webapi&lt;T&gt;(method: string, params: any, apiURL?: string): Promise&lt;T&gt; {
+	let url = apiURL ? apiURL : getApiUrl(method);
+
+	// return doFetch(url, params)
+	return doFetch(url, params, &quot;POST&quot;, XLocale)
+		.then(
+			response =&gt;
+				response.json().then(json =&gt; ({
+					data: json,
+					status: response.status
+				})) as Promise&lt;{
+					data: any;
+					status: number;
+				}&gt;
+		)
+		.then&lt;T&gt;(response =&gt; {
+			if (response.status === 200 &amp;&amp; response.data.result.code !== 0) {
+				if (response.data.result.code === 1000) {
+					removeUserInfo();
+					parent.location.href = &quot;./login.html&quot;;
+				}
+				let msg = response.data.result.message;
+				if (response.data.result.code === 500) {
+					msg = msg ? msg : &quot;server error&quot;;
+				}
+				console.error(msg);
+				console.log(msg);
+				return Promise.reject({
+					status: 5001, // 专门为后端设置的专门接口信息错误
+					message: msg
+				});
+			}
+			if (response.status !== 200) {
+				return Promise.reject({
+					status: response.status,
+					message: &quot;后端接口信息：&quot; + response.data.message
+				});
+			}
+			return response.data;
+		})
+		.catch(err =&gt; {
+			const msg = err.message || &quot;&quot;;
+			return Promise.reject({
+				status: 5002,
+				message: msg.match(/Failed to fetch/gi) ? `网络不稳定，请稍后重试` : msg
+				// `接口：${method}挂了或者没有开启CORS跨域功能，请稍等！`
+			});
+		});
+}
+</code></pre>
+<h2 id="参考">参考</h2>
+<ul>
+<li>https://segmentfault.com/a/1190000012836882</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[逻辑推理题-猜名次]]></title>
+        <id>https://JoelynZhou.github.io/post/luo-ji-tui-li-ti-cai-ming-ci</id>
+        <link href="https://JoelynZhou.github.io/post/luo-ji-tui-li-ti-cai-ming-ci">
+        </link>
+        <updated>2019-11-14T11:38:17.000Z</updated>
+        <content type="html"><![CDATA[<p>[注：Image by <a href="https://pixabay.com/users/DaveFrancis-14230021/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4615685">Dave Francis</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4615685">Pixabay</a>]</p>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>有 A, B, C, D 和 E 共5个运动员，在一次比赛中，已知E肯定不是第二名或第三名，他们相互进行推测：<br>
+A 说，E 一定是第一名；<br>
+B 说，我是第二名；<br>
+C 说，A 是最后一名；<br>
+D 说，C 不是第一名；<br>
+E 说，D 是第一名；<br>
+结果只有实际排名第一和第二名的运动员猜对了，其他人都猜错了。<br>
+请编写一个程序，求出这5个运动员的名次。</p>
+</blockquote>
+<p>这个问题的常规思路其实很简单，把所有情况排列组合，有顺序，一共<img src="https://JoelynZhou.github.io/post-images/1573731742585.png" alt=""></p>
+<p>种情况，再遍历校验条件是否符合。所以，难点在于，怎么用编程实现这个排列组合。</p>
+<h3 id="解法一投机取巧粗暴遍历">解法一：投机取巧+粗暴遍历</h3>
+<pre><code class="language-javascript">/**
+ * 排列组合问题可以用二叉树来简单描述
+ * 思路：创建二叉树，遍历二叉树，条件校验
+ */
+const origin = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;];
+let output = [];
+for (let i = 12345; i &lt;= 54321; i++) {
+    // TODO
+    // 可以优化成寻找下一个比 12345 大的排列组合
+    const temp = [Math.floor(i / 10000), Math.floor(i / 1000 % 10), Math.floor(i / 100 % 10), Math.floor(i / 10 % 10), i % 10];
+    if (isValid(temp)) {
+        // 校验
+        check(temp);
+    } else {
+        continue;
+    }
+}
+console.log(output);
+
+function check(members) {
+    if (members[1] === 5 || members[2] === 5) {
+        return;
+    }
+    const list = [members[0] === 5, members[1] === 2, members[4] === 1, members[0] !== 3, members[0] === 4];
+    if (list[members[0] - 1] &amp;&amp; list[members[1] - 1] &amp;&amp; !list[members[2] - 1] &amp;&amp; !list[members[3] - 1] &amp;&amp; !list[members[4] - 1]) {
+        const res = [];
+        members.forEach(x =&gt; {
+            res.push(origin[x - 1]);
+        })
+        output.push(res);
+    }
+}
+
+function isValid(arr) {
+    let hash = {};
+    for (let i in arr) {
+        if (hash[arr[i]] || arr[i] &gt; 5 || arr[i] === 0) {
+            return false;
+        }
+        hash[arr[i]] = true;
+    }
+    return true;
+}
+</code></pre>
+<h3 id="解法二根据推论去反校验">解法二：根据推论去反校验</h3>
+<p>假设都对，推互斥</p>
+<pre><code class="language-javascript">function genPermutations(arr) {
+    const result = [];
+
+    function innerArr(temArr) {
+        for (let i = 0, len = arr.length; i &lt; len; i++) {
+            if (temArr.length == len - 1) {
+                if (temArr.indexOf(arr[i]) &lt; 0) {
+                    result.push(temArr.concat(arr[i]));
+                }
+                continue;
+            }
+            if (temArr.indexOf(arr[i]) &lt; 0) {
+                innerArr(temArr.concat(arr[i]));
+            }
+        }
+    }
+    innerArr([]);
+    return result;
+}
+
+var permutations = genPermutations([1, 2, 3, 4, 5])
+
+function answer(arr, fun) {
+    // 已知E肯定不是第二名或第三名
+    arr = arr.filter(n =&gt; n[4] !== 2 &amp;&amp; n[4] !== 3);
+    const result = arr.filter(fun)
+    if (result.length === 1) {
+        console.log(&quot;正确答案为&quot;, result);
+    } else {
+        console.log(&quot;错误猜想&quot;);
+    }
+}
+
+// 第一种组合
+// A说，E一定是第一名；=&gt; E = 1，A = 2 D = 1,
+answer(permutations, n =&gt; n[4] == 1 &amp;&amp; n[0] == 2 &amp;&amp; n[3] == 1)
+
+
+// 第二种组合
+// E说，D是第一名; =&gt; E = 2, D = 1,
+answer(permutations, n =&gt; n[4] == 2 &amp;&amp; n[3] == 1)
+
+//  第三种组合
+//  B说，我是第二名、C说，A是最后一名；=&gt; B = 2 C=1 A==5 E!=1  D != 1
+// =&gt;  B = 2 C=1 A==5
+answer(permutations, n =&gt; n[1] == 2 &amp;&amp; n[2] == 1 &amp;&amp; n[0] == 5)
+
+// 第四种组合 
+// D说，C不是第一名 
+// E说，D是第一名；
+// D ==2 =&gt; C!=1  B != 2 E!=1  A !=5
+answer(permutations, n =&gt; n[3] == 2 &amp;&amp; n[2] != 1 &amp;&amp; n[1] != 2 &amp;&amp; n[4] != 1 &amp;&amp; n[0] != 5);
+</code></pre>
+<h3 id="不用程序直接推导">不用程序直接推导</h3>
+<p>本来一个很简单的题，被编程搞得这么麻烦，就想知道如果自己算就要多久，果然不超过五分钟，就有了下面的结果：<br>
+<img src="https://JoelynZhou.github.io/post-images/1573731798117.png" alt=""></p>
+<p>┓( ´∀` )┏</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[2020 年度计（da）划（lian）表]]></title>
+        <id>https://JoelynZhou.github.io/post/2020-nian-du-ji-dahua-lianbiao</id>
+        <link href="https://JoelynZhou.github.io/post/2020-nian-du-ji-dahua-lianbiao">
+        </link>
+        <updated>2019-11-13T14:06:34.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p><strong>关键词：专注</strong></p>
+</blockquote>
+<h3 id="说在前面">说在前面</h3>
+<p>问：执行这个计划会收获什么？</p>
+<p>答：更开阔的知识面，更高的薪资、更好的身体素质，更多给自己的正向反馈（重要）。</p>
+<hr>
+<h3 id="个人健康">个人健康</h3>
+<blockquote>
+<p>年计划：</p>
+<ul>
+<li>keep 6240 分钟（120min * 52week）</li>
+<li>找一份有机会去全球各地的工作（五年计划）</li>
+</ul>
+</blockquote>
+<h4 id="心理健康">心理健康</h4>
+<ul>
+<li>哈佛《幸福课》、《零极限》、《象与骑象人》、《flow》、《接纳不完美的自己》、《吸引力法则》</li>
+<li>学习如何冥想</li>
+</ul>
+<h4 id="身体健康">身体健康</h4>
+<ul>
+<li>报一期瑜伽课</li>
+<li>keep 打卡</li>
+<li>坚持带便当</li>
+<li>每个月主动熬夜（12点）次数不超过 8 次</li>
+</ul>
+<hr>
+<h3 id="娱乐休闲">娱乐休闲</h3>
+<ul>
+<li>参加 3 个走出自闭的活动</li>
+<li>发现 5 个上海好玩的地方</li>
+</ul>
+<hr>
+<h3 id="家庭生活">家庭生活</h3>
+<ul>
+<li>每周大扫除（断舍离）一次</li>
+</ul>
+<hr>
+<h3 id="个人成长">个人成长</h3>
+<h4 id="输入">输入</h4>
+<ul>
+<li>每周一本书（包括不限于 电子书、实体书、听书）</li>
+<li>每周一部（2 - 4 hour）电影（包括不限于电影、纪录片、公开课 ）</li>
+<li>每天 30 min 优质公众号</li>
+<li>每天 30 min 英语学习</li>
+<li>每周 2-4 hour 理财学习</li>
+</ul>
+<h4 id="输出">输出</h4>
+<ul>
+<li>个人博客</li>
+<li>github</li>
+<li>知乎</li>
+<li>每周一次摄影（生活片段记录）</li>
+<li>复盘（周总结、月总结、年总结）</li>
+</ul>
+<hr>
+<h3 id="人际交往">人际交往</h3>
+<ul>
+<li>记住身边朋友的生日</li>
+</ul>
+<hr>
+<h3 id="个人习惯">个人习惯</h3>
+<h4 id="生活">生活</h4>
+<ul>
+<li>碗不要拖到第二天洗</li>
+<li>尽！量！每天抹防晒！</li>
+</ul>
+<h4 id="素质">素质</h4>
+<ul>
+<li>学会倾听，好好说话</li>
+<li>把【谢谢】改为【谢谢你】</li>
+<li>慎独，远离舒适区</li>
+</ul>
+<h4 id="新技能">新技能</h4>
+<ul>
+<li>投资理财</li>
+<li>英语</li>
+<li>视频剪辑</li>
+<li>尤克里里</li>
+<li>厨艺</li>
+</ul>
 ]]></content>
     </entry>
 </feed>
