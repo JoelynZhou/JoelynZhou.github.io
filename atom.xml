@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2019-11-19T12:09:18.870Z</updated>
+    <updated>2019-11-20T02:32:02.845Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,71 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[javascript 中的 this 指向问题]]></title>
+        <id>https://JoelynZhou.github.io/post/javascript-zhong-de-this-zhi-xiang-wen-ti</id>
+        <link href="https://JoelynZhou.github.io/post/javascript-zhong-de-this-zhi-xiang-wen-ti">
+        </link>
+        <updated>2019-11-20T02:31:08.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="写在前面">写在前面</h2>
+<p>理解 this，记住以下两点：</p>
+<ul>
+<li>this 永远指向一个对象</li>
+<li>this 的指向完全取决于调用的位置</li>
+</ul>
+<h2 id="更深层次的原因">更深层次的原因</h2>
+<p>JS 中的数据类型可以分为：基本数据类型和引用类型。其中，数组、函数、对象都是引用类型，参数传递时也是引用传递（可单独讲一下）。而函数既可以当成值传递，也可以当成对象和构造函数，所以函数运行时需要确定其当前的运行环境，因此，this 只有在函数运行时才可以最终确定运行环境（this 对于运行环境的动态切换规则）。</p>
+<h2 id="聊一聊-this-的几个常用使用场景">聊一聊 this 的几个常用使用场景</h2>
+<ul>
+<li>事件绑定</li>
+<li>构造函数</li>
+<li>定时器</li>
+<li>call（）</li>
+<li>apply（）</li>
+</ul>
+<h3 id="事件绑定">事件绑定</h3>
+<p>三种方式：</p>
+<ul>
+<li>行内绑定</li>
+<li>动态绑定</li>
+<li>事件监听</li>
+</ul>
+<h3 id="定时器">定时器</h3>
+<pre><code class="language-javascript">var obj={
+    fun:function(){
+        this;
+    }
+}
+setInterval(obj.fun,100);	// this 指向 window
+setInterval(&quot;obj.fun()&quot;,100);	// this 指向 obj
+</code></pre>
+<p><code>setInterval(obj.fun,100)</code>其实是将 fun 这个函数的地址作为参数传递给了 <code>setInterval</code>方法（这个时候跟 obj 对象已经半毛钱关系都没有了），那么 100 毫秒后，函数的运行就是在 window 对象下了；</p>
+<p>而<code>setInterval(&quot;obj.fun()&quot;,100)</code>的第一个参数其实是一段可执行代码，当 js 开始执行这段代码时，是先找到 obj 下的 fun 函数并调用执行，所以函数的运行环境仍然在 obj 对象内，所以 this 就指向 obj 对象了。</p>
+<h3 id="call-apply">call() &amp;&amp; apply()</h3>
+<ul>
+<li>call()</li>
+</ul>
+<pre><code class="language-javascript">func.call(obj,arg1,arg2,...argN)
+// obj 是 this 要指向的对象
+// arg1... 是参数列表
+</code></pre>
+<ul>
+<li>apply()</li>
+</ul>
+<pre><code class="language-javascript">func.apply(obj,[arg1,arg2,...argN])
+// obj 是 this 要指向的对象
+// [arg1...] 是参数列表，要求是数组
+</code></pre>
+<blockquote>
+<p>Call 和 Apply 作用一致，只是函数实参的传递方式不一样，二者都用来强制指定函数调用时 this 的指向。</p>
+</blockquote>
+<p>关于 闭包的 this 指向问题，后面会单独拉一篇文章出来讲。</p>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/42145138">彻底搞懂  JavaScript 中的 this 指向问题</a></li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[XmlHttpRequest & Ajax & Fetch & Axios]]></title>
         <id>https://JoelynZhou.github.io/post/xmlhttprequest-and-ajax-and-fetch-and-axios</id>

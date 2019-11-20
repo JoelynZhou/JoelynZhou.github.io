@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | JoelynZhou</title>
+<title>javascript 中的 this 指向问题 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1574217114080">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,55 +73,76 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              javascript 中的 this 指向问题
             </h2>
             <div class="post-info">
               <span>
-                2019-11-01
+                2019-11-20
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！❤️</p>
+                <h2 id="写在前面">写在前面</h2>
+<p>理解 this，记住以下两点：</p>
+<ul>
+<li>this 永远指向一个对象</li>
+<li>this 的指向完全取决于调用的位置</li>
+</ul>
+<h2 id="更深层次的原因">更深层次的原因</h2>
+<p>JS 中的数据类型可以分为：基本数据类型和引用类型。其中，数组、函数、对象都是引用类型，参数传递时也是引用传递（可单独讲一下）。而函数既可以当成值传递，也可以当成对象和构造函数，所以函数运行时需要确定其当前的运行环境，因此，this 只有在函数运行时才可以最终确定运行环境（this 对于运行环境的动态切换规则）。</p>
+<h2 id="聊一聊-this-的几个常用使用场景">聊一聊 this 的几个常用使用场景</h2>
+<ul>
+<li>事件绑定</li>
+<li>构造函数</li>
+<li>定时器</li>
+<li>call（）</li>
+<li>apply（）</li>
+</ul>
+<h3 id="事件绑定">事件绑定</h3>
+<p>三种方式：</p>
+<ul>
+<li>行内绑定</li>
+<li>动态绑定</li>
+<li>事件监听</li>
+</ul>
+<h3 id="定时器">定时器</h3>
+<pre><code class="language-javascript">var obj={
+    fun:function(){
+        this;
+    }
+}
+setInterval(obj.fun,100);	// this 指向 window
+setInterval(&quot;obj.fun()&quot;,100);	// this 指向 obj
+</code></pre>
+<p><code>setInterval(obj.fun,100)</code>其实是将 fun 这个函数的地址作为参数传递给了 <code>setInterval</code>方法（这个时候跟 obj 对象已经半毛钱关系都没有了），那么 100 毫秒后，函数的运行就是在 window 对象下了；</p>
+<p>而<code>setInterval(&quot;obj.fun()&quot;,100)</code>的第一个参数其实是一段可执行代码，当 js 开始执行这段代码时，是先找到 obj 下的 fun 函数并调用执行，所以函数的运行环境仍然在 obj 对象内，所以 this 就指向 obj 对象了。</p>
+<h3 id="call-apply">call() &amp;&amp; apply()</h3>
+<ul>
+<li>call()</li>
+</ul>
+<pre><code class="language-javascript">func.call(obj,arg1,arg2,...argN)
+// obj 是 this 要指向的对象
+// arg1... 是参数列表
+</code></pre>
+<ul>
+<li>apply()</li>
+</ul>
+<pre><code class="language-javascript">func.apply(obj,[arg1,arg2,...argN])
+// obj 是 this 要指向的对象
+// [arg1...] 是参数列表，要求是数组
+</code></pre>
+<blockquote>
+<p>Call 和 Apply 作用一致，只是函数实参的传递方式不一样，二者都用来强制指定函数调用时 this 的指向。</p>
 </blockquote>
-<h3 id="关于我">🙋 关于我</h3>
-<p>1994/07  女<br>
-江苏大学 · 本科<br>
-江苏·南通<br>
-现居上海</p>
-<h3 id="经历">🌈 经历</h3>
+<p>关于 闭包的 this 指向问题，后面会单独拉一篇文章出来讲。</p>
+<h2 id="参考">参考</h2>
 <ul>
-<li>
-<p>2018.07 - 至今<br>
-前端开发工程师 · ezbuy（深圳前海煦逸信息科技有限公司）</p>
-<ul>
-<li>2018.07 - 2019.06 新加坡本地物流系统      主开发</li>
-<li>2019.07 - 2019.11 国际物流系统（后台管理系统/客户端系统）    主开发</li>
-</ul>
-</li>
-<li>
-<p>2016.06 - 2018.07<br>
-web 开发工程师 · 上海老虎玫瑰信息科技有限公司</p>
-</li>
-</ul>
-<h3 id="兴趣爱好">💃 兴趣爱好</h3>
-<ul>
-<li>手账爱好者</li>
-<li>电影爱好者</li>
-</ul>
-<h3 id="联系我">🕷 联系我</h3>
-<ul>
-<li>Tel : 16621092546</li>
-<li>Mail : joelynzhou@hotmail.com</li>
-<li>Github : https://github.com/JoelynZhou/</li>
-<li>知乎 : https://www.zhihu.com/people/joelynzhou/</li>
-<li>ins : https://www.instagram.com/joelynzhou/</li>
+<li><a href="https://zhuanlan.zhihu.com/p/42145138">彻底搞懂  JavaScript 中的 this 指向问题</a></li>
 </ul>
 
               </div>
@@ -129,14 +150,16 @@ web 开发工程师 · 上海老虎玫瑰信息科技有限公司</p>
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li>
+<li><a href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2">写在前面</a></li>
+<li><a href="#%E6%9B%B4%E6%B7%B1%E5%B1%82%E6%AC%A1%E7%9A%84%E5%8E%9F%E5%9B%A0">更深层次的原因</a></li>
+<li><a href="#%E8%81%8A%E4%B8%80%E8%81%8A-this-%E7%9A%84%E5%87%A0%E4%B8%AA%E5%B8%B8%E7%94%A8%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">聊一聊 this 的几个常用使用场景</a>
 <ul>
-<li><a href="#%E5%85%B3%E4%BA%8E%E6%88%91">🙋 关于我</a></li>
-<li><a href="#%E7%BB%8F%E5%8E%86">🌈 经历</a></li>
-<li><a href="#%E5%85%B4%E8%B6%A3%E7%88%B1%E5%A5%BD">💃 兴趣爱好</a></li>
-<li><a href="#%E8%81%94%E7%B3%BB%E6%88%91">🕷 联系我</a></li>
+<li><a href="#%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A">事件绑定</a></li>
+<li><a href="#%E5%AE%9A%E6%97%B6%E5%99%A8">定时器</a></li>
+<li><a href="#call-apply">call() &amp;&amp; apply()</a></li>
 </ul>
 </li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 </li>
 </ul>
@@ -146,6 +169,15 @@ web 开发工程师 · 上海老虎玫瑰信息科技有限公司</p>
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://JoelynZhou.github.io/post/xmlhttprequest-and-ajax-and-fetch-and-axios">
+              <h3 class="post-title">
+                XmlHttpRequest &amp; Ajax &amp; Fetch &amp; Axios
+              </h3>
+            </a>
+          </div>
         
 
         
