@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2019-11-20T10:23:23.663Z</updated>
+    <updated>2019-12-31T10:52:43.844Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,42 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2019, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[Mojave 深色模式下禁用 Chrome 深色主题]]></title>
+        <id>https://JoelynZhou.github.io/post/mojave-shen-se-mo-shi-xia-jin-yong-chrome-shen-se-zhu-ti</id>
+        <link href="https://JoelynZhou.github.io/post/mojave-shen-se-mo-shi-xia-jin-yong-chrome-shen-se-zhu-ti">
+        </link>
+        <updated>2019-12-31T10:31:37.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="背景">背景</h3>
+<p>Mojave 深色模式下，打开很多软件都是深色主题。</p>
+<p>Chrome 为例，</p>
+<p>如果通过引入亮色皮肤插件的方式，不能完全解决</p>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gag3jx9skyj31c00u04bh.jpg" alt="" loading="lazy"></figure>
+<p>故寻找其他解决方案。</p>
+<h3 id="解决方式">解决方式</h3>
+<ol>
+<li></li>
+</ol>
+<pre><code class="language-cmd">osascript -e 'id of app &quot;Google Chrome&quot;'
+// com.google.Chrome
+</code></pre>
+<ol start="2">
+<li></li>
+</ol>
+<pre><code class="language-cmd">defaults write com.google.Chrome NSRequiresAquaSystemAppearance -bool yes
+</code></pre>
+<ol start="3">
+<li>重启 Chrome</li>
+<li>（恢复默认）</li>
+</ol>
+<pre><code class="language-cmd">defaults delete com.google.Chrome NSRequiresAquaSystemAppearance
+</code></pre>
+<h3 id="参考">参考</h3>
+<ul>
+<li>https://fankcoder.com/2019/04/28/tool-2019-04-28-fix-chrome-darkmode/</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[javascript 中的 this 指向问题]]></title>
         <id>https://JoelynZhou.github.io/post/javascript-zhong-de-this-zhi-xiang-wen-ti</id>
@@ -340,7 +376,7 @@ E 说，D 是第一名；<br>
 结果只有实际排名第一和第二名的运动员猜对了，其他人都猜错了。<br>
 请编写一个程序，求出这5个运动员的名次。</p>
 </blockquote>
-<p>这个问题的常规思路其实很简单，把所有情况排列组合，有顺序，一共<img src="https://JoelynZhou.github.io/post-images/1573731742585.png" alt=""></p>
+<p>这个问题的常规思路其实很简单，把所有情况排列组合，有顺序，一共<img src="https://JoelynZhou.github.io/post-images/1573731742585.png" alt="" loading="lazy"></p>
 <p>种情况，再遍历校验条件是否符合。所以，难点在于，怎么用编程实现这个排列组合。</p>
 <h3 id="解法一投机取巧粗暴遍历">解法一：投机取巧+粗暴遍历</h3>
 <pre><code class="language-javascript">/**
@@ -444,7 +480,7 @@ answer(permutations, n =&gt; n[3] == 2 &amp;&amp; n[2] != 1 &amp;&amp; n[1] != 2
 </code></pre>
 <h3 id="不用程序直接推导">不用程序直接推导</h3>
 <p>本来一个很简单的题，被编程搞得这么麻烦，就想知道如果自己算就要多久，果然不超过五分钟，就有了下面的结果：<br>
-<img src="https://JoelynZhou.github.io/post-images/1573731798117.png" alt=""></p>
+<img src="https://JoelynZhou.github.io/post-images/1573731798117.png" alt="" loading="lazy"></p>
 <p>┓( ´∀` )┏</p>
 ]]></content>
     </entry>
