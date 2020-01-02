@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-01-02T02:23:46.437Z</updated>
+    <updated>2020-01-02T02:26:45.886Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -26,19 +26,19 @@
 <ol>
 <li></li>
 </ol>
-<pre><code class="language-bash">osascript -e 'id of app &quot;Google Chrome&quot;'
+<pre><code class="language-bash">$ osascript -e 'id of app &quot;Google Chrome&quot;'
 // com.google.Chrome
 </code></pre>
 <ol start="2">
 <li></li>
 </ol>
-<pre><code class="language-bash">defaults write com.google.Chrome NSRequiresAquaSystemAppearance -bool yes
+<pre><code class="language-bash">$ defaults write com.google.Chrome NSRequiresAquaSystemAppearance -bool yes
 </code></pre>
 <ol start="3">
 <li>重启 Chrome</li>
 <li>（恢复默认）</li>
 </ol>
-<pre><code class="language-bash">defaults delete com.google.Chrome NSRequiresAquaSystemAppearance
+<pre><code class="language-bash">$ defaults delete com.google.Chrome NSRequiresAquaSystemAppearance
 </code></pre>
 <h3 id="参考">参考</h3>
 <ul>

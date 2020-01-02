@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mojave 深色模式下禁用 Chrome 深色主题 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
-<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1577931786784">
+<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1577932001152">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://JoelynZhou.github.io/styles/main.css">
@@ -20,7 +20,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://JoelynZhou.github.io">
-  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1577931786784" alt="">
+  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1577932001152" alt="">
   </a>
   <h1 class="site-title">
     JoelynZhou
@@ -97,19 +97,19 @@
 <ol>
 <li></li>
 </ol>
-<pre><code class="language-bash">osascript -e 'id of app &quot;Google Chrome&quot;'
+<pre><code class="language-bash">$ osascript -e 'id of app &quot;Google Chrome&quot;'
 // com.google.Chrome
 </code></pre>
 <ol start="2">
 <li></li>
 </ol>
-<pre><code class="language-bash">defaults write com.google.Chrome NSRequiresAquaSystemAppearance -bool yes
+<pre><code class="language-bash">$ defaults write com.google.Chrome NSRequiresAquaSystemAppearance -bool yes
 </code></pre>
 <ol start="3">
 <li>重启 Chrome</li>
 <li>（恢复默认）</li>
 </ol>
-<pre><code class="language-bash">defaults delete com.google.Chrome NSRequiresAquaSystemAppearance
+<pre><code class="language-bash">$ defaults delete com.google.Chrome NSRequiresAquaSystemAppearance
 </code></pre>
 <h3 id="参考">参考</h3>
 <ul>
