@@ -2,14 +2,14 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2019-12-31T10:52:43.844Z</updated>
+    <updated>2020-01-02T02:17:25.310Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
     <subtitle>多读书 / 多看报 / 少吃零食 / 多睡觉</subtitle>
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2019, JoelynZhou</rights>
+    <rights>All rights reserved 2020, JoelynZhou</rights>
     <entry>
         <title type="html"><![CDATA[Mojave 深色模式下禁用 Chrome 深色主题]]></title>
         <id>https://JoelynZhou.github.io/post/mojave-shen-se-mo-shi-xia-jin-yong-chrome-shen-se-zhu-ti</id>
@@ -26,7 +26,7 @@
 <ol>
 <li></li>
 </ol>
-<pre><code class="language-cmd">osascript -e 'id of app &quot;Google Chrome&quot;'
+<pre><code class="language-command">osascript -e 'id of app &quot;Google Chrome&quot;'
 // com.google.Chrome
 </code></pre>
 <ol start="2">
@@ -495,7 +495,7 @@ answer(permutations, n =&gt; n[3] == 2 &amp;&amp; n[2] != 1 &amp;&amp; n[1] != 2
 </blockquote>
 <h3 id="说在前面">说在前面</h3>
 <p>问：执行这个计划会收获什么？</p>
-<p>答：更开阔的知识面，更高的薪资、更好的身体素质，更多给自己的正向反馈（重要）。</p>
+<p>答：升值加薪，更开阔的知识面，更好的身体素质，更多给自己的正向反馈（重要）。</p>
 <hr>
 <h3 id="个人健康">个人健康</h3>
 <blockquote>
