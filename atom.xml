@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-01-02T02:26:45.886Z</updated>
+    <updated>2020-01-16T09:44:33.261Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[macOS 壁纸 - 小鹤双拼]]></title>
+        <id>https://JoelynZhou.github.io/post/macos-bi-zhi-xiao-he-shuang-pin</id>
+        <link href="https://JoelynZhou.github.io/post/macos-bi-zhi-xiao-he-shuang-pin">
+        </link>
+        <updated>2020-01-16T09:43:43.000Z</updated>
+        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gayjkzgvvij31c00u0di9.jpg" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Mojave 深色模式下禁用 Chrome 深色主题]]></title>
         <id>https://JoelynZhou.github.io/post/mojave-shen-se-mo-shi-xia-jin-yong-chrome-shen-se-zhu-ti</id>
