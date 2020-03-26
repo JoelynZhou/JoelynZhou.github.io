@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-01-16T09:51:23.787Z</updated>
+    <updated>2020-03-26T05:50:42.780Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,65 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[892. 三维形体的表面积]]></title>
+        <id>https://JoelynZhou.github.io/post/892-san-wei-xing-ti-de-biao-mian-ji</id>
+        <link href="https://JoelynZhou.github.io/post/892-san-wei-xing-ti-de-biao-mian-ji">
+        </link>
+        <updated>2020-03-26T03:44:23.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>在 N * N 的网格上，我们放置一些 1 * 1 * 1  的立方体。<br>
+每个值 v = grid[i][j] 表示 v 个正方体叠放在对应单元格 (i, j) 上。<br>
+请你返回最终形体的表面积。</p>
+<ul>
+<li>1 &lt;= N &lt;= 50</li>
+<li>0 &lt;= grid[i][j] &lt;= 50</li>
+</ul>
+<h2 id="测试用例">测试用例</h2>
+<pre><code class="language-javascript">输入：[[2]]
+输出：10
+</code></pre>
+<pre><code class="language-javascript">输入：[[1,2],[3,4]]
+输出：34
+</code></pre>
+<h2 id="分析">分析</h2>
+<p>计算不规则立方体堆的表面积，rid[i][j]表示第 i 行 第 j 列的方块个数</p>
+<ol>
+<li>先假设每一摞的立方体互不接触：<br>
+通过遍历累加，可以计算出每一摞立方体的表面积及不接触情况下的总表面积</li>
+<li>再考虑接触的需要减去的部分：<br>
+一旦两摞立方体接触，那么被抵消掉的表面积应该是较矮的那一摞的高度*2</li>
+<li>关于计算顺序:<br>
+可以假设从第 0 行第 0 列开始，<br>
+每次新增一摞的时候，加上把当前摞作为独立情况下的表面积，同时减去与左侧，上侧有接触面时抵消掉的面积，直到第 i 行第 j 列结束循环体，输出结果</li>
+</ol>
+<h3 id="题解">题解</h3>
+<pre><code class="language-javascript">/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var surfaceArea = function(grid) {
+    let result=0;
+    for(let i=0;i&lt;grid.length;i++){
+        for(let j=0;j&lt;grid[i].length;j++){
+            if(grid[i][j]&gt;0){
+                result+=grid[i][j]*4+2;
+            }
+            if(i&gt;0){
+                result -= Math.min(grid[i-1][j],grid[i][j])*2;
+            }
+            if(j&gt;0){
+                result -= Math.min(grid[i][j-1],grid[i][j])*2;
+            }
+        }
+    }
+    return result;
+};
+</code></pre>
+<h3 id="性能">性能</h3>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd7a7rj549j30p003q3yk.jpg" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[macOS 壁纸 - VSC 快捷键]]></title>
         <id>https://JoelynZhou.github.io/post/macos-bi-zhi-vsc-kuai-jie-jian</id>

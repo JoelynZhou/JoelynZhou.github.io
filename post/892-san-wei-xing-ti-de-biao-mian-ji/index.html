@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Hello Gridea | JoelynZhou</title>
+<title>892. 三维形体的表面积 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1585201834316">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,55 +73,85 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              Hello Gridea
+              892. 三维形体的表面积
             </h2>
             <div class="post-info">
               <span>
-                2018-12-12
+                2020-03-26
               </span>
               <span>
                 2 min read
               </span>
               
-                <a href="https://JoelynZhou.github.io/tag/-P7Jg5Pid" class="post-tag">
-                  # Gridea
-                </a>
-              
             </div>
-            
-              <img class="post-feature-image" src="https://JoelynZhou.github.io/post-images/hello-gridea.png" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<!-- more -->
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+                <h2 id="题目">题目</h2>
+<p>在 N * N 的网格上，我们放置一些 1 * 1 * 1  的立方体。<br>
+每个值 v = grid[i][j] 表示 v 个正方体叠放在对应单元格 (i, j) 上。<br>
+请你返回最终形体的表面积。</p>
+<ul>
+<li>1 &lt;= N &lt;= 50</li>
+<li>0 &lt;= grid[i][j] &lt;= 50</li>
+</ul>
+<h2 id="测试用例">测试用例</h2>
+<pre><code class="language-javascript">输入：[[2]]
+输出：10
+</code></pre>
+<pre><code class="language-javascript">输入：[[1,2],[3,4]]
+输出：34
+</code></pre>
+<h2 id="分析">分析</h2>
+<p>计算不规则立方体堆的表面积，rid[i][j]表示第 i 行 第 j 列的方块个数</p>
+<ol>
+<li>先假设每一摞的立方体互不接触：<br>
+通过遍历累加，可以计算出每一摞立方体的表面积及不接触情况下的总表面积</li>
+<li>再考虑接触的需要减去的部分：<br>
+一旦两摞立方体接触，那么被抵消掉的表面积应该是较矮的那一摞的高度*2</li>
+<li>关于计算顺序:<br>
+可以假设从第 0 行第 0 列开始，<br>
+每次新增一摞的时候，加上把当前摞作为独立情况下的表面积，同时减去与左侧，上侧有接触面时抵消掉的面积，直到第 i 行第 j 列结束循环体，输出结果</li>
+</ol>
+<h3 id="题解">题解</h3>
+<pre><code class="language-javascript">/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var surfaceArea = function(grid) {
+    let result=0;
+    for(let i=0;i&lt;grid.length;i++){
+        for(let j=0;j&lt;grid[i].length;j++){
+            if(grid[i][j]&gt;0){
+                result+=grid[i][j]*4+2;
+            }
+            if(i&gt;0){
+                result -= Math.min(grid[i-1][j],grid[i][j])*2;
+            }
+            if(j&gt;0){
+                result -= Math.min(grid[i][j-1],grid[i][j])*2;
+            }
+        }
+    }
+    return result;
+};
+</code></pre>
+<h3 id="性能">性能</h3>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd7a7rj549j30p003q3yk.jpg" alt="" loading="lazy"></figure>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E7%89%B9%E6%80%A7">特性👇</a></li>
+<li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">测试用例</a></li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a>
+<ul>
+<li><a href="#%E9%A2%98%E8%A7%A3">题解</a></li>
+<li><a href="#%E6%80%A7%E8%83%BD">性能</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -131,6 +161,15 @@
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://JoelynZhou.github.io/post/macos-bi-zhi-vsc-kuai-jie-jian">
+              <h3 class="post-title">
+                macOS 壁纸 - VSC 快捷键
+              </h3>
+            </a>
+          </div>
         
 
         
