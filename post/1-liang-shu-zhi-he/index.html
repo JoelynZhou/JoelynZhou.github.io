@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>javascript 中的 this 指向问题 | JoelynZhou</title>
+<title>1. 两数之和 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1585231683197">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,93 +73,68 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              javascript 中的 this 指向问题
+              1. 两数之和
             </h2>
             <div class="post-info">
               <span>
-                2019-11-20
+                2020-03-26
               </span>
               <span>
-                2 min read
+                1 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h2 id="写在前面">写在前面</h2>
-<p>理解 this，记住以下两点：</p>
-<ul>
-<li>this 永远指向一个对象</li>
-<li>this 的指向完全取决于调用的位置</li>
-</ul>
-<h2 id="更深层次的原因">更深层次的原因</h2>
-<p>JS 中的数据类型可以分为：基本数据类型和引用类型。其中，数组、函数、对象都是引用类型，参数传递时也是引用传递（可单独讲一下）。而函数既可以当成值传递，也可以当成对象和构造函数，所以函数运行时需要确定其当前的运行环境，因此，this 只有在函数运行时才可以最终确定运行环境（this 对于运行环境的动态切换规则）。</p>
-<h2 id="聊一聊-this-的几个常用使用场景">聊一聊 this 的几个常用使用场景</h2>
-<ul>
-<li>事件绑定</li>
-<li>构造函数</li>
-<li>定时器</li>
-<li>call（）</li>
-<li>apply（）</li>
-</ul>
-<h3 id="事件绑定">事件绑定</h3>
-<p>三种方式：</p>
-<ul>
-<li>行内绑定</li>
-<li>动态绑定</li>
-<li>事件监听</li>
-</ul>
-<h3 id="定时器">定时器</h3>
-<pre><code class="language-javascript">var obj={
-    fun:function(){
-        this;
+                <h2 id="题目">题目</h2>
+<p>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。</p>
+<h2 id="示例">示例</h2>
+<pre><code>给定 nums = [2, 7, 11, 15], target = 9
+
+因为 nums[0] + nums[1] = 2 + 7 = 9
+所以返回 [0, 1]
+</code></pre>
+<h2 id="分析">分析</h2>
+<ol>
+<li>粗暴遍历：<br>
+算法复杂度 O(n^2)</li>
+<li>Hash 查找：<br>
+哈希表的查找复杂度是 O(1)，<br>
+所以整体复杂度 O(n)</li>
+</ol>
+<h2 id="题解">题解</h2>
+<pre><code class="language-javascript">/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ * 分析：
+ * 基于 哈希表的查找复杂度是 O(1)
+ * 通过哈希表，遍历一次，算法复杂度O(n)
+ */
+var twoSum = function(nums, target) {
+    const hashMap=new Map();
+    for(let i=0;i&lt;nums.length;i++){
+        if(hashMap.has(target-nums[i])){
+            return [hashMap.get(target-nums[i]),i];
+        }
+        hashMap.set(nums[i],i);
     }
-}
-setInterval(obj.fun,100);	// this 指向 window
-setInterval(&quot;obj.fun()&quot;,100);	// this 指向 obj
+    return [];
+};
 </code></pre>
-<p><code>setInterval(obj.fun,100)</code>其实是将 fun 这个函数的地址作为参数传递给了 <code>setInterval</code>方法（这个时候跟 obj 对象已经半毛钱关系都没有了），那么 100 毫秒后，函数的运行就是在 window 对象下了；</p>
-<p>而<code>setInterval(&quot;obj.fun()&quot;,100)</code>的第一个参数其实是一段可执行代码，当 js 开始执行这段代码时，是先找到 obj 下的 fun 函数并调用执行，所以函数的运行环境仍然在 obj 对象内，所以 this 就指向 obj 对象了。</p>
-<h3 id="call-apply">call() &amp;&amp; apply()</h3>
-<ul>
-<li>call()</li>
-</ul>
-<pre><code class="language-javascript">func.call(obj,arg1,arg2,...argN)
-// obj 是 this 要指向的对象
-// arg1... 是参数列表
-</code></pre>
-<ul>
-<li>apply()</li>
-</ul>
-<pre><code class="language-javascript">func.apply(obj,[arg1,arg2,...argN])
-// obj 是 this 要指向的对象
-// [arg1...] 是参数列表，要求是数组
-</code></pre>
-<blockquote>
-<p>Call 和 Apply 作用一致，只是函数实参的传递方式不一样，二者都用来强制指定函数调用时 this 的指向。</p>
-</blockquote>
-<p>关于 闭包的 this 指向问题，后面会单独拉一篇文章出来讲。</p>
-<h2 id="参考">参考</h2>
-<ul>
-<li><a href="https://zhuanlan.zhihu.com/p/42145138">彻底搞懂  JavaScript 中的 this 指向问题</a></li>
-</ul>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd7ohikwrnj30pu04474c.jpg" alt="" loading="lazy"></figure>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2">写在前面</a></li>
-<li><a href="#%E6%9B%B4%E6%B7%B1%E5%B1%82%E6%AC%A1%E7%9A%84%E5%8E%9F%E5%9B%A0">更深层次的原因</a></li>
-<li><a href="#%E8%81%8A%E4%B8%80%E8%81%8A-this-%E7%9A%84%E5%87%A0%E4%B8%AA%E5%B8%B8%E7%94%A8%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">聊一聊 this 的几个常用使用场景</a>
-<ul>
-<li><a href="#%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A">事件绑定</a></li>
-<li><a href="#%E5%AE%9A%E6%97%B6%E5%99%A8">定时器</a></li>
-<li><a href="#call-apply">call() &amp;&amp; apply()</a></li>
-</ul>
-</li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+<li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
+<li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
+<li><a href="#%E9%A2%98%E8%A7%A3">题解</a></li>
 </ul>
 </li>
 </ul>
@@ -172,9 +147,9 @@ setInterval(&quot;obj.fun()&quot;,100);	// this 指向 obj
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://JoelynZhou.github.io/post/xmlhttprequest-and-ajax-and-fetch-and-axios/">
+            <a href="https://JoelynZhou.github.io/post/999-che-de-ke-yong-bu-huo-liang/">
               <h3 class="post-title">
-                XmlHttpRequest &amp; Ajax &amp; Fetch &amp; Axios
+                999. 车的可用捕获量
               </h3>
             </a>
           </div>
