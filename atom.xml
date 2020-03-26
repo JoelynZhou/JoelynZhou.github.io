@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-03-26T05:50:42.780Z</updated>
+    <updated>2020-03-26T07:34:21.545Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -11,9 +11,76 @@
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, JoelynZhou</rights>
     <entry>
+        <title type="html"><![CDATA[999. 车的可用捕获量]]></title>
+        <id>https://JoelynZhou.github.io/post/999-che-de-ke-yong-bu-huo-liang/</id>
+        <link href="https://JoelynZhou.github.io/post/999-che-de-ke-yong-bu-huo-liang/">
+        </link>
+        <updated>2020-03-26T07:26:00.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>在一个 8 x 8 的棋盘上，有一个白色车（rook）。也可能有空方块，白色的象（bishop）和黑色的卒（pawn）。它们分别以字符 “R”，“.”，“B” 和 “p” 给出。大写字符表示白棋，小写字符表示黑棋。</p>
+<p>车按国际象棋中的规则移动：它选择四个基本方向中的一个（北，东，西和南），然后朝那个方向移动，直到它选择停止、到达棋盘的边缘或移动到同一方格来捕获该方格上颜色相反的卒。另外，车不能与其他友方（白色）象进入同一个方格。</p>
+<p>返回车能够在一次移动中捕获到的卒的数量。</p>
+<p><a href="https://assets.leetcode-cn.com/solution-static/999_fig1.gif">Gif 点击这里</a></p>
+<h2 id="测试用例">测试用例</h2>
+<pre><code>输入：[[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;p&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;R&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;p&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;p&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;]]
+输出：3
+解释：
+在本例中，车能够捕获所有的卒。
+</code></pre>
+<h2 id="分析">分析</h2>
+<p>考察方向数组的问题：</p>
+<ol>
+<li>暴力法：<br>
+四层 for 循环</li>
+<li>奇思妙解：<br>
+通过创建平面坐标系来解决</li>
+</ol>
+<h2 id="题解">题解</h2>
+<pre><code class="language-javascript">/**
+ * @param {character[][]} board
+ * @return {number}
+ * 分析：
+ * 考察方向数组的问题
+ * 暴力法：
+ * 四层 for 循环
+ * 奇思妙解：
+ * 通过创建平面坐标系来解决
+ */
+var numRookCaptures = function(board) {
+    let result=0;
+    for(let i=0;i&lt;board.length;i++){
+        for(let j=0;j&lt;board[i].length;j++){
+            //找到 R 的位置
+            if(board[i][j]===&quot;R&quot;){
+                //R 为原点创建坐标系
+                //向四个方向查找
+                return rampage(board,i,j,0,1)+rampage(board,i,j,0,-1)+rampage(board,i,j,1,0)+rampage(board,i,j,-1,0);
+            }
+        }
+    }
+};
+
+/**
+ * @param {board:做标数据，x,y: R 的坐标; dx,dy:步长}
+ */
+var rampage=(board,x,y,dx,dy)=&gt;{
+    while(x&gt;=0 &amp;&amp; x&lt;board.length &amp;&amp; y&gt;=0 &amp;&amp; y&lt;board[x].length &amp;&amp; board[x][y]!==&quot;B&quot;){
+        if(board[x][y]===&quot;p&quot;){
+            return 1;
+        }
+        x+=dx;
+        y+=dy;
+    }
+    return 0;
+}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd7d8br0n5j30oa0403yk.jpg" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[892. 三维形体的表面积]]></title>
-        <id>https://JoelynZhou.github.io/post/892-san-wei-xing-ti-de-biao-mian-ji</id>
-        <link href="https://JoelynZhou.github.io/post/892-san-wei-xing-ti-de-biao-mian-ji">
+        <id>https://JoelynZhou.github.io/post/892-san-wei-xing-ti-de-biao-mian-ji/</id>
+        <link href="https://JoelynZhou.github.io/post/892-san-wei-xing-ti-de-biao-mian-ji/">
         </link>
         <updated>2020-03-26T03:44:23.000Z</updated>
         <content type="html"><![CDATA[<h2 id="题目">题目</h2>
@@ -71,8 +138,8 @@ var surfaceArea = function(grid) {
     </entry>
     <entry>
         <title type="html"><![CDATA[macOS 壁纸 - VSC 快捷键]]></title>
-        <id>https://JoelynZhou.github.io/post/macos-bi-zhi-vsc-kuai-jie-jian</id>
-        <link href="https://JoelynZhou.github.io/post/macos-bi-zhi-vsc-kuai-jie-jian">
+        <id>https://JoelynZhou.github.io/post/macos-bi-zhi-vsc-kuai-jie-jian/</id>
+        <link href="https://JoelynZhou.github.io/post/macos-bi-zhi-vsc-kuai-jie-jian/">
         </link>
         <updated>2020-01-16T09:46:00.000Z</updated>
         <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gayjtquzr5j31uz0u0gnn.jpg" alt="" loading="lazy"></figure>
@@ -80,8 +147,8 @@ var surfaceArea = function(grid) {
     </entry>
     <entry>
         <title type="html"><![CDATA[macOS 壁纸 - 小鹤双拼]]></title>
-        <id>https://JoelynZhou.github.io/post/macos-bi-zhi-xiao-he-shuang-pin</id>
-        <link href="https://JoelynZhou.github.io/post/macos-bi-zhi-xiao-he-shuang-pin">
+        <id>https://JoelynZhou.github.io/post/macos-bi-zhi-xiao-he-shuang-pin/</id>
+        <link href="https://JoelynZhou.github.io/post/macos-bi-zhi-xiao-he-shuang-pin/">
         </link>
         <updated>2020-01-16T09:43:43.000Z</updated>
         <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gayjkzgvvij31c00u0di9.jpg" alt="" loading="lazy"></figure>
@@ -89,8 +156,8 @@ var surfaceArea = function(grid) {
     </entry>
     <entry>
         <title type="html"><![CDATA[Mojave 深色模式下禁用 Chrome 深色主题]]></title>
-        <id>https://JoelynZhou.github.io/post/mojave-shen-se-mo-shi-xia-jin-yong-chrome-shen-se-zhu-ti</id>
-        <link href="https://JoelynZhou.github.io/post/mojave-shen-se-mo-shi-xia-jin-yong-chrome-shen-se-zhu-ti">
+        <id>https://JoelynZhou.github.io/post/mojave-shen-se-mo-shi-xia-jin-yong-chrome-shen-se-zhu-ti/</id>
+        <link href="https://JoelynZhou.github.io/post/mojave-shen-se-mo-shi-xia-jin-yong-chrome-shen-se-zhu-ti/">
         </link>
         <updated>2019-12-31T10:31:37.000Z</updated>
         <content type="html"><![CDATA[<h3 id="背景">背景</h3>
@@ -125,8 +192,8 @@ var surfaceArea = function(grid) {
     </entry>
     <entry>
         <title type="html"><![CDATA[javascript 中的 this 指向问题]]></title>
-        <id>https://JoelynZhou.github.io/post/javascript-zhong-de-this-zhi-xiang-wen-ti</id>
-        <link href="https://JoelynZhou.github.io/post/javascript-zhong-de-this-zhi-xiang-wen-ti">
+        <id>https://JoelynZhou.github.io/post/javascript-zhong-de-this-zhi-xiang-wen-ti/</id>
+        <link href="https://JoelynZhou.github.io/post/javascript-zhong-de-this-zhi-xiang-wen-ti/">
         </link>
         <updated>2019-11-20T02:31:08.000Z</updated>
         <content type="html"><![CDATA[<h2 id="写在前面">写在前面</h2>
@@ -190,8 +257,8 @@ setInterval(&quot;obj.fun()&quot;,100);	// this 指向 obj
     </entry>
     <entry>
         <title type="html"><![CDATA[XmlHttpRequest & Ajax & Fetch & Axios]]></title>
-        <id>https://JoelynZhou.github.io/post/xmlhttprequest-and-ajax-and-fetch-and-axios</id>
-        <link href="https://JoelynZhou.github.io/post/xmlhttprequest-and-ajax-and-fetch-and-axios">
+        <id>https://JoelynZhou.github.io/post/xmlhttprequest-and-ajax-and-fetch-and-axios/</id>
+        <link href="https://JoelynZhou.github.io/post/xmlhttprequest-and-ajax-and-fetch-and-axios/">
         </link>
         <updated>2019-11-18T12:49:56.000Z</updated>
         <content type="html"><![CDATA[<p>[注：Image by <a href="https://pixabay.com/users/bboellinger-4262159/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4620141">Birgit Böllinger</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4620141">Pixabay</a>]</p>
@@ -437,8 +504,8 @@ export function webapi&lt;T&gt;(method: string, params: any, apiURL?: string): P
     </entry>
     <entry>
         <title type="html"><![CDATA[逻辑推理题-猜名次]]></title>
-        <id>https://JoelynZhou.github.io/post/luo-ji-tui-li-ti-cai-ming-ci</id>
-        <link href="https://JoelynZhou.github.io/post/luo-ji-tui-li-ti-cai-ming-ci">
+        <id>https://JoelynZhou.github.io/post/luo-ji-tui-li-ti-cai-ming-ci/</id>
+        <link href="https://JoelynZhou.github.io/post/luo-ji-tui-li-ti-cai-ming-ci/">
         </link>
         <updated>2019-11-14T11:38:17.000Z</updated>
         <content type="html"><![CDATA[<p>[注：Image by <a href="https://pixabay.com/users/DaveFrancis-14230021/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4615685">Dave Francis</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4615685">Pixabay</a>]</p>
@@ -563,8 +630,8 @@ answer(permutations, n =&gt; n[3] == 2 &amp;&amp; n[2] != 1 &amp;&amp; n[1] != 2
     </entry>
     <entry>
         <title type="html"><![CDATA[2020 年度计（da）划（lian）表]]></title>
-        <id>https://JoelynZhou.github.io/post/2020-nian-du-ji-dahua-lianbiao</id>
-        <link href="https://JoelynZhou.github.io/post/2020-nian-du-ji-dahua-lianbiao">
+        <id>https://JoelynZhou.github.io/post/2020-nian-du-ji-dahua-lianbiao/</id>
+        <link href="https://JoelynZhou.github.io/post/2020-nian-du-ji-dahua-lianbiao/">
         </link>
         <updated>2019-11-01T14:06:34.000Z</updated>
         <content type="html"><![CDATA[<blockquote>
