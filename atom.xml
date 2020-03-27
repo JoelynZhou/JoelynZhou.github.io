@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-03-26T14:11:42.132Z</updated>
+    <updated>2020-03-27T15:02:52.436Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,52 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[914. 卡牌分组]]></title>
+        <id>https://JoelynZhou.github.io/post/914-qia-pai-fen-zu/</id>
+        <link href="https://JoelynZhou.github.io/post/914-qia-pai-fen-zu/">
+        </link>
+        <updated>2020-03-27T14:58:55.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>给定一副牌，每张牌上都写着一个整数。</p>
+<p>此时，你需要选定一个数字 X，使我们可以将整副牌按下述规则分成 1 组或更多组：</p>
+<p>每组都有 X 张牌。<br>
+组内所有的牌上都写着相同的整数。<br>
+仅当你可选的 X &gt;= 2 时返回 true。</p>
+<h2 id="示例">示例</h2>
+<pre><code>输入：[1,2,3,4,4,3,2,1]
+输出：true
+解释：可行的分组是 [1,1]，[2,2]，[3,3]，[4,4]
+</code></pre>
+<pre><code>输入：[1,1,2,2,2,2]
+输出：true
+解释：可行的分组是 [1,1]，[2,2]，[2,2]
+</code></pre>
+<h2 id="分析">分析</h2>
+<p>本质是求每张牌个数组成的数组的最大公约数是否大于2。<br>
+求最大公约数：</p>
+<ol>
+<li>辗转相除法</li>
+</ol>
+<h2 id="题解">题解</h2>
+<pre><code class="language-javascript">/**
+ * @param {number[]} deck
+ * @return {boolean}
+ */
+var hasGroupsSizeX = function(deck) {
+    let map = new Map();
+    for(let n of deck){
+        map.set(n,map.has(n)?map.get(n)+1:1);
+    }
+    const arr = [...map.values()];
+    let res = arr[0];
+    return arr.every(i =&gt; (res = gcd(res, i)) &gt; 1);
+};
+const gcd = (a, b) =&gt; (b === 0 ? a : gcd(b, a % b));
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd8vq9ma1sj30oo05imxa.jpg" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1. 两数之和]]></title>
         <id>https://JoelynZhou.github.io/post/1-liang-shu-zhi-he/</id>
@@ -672,96 +718,6 @@ answer(permutations, n =&gt; n[3] == 2 &amp;&amp; n[2] != 1 &amp;&amp; n[1] != 2
 <p>本来一个很简单的题，被编程搞得这么麻烦，就想知道如果自己算就要多久，果然不超过五分钟，就有了下面的结果：<br>
 <img src="https://JoelynZhou.github.io/post-images/1573731798117.png" alt="" loading="lazy"></p>
 <p>┓( ´∀` )┏</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[2020 年度计（da）划（lian）表]]></title>
-        <id>https://JoelynZhou.github.io/post/2020-nian-du-ji-dahua-lianbiao/</id>
-        <link href="https://JoelynZhou.github.io/post/2020-nian-du-ji-dahua-lianbiao/">
-        </link>
-        <updated>2019-11-01T14:06:34.000Z</updated>
-        <content type="html"><![CDATA[<blockquote>
-<p><strong>关键词：专注</strong></p>
-</blockquote>
-<h3 id="说在前面">说在前面</h3>
-<p>问：执行这个计划会收获什么？</p>
-<p>答：升值加薪，更开阔的知识面，更好的身体素质，更多给自己的正向反馈（重要）。</p>
-<hr>
-<h3 id="个人健康">个人健康</h3>
-<blockquote>
-<p>年计划：</p>
-<ul>
-<li>keep 6240 分钟（120min * 52week）</li>
-<li>找一份有机会去全球各地的工作（五年计划）</li>
-</ul>
-</blockquote>
-<h4 id="心理健康">心理健康</h4>
-<ul>
-<li>哈佛《幸福课》、《零极限》、《象与骑象人》、《flow》、《接纳不完美的自己》、《吸引力法则》</li>
-<li>学习如何冥想</li>
-</ul>
-<h4 id="身体健康">身体健康</h4>
-<ul>
-<li>报一期瑜伽课</li>
-<li>keep 打卡</li>
-<li>坚持带便当</li>
-<li>每个月主动熬夜（12点）次数不超过 8 次</li>
-</ul>
-<hr>
-<h3 id="娱乐休闲">娱乐休闲</h3>
-<ul>
-<li>参加 3 个走出自闭的活动</li>
-<li>发现 5 个上海好玩的地方</li>
-</ul>
-<hr>
-<h3 id="家庭生活">家庭生活</h3>
-<ul>
-<li>每周大扫除（断舍离）一次</li>
-</ul>
-<hr>
-<h3 id="个人成长">个人成长</h3>
-<h4 id="输入">输入</h4>
-<ul>
-<li>每周一本书（包括不限于 电子书、实体书、听书）</li>
-<li>每周一部（2 - 4 hour）电影（包括不限于电影、纪录片、公开课 ）</li>
-<li>每天 30 min 优质公众号</li>
-<li>每天 30 min 英语学习</li>
-<li>每周 2-4 hour 理财学习</li>
-</ul>
-<h4 id="输出">输出</h4>
-<ul>
-<li>个人博客</li>
-<li>github</li>
-<li>知乎</li>
-<li>每周一次摄影（生活片段记录）</li>
-<li>复盘（周总结、月总结、年总结）</li>
-</ul>
-<hr>
-<h3 id="人际交往">人际交往</h3>
-<ul>
-<li>记住身边朋友的生日</li>
-</ul>
-<hr>
-<h3 id="个人习惯">个人习惯</h3>
-<h4 id="生活">生活</h4>
-<ul>
-<li>碗不要拖到第二天洗</li>
-<li>尽！量！每天抹防晒！</li>
-</ul>
-<h4 id="素质">素质</h4>
-<ul>
-<li>学会倾听，好好说话</li>
-<li>把【谢谢】改为【谢谢你】</li>
-<li>慎独，远离舒适区</li>
-</ul>
-<h4 id="新技能">新技能</h4>
-<ul>
-<li>投资理财</li>
-<li>英语</li>
-<li>视频剪辑</li>
-<li>尤克里里</li>
-<li>厨艺</li>
-</ul>
 ]]></content>
     </entry>
 </feed>
