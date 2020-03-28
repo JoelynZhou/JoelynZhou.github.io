@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-03-27T15:02:52.436Z</updated>
+    <updated>2020-03-28T16:02:14.836Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,50 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[820. 单词的压缩编码]]></title>
+        <id>https://JoelynZhou.github.io/post/820-dan-ci-de-ya-suo-bian-ma/</id>
+        <link href="https://JoelynZhou.github.io/post/820-dan-ci-de-ya-suo-bian-ma/">
+        </link>
+        <updated>2020-03-28T15:34:54.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>给定一个单词列表，我们将这个列表编码成一个索引字符串 S 与一个索引列表 A。</p>
+<p>例如，如果这个列表是 [&quot;time&quot;, &quot;me&quot;, &quot;bell&quot;]，我们就可以将其表示为 S = &quot;time#bell#&quot; 和 indexes = [0, 2, 5]。</p>
+<p>对于每一个索引，我们可以通过从字符串 S 中索引的位置开始读取字符串，直到 &quot;#&quot; 结束，来恢复我们之前的单词列表。</p>
+<p>那么成功对给定单词列表进行编码的最小字符串长度是多少呢？</p>
+<h2 id="示例">示例</h2>
+<p>输入: words = [&quot;time&quot;, &quot;me&quot;, &quot;bell&quot;]<br>
+输出: 10<br>
+说明: S = &quot;time#bell#&quot; ， indexes = [0, 2, 5] 。</p>
+<h2 id="分析">分析</h2>
+<ol>
+<li>最初想法<br>
+首先匹配子串会让人想到 Trie 树，但本题题意是匹配后缀，所以会想到把单词翻转，构造前缀树条件，生成前缀树，计算每一个子节点到父节点的距离（ # 相当于根节点，所以需要算上根节点的个数 1 ）。</li>
+<li>在此基础上的思考<br>
+既然每个节点的共享部分都需要反复计算，那么是不是可以理解为，其实过滤掉不用计算的是<strong>整个单词能匹配到其他单词</strong>的情况（包含关系，而不是半包含关系），那么只需要遍历每个单词，过滤掉当前单词的所有后缀以独立单词存在的情况，再对剩下的单词长度求和（别忘了根节点）即可。</li>
+</ol>
+<h2 id="题解">题解</h2>
+<pre><code class="language-javascript">/**
+ * @param {string[]} words
+ * @return {number}
+ */
+var minimumLengthEncoding = function (words) {
+    let set = new Set(words);
+    for (let word of set) {
+        for (let i = 1; i &lt; word.length; i++) {
+            let temp = word.slice(i);
+            set.has(temp) &amp;&amp; set.delete(temp);
+        }
+    }
+    let res = [...set].reduce((acc,cur)=&gt;{
+        return acc+cur.length+1;
+    },0)
+    return res;
+};
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gda2e0qzo9j30i60370sp.jpg" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[914. 卡牌分组]]></title>
         <id>https://JoelynZhou.github.io/post/914-qia-pai-fen-zu/</id>
@@ -592,132 +636,6 @@ export function webapi&lt;T&gt;(method: string, params: any, apiURL?: string): P
 <ul>
 <li>https://segmentfault.com/a/1190000012836882</li>
 </ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[逻辑推理题-猜名次]]></title>
-        <id>https://JoelynZhou.github.io/post/luo-ji-tui-li-ti-cai-ming-ci/</id>
-        <link href="https://JoelynZhou.github.io/post/luo-ji-tui-li-ti-cai-ming-ci/">
-        </link>
-        <updated>2019-11-14T11:38:17.000Z</updated>
-        <content type="html"><![CDATA[<p>[注：Image by <a href="https://pixabay.com/users/DaveFrancis-14230021/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4615685">Dave Francis</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4615685">Pixabay</a>]</p>
-<h3 id="题目">题目</h3>
-<blockquote>
-<p>有 A, B, C, D 和 E 共5个运动员，在一次比赛中，已知E肯定不是第二名或第三名，他们相互进行推测：<br>
-A 说，E 一定是第一名；<br>
-B 说，我是第二名；<br>
-C 说，A 是最后一名；<br>
-D 说，C 不是第一名；<br>
-E 说，D 是第一名；<br>
-结果只有实际排名第一和第二名的运动员猜对了，其他人都猜错了。<br>
-请编写一个程序，求出这5个运动员的名次。</p>
-</blockquote>
-<p>这个问题的常规思路其实很简单，把所有情况排列组合，有顺序，一共<img src="https://JoelynZhou.github.io/post-images/1573731742585.png" alt="" loading="lazy"></p>
-<p>种情况，再遍历校验条件是否符合。所以，难点在于，怎么用编程实现这个排列组合。</p>
-<h3 id="解法一投机取巧粗暴遍历">解法一：投机取巧+粗暴遍历</h3>
-<pre><code class="language-javascript">/**
- * 排列组合问题可以用二叉树来简单描述
- * 思路：创建二叉树，遍历二叉树，条件校验
- */
-const origin = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;];
-let output = [];
-for (let i = 12345; i &lt;= 54321; i++) {
-    // TODO
-    // 可以优化成寻找下一个比 12345 大的排列组合
-    const temp = [Math.floor(i / 10000), Math.floor(i / 1000 % 10), Math.floor(i / 100 % 10), Math.floor(i / 10 % 10), i % 10];
-    if (isValid(temp)) {
-        // 校验
-        check(temp);
-    } else {
-        continue;
-    }
-}
-console.log(output);
-
-function check(members) {
-    if (members[1] === 5 || members[2] === 5) {
-        return;
-    }
-    const list = [members[0] === 5, members[1] === 2, members[4] === 1, members[0] !== 3, members[0] === 4];
-    if (list[members[0] - 1] &amp;&amp; list[members[1] - 1] &amp;&amp; !list[members[2] - 1] &amp;&amp; !list[members[3] - 1] &amp;&amp; !list[members[4] - 1]) {
-        const res = [];
-        members.forEach(x =&gt; {
-            res.push(origin[x - 1]);
-        })
-        output.push(res);
-    }
-}
-
-function isValid(arr) {
-    let hash = {};
-    for (let i in arr) {
-        if (hash[arr[i]] || arr[i] &gt; 5 || arr[i] === 0) {
-            return false;
-        }
-        hash[arr[i]] = true;
-    }
-    return true;
-}
-</code></pre>
-<h3 id="解法二根据推论去反校验">解法二：根据推论去反校验</h3>
-<p>假设都对，推互斥</p>
-<pre><code class="language-javascript">function genPermutations(arr) {
-    const result = [];
-
-    function innerArr(temArr) {
-        for (let i = 0, len = arr.length; i &lt; len; i++) {
-            if (temArr.length == len - 1) {
-                if (temArr.indexOf(arr[i]) &lt; 0) {
-                    result.push(temArr.concat(arr[i]));
-                }
-                continue;
-            }
-            if (temArr.indexOf(arr[i]) &lt; 0) {
-                innerArr(temArr.concat(arr[i]));
-            }
-        }
-    }
-    innerArr([]);
-    return result;
-}
-
-var permutations = genPermutations([1, 2, 3, 4, 5])
-
-function answer(arr, fun) {
-    // 已知E肯定不是第二名或第三名
-    arr = arr.filter(n =&gt; n[4] !== 2 &amp;&amp; n[4] !== 3);
-    const result = arr.filter(fun)
-    if (result.length === 1) {
-        console.log(&quot;正确答案为&quot;, result);
-    } else {
-        console.log(&quot;错误猜想&quot;);
-    }
-}
-
-// 第一种组合
-// A说，E一定是第一名；=&gt; E = 1，A = 2 D = 1,
-answer(permutations, n =&gt; n[4] == 1 &amp;&amp; n[0] == 2 &amp;&amp; n[3] == 1)
-
-
-// 第二种组合
-// E说，D是第一名; =&gt; E = 2, D = 1,
-answer(permutations, n =&gt; n[4] == 2 &amp;&amp; n[3] == 1)
-
-//  第三种组合
-//  B说，我是第二名、C说，A是最后一名；=&gt; B = 2 C=1 A==5 E!=1  D != 1
-// =&gt;  B = 2 C=1 A==5
-answer(permutations, n =&gt; n[1] == 2 &amp;&amp; n[2] == 1 &amp;&amp; n[0] == 5)
-
-// 第四种组合 
-// D说，C不是第一名 
-// E说，D是第一名；
-// D ==2 =&gt; C!=1  B != 2 E!=1  A !=5
-answer(permutations, n =&gt; n[3] == 2 &amp;&amp; n[2] != 1 &amp;&amp; n[1] != 2 &amp;&amp; n[4] != 1 &amp;&amp; n[0] != 5);
-</code></pre>
-<h3 id="不用程序直接推导">不用程序直接推导</h3>
-<p>本来一个很简单的题，被编程搞得这么麻烦，就想知道如果自己算就要多久，果然不超过五分钟，就有了下面的结果：<br>
-<img src="https://JoelynZhou.github.io/post-images/1573731798117.png" alt="" loading="lazy"></p>
-<p>┓( ´∀` )┏</p>
 ]]></content>
     </entry>
 </feed>

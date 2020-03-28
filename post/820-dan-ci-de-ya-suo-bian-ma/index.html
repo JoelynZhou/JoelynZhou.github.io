@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>999. 车的可用捕获量 | JoelynZhou</title>
+<title>820. 单词的压缩编码 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1585411304250">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,83 +73,56 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              999. 车的可用捕获量
+              820. 单词的压缩编码
             </h2>
             <div class="post-info">
               <span>
-                2020-03-26
+                2020-03-28
               </span>
               <span>
-                3 min read
+                2 min read
               </span>
-              
-                <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
-                  # LeetCode
-                </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
                 <h2 id="题目">题目</h2>
-<p>在一个 8 x 8 的棋盘上，有一个白色车（rook）。也可能有空方块，白色的象（bishop）和黑色的卒（pawn）。它们分别以字符 “R”，“.”，“B” 和 “p” 给出。大写字符表示白棋，小写字符表示黑棋。</p>
-<p>车按国际象棋中的规则移动：它选择四个基本方向中的一个（北，东，西和南），然后朝那个方向移动，直到它选择停止、到达棋盘的边缘或移动到同一方格来捕获该方格上颜色相反的卒。另外，车不能与其他友方（白色）象进入同一个方格。</p>
-<p>返回车能够在一次移动中捕获到的卒的数量。</p>
-<p><a href="https://assets.leetcode-cn.com/solution-static/999_fig1.gif">Gif 点击这里</a></p>
-<h2 id="测试用例">测试用例</h2>
-<pre><code>输入：[[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;p&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;R&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;p&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;p&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;]]
-输出：3
-解释：
-在本例中，车能够捕获所有的卒。
-</code></pre>
+<p>给定一个单词列表，我们将这个列表编码成一个索引字符串 S 与一个索引列表 A。</p>
+<p>例如，如果这个列表是 [&quot;time&quot;, &quot;me&quot;, &quot;bell&quot;]，我们就可以将其表示为 S = &quot;time#bell#&quot; 和 indexes = [0, 2, 5]。</p>
+<p>对于每一个索引，我们可以通过从字符串 S 中索引的位置开始读取字符串，直到 &quot;#&quot; 结束，来恢复我们之前的单词列表。</p>
+<p>那么成功对给定单词列表进行编码的最小字符串长度是多少呢？</p>
+<h2 id="示例">示例</h2>
+<p>输入: words = [&quot;time&quot;, &quot;me&quot;, &quot;bell&quot;]<br>
+输出: 10<br>
+说明: S = &quot;time#bell#&quot; ， indexes = [0, 2, 5] 。</p>
 <h2 id="分析">分析</h2>
-<p>考察方向数组的问题：</p>
 <ol>
-<li>暴力法：<br>
-四层 for 循环</li>
-<li>奇思妙解：<br>
-通过创建平面坐标系来解决</li>
+<li>最初想法<br>
+首先匹配子串会让人想到 Trie 树，但本题题意是匹配后缀，所以会想到把单词翻转，构造前缀树条件，生成前缀树，计算每一个子节点到父节点的距离（ # 相当于根节点，所以需要算上根节点的个数 1 ）。</li>
+<li>在此基础上的思考<br>
+既然每个节点的共享部分都需要反复计算，那么是不是可以理解为，其实过滤掉不用计算的是<strong>整个单词能匹配到其他单词</strong>的情况（包含关系，而不是半包含关系），那么只需要遍历每个单词，过滤掉当前单词的所有后缀以独立单词存在的情况，再对剩下的单词长度求和（别忘了根节点）即可。</li>
 </ol>
 <h2 id="题解">题解</h2>
 <pre><code class="language-javascript">/**
- * @param {character[][]} board
+ * @param {string[]} words
  * @return {number}
- * 分析：
- * 考察方向数组的问题
- * 暴力法：
- * 四层 for 循环
- * 奇思妙解：
- * 通过创建平面坐标系来解决
  */
-var numRookCaptures = function(board) {
-    let result=0;
-    for(let i=0;i&lt;board.length;i++){
-        for(let j=0;j&lt;board[i].length;j++){
-            //找到 R 的位置
-            if(board[i][j]===&quot;R&quot;){
-                //R 为原点创建坐标系
-                //向四个方向查找
-                return rampage(board,i,j,0,1)+rampage(board,i,j,0,-1)+rampage(board,i,j,1,0)+rampage(board,i,j,-1,0);
-            }
+var minimumLengthEncoding = function (words) {
+    let set = new Set(words);
+    for (let word of set) {
+        for (let i = 1; i &lt; word.length; i++) {
+            let temp = word.slice(i);
+            set.has(temp) &amp;&amp; set.delete(temp);
         }
     }
+    let res = [...set].reduce((acc,cur)=&gt;{
+        return acc+cur.length+1;
+    },0)
+    return res;
 };
-
-/**
- * @param {board:做标数据，x,y: R 的坐标; dx,dy:步长}
- */
-var rampage=(board,x,y,dx,dy)=&gt;{
-    while(x&gt;=0 &amp;&amp; x&lt;board.length &amp;&amp; y&gt;=0 &amp;&amp; y&lt;board[x].length &amp;&amp; board[x][y]!==&quot;B&quot;){
-        if(board[x][y]===&quot;p&quot;){
-            return 1;
-        }
-        x+=dx;
-        y+=dy;
-    }
-    return 0;
-}
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd7d8br0n5j30oa0403yk.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gda2e0qzo9j30i60370sp.jpg" alt="" loading="lazy"></figure>
 
               </div>
               <div class="toc-container">
@@ -157,7 +130,7 @@ var rampage=(board,x,y,dx,dy)=&gt;{
 <li>
 <ul>
 <li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
-<li><a href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">测试用例</a></li>
+<li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
 <li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
 <li><a href="#%E9%A2%98%E8%A7%A3">题解</a></li>
 </ul>
@@ -172,9 +145,9 @@ var rampage=(board,x,y,dx,dy)=&gt;{
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://JoelynZhou.github.io/post/892-san-wei-xing-ti-de-biao-mian-ji/">
+            <a href="https://JoelynZhou.github.io/post/914-qia-pai-fen-zu/">
               <h3 class="post-title">
-                892. 三维形体的表面积
+                914. 卡牌分组
               </h3>
             </a>
           </div>
