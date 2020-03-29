@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-03-28T16:52:02.820Z</updated>
+    <updated>2020-03-29T12:18:31.566Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,102 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[1162. 地图分析]]></title>
+        <id>https://JoelynZhou.github.io/post/1162-di-tu-fen-xi/</id>
+        <link href="https://JoelynZhou.github.io/post/1162-di-tu-fen-xi/">
+        </link>
+        <updated>2020-03-29T11:12:46.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>你现在手里有一份大小为 N x N 的『地图』（网格） grid，上面的每个『区域』（单元格）都用 0 和 1 标记好了。其中 0 代表海洋，1 代表陆地，你知道距离陆地区域最远的海洋区域是是哪一个吗？请返回该海洋区域到离它最近的陆地区域的距离。</p>
+<p>我们这里说的距离是『曼哈顿距离』（ Manhattan Distance）：(x0, y0) 和 (x1, y1) 这两个区域之间的距离是 |x0 - x1| + |y0 - y1| 。</p>
+<p>如果我们的地图上只有陆地或者海洋，请返回 -1。</p>
+<h2 id="示例">示例</h2>
+<p>输入：[[1,0,1],[0,0,0],[1,0,1]]<br>
+输出：2<br>
+解释：<br>
+海洋区域 (1, 1) 和所有陆地区域之间的距离都达到最大，最大距离为 2。<br>
+<img src="https://pic.leetcode-cn.com/23e21821e14238829dd7021a620895f40a8e42127cfe372e4791d025bb655afc.jpg" alt="" loading="lazy"></p>
+<h2 id="分析">分析</h2>
+<p>参考链接：<a href="https://leetcode-cn.com/problems/as-far-from-land-as-possible/solution/zhen-liang-yan-sou-huan-neng-duo-yuan-kan-wan-miao/">参考链接点这里</a></p>
+<p>花了好长时间去理解题意，距离最近的陆地区域的最远距离，究竟是最远距离还是最近距离，后来看了链接中大佬画的 GIF 瞬间明白了，这道题或许换个模型更容易理解。</p>
+<p>我脑补的模型：</p>
+<ul>
+<li>背景：
+<ul>
+<li>病毒在封闭人群中的传播（可能是最近瘟疫公司玩多了的缘故 orz）；</li>
+</ul>
+</li>
+<li>假设：
+<ul>
+<li>将陆地看成是感染人员，每个感染人员 每天 都会感染周围的人，然后 第二天新感染的人员又会感染周围的人，问：你以上帝视角，站在人群中什么位置，才是最晚被感染的人（人类之光格陵兰）。</li>
+</ul>
+</li>
+<li>思路：
+<ul>
+<li>第一天，算出被 0 号病人感染的人，剩下没感染的还有多少人</li>
+<li>第二天，算出被 第一天感染的人 感染的人，剩下没感染多少人</li>
+<li>……</li>
+<li>第 N 天，已经没有被感染的人了</li>
+<li>得到 N</li>
+</ul>
+</li>
+</ul>
+<h2 id="题解">题解</h2>
+<pre><code class="language-javascript">/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var maxDistance = function (grid) {
+    let land = []; // 陆地源数组
+    let level = 0; // 返回层级
+    for (let i = 0; i &lt; grid.length; i++) {
+        for (let j = 0; j &lt; grid[i].length; j++) {
+            if (grid[i][j] === 1) {
+                land.push([i, j]);
+            }
+        }
+    }
+    let ocean = grid.length * grid.length - land.length; // 海洋的格数
+    // 全是海洋或者陆地，返回 -1
+    if (land.length === 0 || ocean === 0) {
+        return -1;
+    }
+    while (ocean &gt; 0) {
+        level++;
+        const temp = [];
+        for (let i = 0; i &lt; land.length; i++) {
+            const [x, y] = [land[i][0], land[i][1]];
+            // 判断 上下左右 相邻的点是否有海洋
+            for (let j = 0; j &lt; 4; j++) {
+                // 边界条件校验
+                if (
+                    x + dx[j] &lt; 0 ||
+                    y + dy[j] &lt; 0 ||
+                    x + dx[j] &gt; grid.length - 1 ||
+                    y + dy[j] &gt; grid[0].length - 1
+                ) {
+                    continue;
+                }
+                // 如果发现是海洋，则标记 2（这里其实只要是非 0，其他数都可以，只为了跟未知海洋作区分），防止被重复计算
+                if (grid[x + dx[j]][y + dy[j]] === 0) {
+                    grid[x + dx[j]][y + dy[j]] = 2;
+                    temp.push([x + dx[j], y + dy[j]]);
+                    // 每发现一个新海洋，剩下的海洋格数就减少 1
+                    ocean--;
+                }
+            }
+        }
+        land = temp; // 一轮扩散结束后，新扩散将代替源陆地存入 land，开始新的一轮扩散
+    }
+    return level;
+};
+const dx = [1, -1, 0, 0];
+const dy = [0, 0, 1, -1];
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb0fcx1xwj30g202ya9z.jpg" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[820. 单词的压缩编码]]></title>
         <id>https://JoelynZhou.github.io/post/820-dan-ci-de-ya-suo-bian-ma/</id>
@@ -388,253 +484,6 @@ setInterval(&quot;obj.fun()&quot;,100);	// this 指向 obj
 <h2 id="参考">参考</h2>
 <ul>
 <li><a href="https://zhuanlan.zhihu.com/p/42145138">彻底搞懂  JavaScript 中的 this 指向问题</a></li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[XmlHttpRequest & Ajax & Fetch & Axios]]></title>
-        <id>https://JoelynZhou.github.io/post/xmlhttprequest-and-ajax-and-fetch-and-axios/</id>
-        <link href="https://JoelynZhou.github.io/post/xmlhttprequest-and-ajax-and-fetch-and-axios/">
-        </link>
-        <updated>2019-11-18T12:49:56.000Z</updated>
-        <content type="html"><![CDATA[<p>[注：Image by <a href="https://pixabay.com/users/bboellinger-4262159/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4620141">Birgit Böllinger</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4620141">Pixabay</a>]</p>
-<h2 id="xmlhttprequest">XmlHttpRequest</h2>
-<pre><code class="language-javascript">var xhr=new XMLHttpRequest();
-xhr.open(&quot;GET&quot;,url);
-xhr.responseType=&quot;json&quot;;
-
-xhr.onload=function(){
-    console.log(xhr.response);
-}
-
-xhr.onerror=function(){
-    console.log(&quot;error&quot;);
-}
-
-xhr.send();
-</code></pre>
-<ul>
-<li>在不重新加载页面的情况下更新页面</li>
-<li>在页面已加载后从服务器请求/接收数据</li>
-<li>在后台向服务器发送数据</li>
-</ul>
-<h2 id="ajax">ajax</h2>
-<pre><code class="language-javascript">$.ajax({
-    type:&quot;post&quot;,
-    url:url,
-    data:data,
-    dataType:dataType,
-    success:function(){},
-    error:function(){}
-})
-</code></pre>
-<ul>
-<li><strong>对原生 XHR 的封装</strong></li>
-<li>增加了对 JSONP 的支持</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>针对 MVC 编程，不符合前端 MVVM 的浪潮</li>
-<li>架构不清晰，如果有多个请求或者依赖关系，容易形成回调地狱</li>
-<li>为了 ajax 引入 jQuery 不合理</li>
-</ul>
-<h2 id="axios">axios</h2>
-<pre><code class="language-javascript">axios({
-    method:&quot;post&quot;,
-    url:url,
-    data:data,
-}).then(response=&gt;{
-    console.log(response);
-}).catch(err=&gt;{
-    console.log(err);
-})
-</code></pre>
-<ul>
-<li>从 node.js 创建 http 请求</li>
-<li>也是对原生 XHR 的封装，但是是 Promise 的实现版本，符合最新 ES 规范</li>
-<li>客户端支持防止 CSRF</li>
-<li><strong>提供了一些并发请求的接口</strong></li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>只支持现代浏览器</li>
-</ul>
-<h2 id="fetch">fetch</h2>
-<pre><code class="language-javascript">fetch(&quot;/users.json&quot;,{
-    method:&quot;post&quot;,
-    mode:&quot;no-cors&quot;,
-    data:{}
-}).then(function(response){
-    return response.json();
-}).then(function(data){
-    console.log(data);
-}).catch(function(e){
-    console.log(&quot;error&quot;);
-})
-</code></pre>
-<p>换成更简洁的箭头函数的写法：</p>
-<pre><code class="language-javascript">fetch(&quot;/users.json&quot;,{
-    method:&quot;post&quot;,
-    mode:&quot;no-cors&quot;,
-    data:{}
-}).then(response=&gt;{
-    return response.json();
-}).then(data=&gt;{
-    console.log(data);
-}).catch(e=&gt;{
-    console.log(&quot;error&quot;);
-})
-</code></pre>
-<p>换成 es7 async/await 的写法：</p>
-<pre><code class="language-javascript">try{
-    let response=await fetch(url);
-    let data=await response.json();
-    console.log(data);
-}catch(e){
-    console.log(&quot;error&quot;,e);
-}
-</code></pre>
-<blockquote>
-<p>Promise, generator/yield,await/async 都是现在和未来JS解决异步的标准做法，可以完美搭配使用。</p>
-</blockquote>
-<p>总结，Fetch 优点：</p>
-<ul>
-<li>语法简洁</li>
-<li>基于标准 Promise 实现，支持 async/await
-<ul>
-<li>因为旧版浏览器不支持 Promise，所以需要使用 polly-fill es6-promise</li>
-</ul>
-</li>
-<li>同构方便</li>
-<li>对跨域的处理
-<ul>
-<li>在配置中添加<code>mode:&quot;no-cors&quot;</code>即可</li>
-</ul>
-</li>
-</ul>
-<p>用 Fetch 遇到的坑：</p>
-<ul>
-<li>
-<p>Fetch 请求默认不带 cookie ，需要设置 <code>fetch(url,{credentials:&quot;include&quot;})</code></p>
-</li>
-<li>
-<p>服务器返回 400，500 并不会 reject，只有网络错误导致请求不能完成才会被 reject</p>
-</li>
-<li>
-<p>不能中断，没有 abort, terminate, onTImeout, cancel 方法</p>
-</li>
-<li>
-<p>不同于 XHR ，不能监测请求进度（但这样会比较简单）</p>
-</li>
-</ul>
-<p>我看了我们目前几个项目，都是基于 fetch 实现的，所以看了一下对上述坑的解决方案：</p>
-<pre><code class="language-typescript">import { message, Modal } from &quot;antd&quot;;
-import { getLocal } from &quot;common/LocaleProvider&quot;;
-import omitEmpty from &quot;omit-empty&quot;;
-//import { removeUserInfo } from &quot;utils/user&quot;;
-import { getSearchParamValue } from &quot;./url&quot;;
-
-function getApiDomain() {
-	const apiip = getSearchParamValue(&quot;apiip&quot;);
-	return apiip || window.location.host;
-}
-
-function checkStatus(response: Response): Response {
-	if (!response.ok) {
-		const error = new Error(response.statusText);
-		switch (response.status) {
-			case 401:
-				window.location.pathname = &quot;/login.html&quot;;
-				break;
-			case 500:
-				message.warn(&quot;server error&quot;);
-				break;
-			default:
-				return response;
-		}
-		throw error;
-	}
-	return response;
-}
-
-export function getApiUrl(method: string) {
-	method = method.replace(/\./g, &quot;/&quot;);
-	return `//${getApiDomain()}/api/${method}`;
-}
-
-export function doFetch(
-	url: string,
-	params: any,
-	fetchMethod?: &quot;POST&quot; | &quot;GET&quot;,
-	headers?: HeadersInit
-) {
-	const method = fetchMethod ? fetchMethod : &quot;post&quot;;
-	params = omitEmpty(params);
-	return fetch(url, {
-		method,
-		credentials: &quot;include&quot;,
-		headers,
-		body: JSON.stringify(params)
-	}).then(checkStatus);
-}
-
-const XLocale = new Headers({
-	&quot;x-locale&quot;: getLocal()
-});
-
-export function webapi&lt;T&gt;(method: string, params: any, apiURL?: string): Promise&lt;T&gt; {
-	let url = apiURL ? apiURL : getApiUrl(method);
-
-	// return doFetch(url, params)
-	return doFetch(url, params, &quot;POST&quot;, XLocale)
-		.then(
-			response =&gt;
-				response.json().then(json =&gt; ({
-					data: json,
-					status: response.status
-				})) as Promise&lt;{
-					data: any;
-					status: number;
-				}&gt;
-		)
-		.then&lt;T&gt;(response =&gt; {
-			if (response.status === 200 &amp;&amp; response.data.result.code !== 0) {
-				if (response.data.result.code === 1000) {
-					removeUserInfo();
-					parent.location.href = &quot;./login.html&quot;;
-				}
-				let msg = response.data.result.message;
-				if (response.data.result.code === 500) {
-					msg = msg ? msg : &quot;server error&quot;;
-				}
-				console.error(msg);
-				console.log(msg);
-				return Promise.reject({
-					status: 5001, // 专门为后端设置的专门接口信息错误
-					message: msg
-				});
-			}
-			if (response.status !== 200) {
-				return Promise.reject({
-					status: response.status,
-					message: &quot;后端接口信息：&quot; + response.data.message
-				});
-			}
-			return response.data;
-		})
-		.catch(err =&gt; {
-			const msg = err.message || &quot;&quot;;
-			return Promise.reject({
-				status: 5002,
-				message: msg.match(/Failed to fetch/gi) ? `网络不稳定，请稍后重试` : msg
-				// `接口：${method}挂了或者没有开启CORS跨域功能，请稍等！`
-			});
-		});
-}
-</code></pre>
-<h2 id="参考">参考</h2>
-<ul>
-<li>https://segmentfault.com/a/1190000012836882</li>
 </ul>
 ]]></content>
     </entry>

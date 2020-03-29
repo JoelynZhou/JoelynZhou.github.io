@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>892. 三维形体的表面积 | JoelynZhou</title>
+<title>1162. 地图分析 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1585483469741">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -73,75 +73,108 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              892. 三维形体的表面积
+              1162. 地图分析
             </h2>
             <div class="post-info">
               <span>
-                2020-03-26
+                2020-03-29
               </span>
               <span>
-                2 min read
+                4 min read
               </span>
-              
-                <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
-                  # LeetCode
-                </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
                 <h2 id="题目">题目</h2>
-<p>在 N * N 的网格上，我们放置一些 1 * 1 * 1  的立方体。<br>
-每个值 v = grid[i][j] 表示 v 个正方体叠放在对应单元格 (i, j) 上。<br>
-请你返回最终形体的表面积。</p>
-<ul>
-<li>1 &lt;= N &lt;= 50</li>
-<li>0 &lt;= grid[i][j] &lt;= 50</li>
-</ul>
-<h2 id="测试用例">测试用例</h2>
-<pre><code class="language-javascript">输入：[[2]]
-输出：10
-</code></pre>
-<pre><code class="language-javascript">输入：[[1,2],[3,4]]
-输出：34
-</code></pre>
+<p>你现在手里有一份大小为 N x N 的『地图』（网格） grid，上面的每个『区域』（单元格）都用 0 和 1 标记好了。其中 0 代表海洋，1 代表陆地，你知道距离陆地区域最远的海洋区域是是哪一个吗？请返回该海洋区域到离它最近的陆地区域的距离。</p>
+<p>我们这里说的距离是『曼哈顿距离』（ Manhattan Distance）：(x0, y0) 和 (x1, y1) 这两个区域之间的距离是 |x0 - x1| + |y0 - y1| 。</p>
+<p>如果我们的地图上只有陆地或者海洋，请返回 -1。</p>
+<h2 id="示例">示例</h2>
+<p>输入：[[1,0,1],[0,0,0],[1,0,1]]<br>
+输出：2<br>
+解释：<br>
+海洋区域 (1, 1) 和所有陆地区域之间的距离都达到最大，最大距离为 2。<br>
+<img src="https://pic.leetcode-cn.com/23e21821e14238829dd7021a620895f40a8e42127cfe372e4791d025bb655afc.jpg" alt="" loading="lazy"></p>
 <h2 id="分析">分析</h2>
-<p>计算不规则立方体堆的表面积，rid[i][j]表示第 i 行 第 j 列的方块个数</p>
-<ol>
-<li>先假设每一摞的立方体互不接触：<br>
-通过遍历累加，可以计算出每一摞立方体的表面积及不接触情况下的总表面积</li>
-<li>再考虑接触的需要减去的部分：<br>
-一旦两摞立方体接触，那么被抵消掉的表面积应该是较矮的那一摞的高度*2</li>
-<li>关于计算顺序:<br>
-可以假设从第 0 行第 0 列开始，<br>
-每次新增一摞的时候，加上把当前摞作为独立情况下的表面积，同时减去与左侧，上侧有接触面时抵消掉的面积，直到第 i 行第 j 列结束循环体，输出结果</li>
-</ol>
-<h3 id="题解">题解</h3>
+<p>参考链接：<a href="https://leetcode-cn.com/problems/as-far-from-land-as-possible/solution/zhen-liang-yan-sou-huan-neng-duo-yuan-kan-wan-miao/">参考链接点这里</a></p>
+<p>花了好长时间去理解题意，距离最近的陆地区域的最远距离，究竟是最远距离还是最近距离，后来看了链接中大佬画的 GIF 瞬间明白了，这道题或许换个模型更容易理解。</p>
+<p>我脑补的模型：</p>
+<ul>
+<li>背景：
+<ul>
+<li>病毒在封闭人群中的传播（可能是最近瘟疫公司玩多了的缘故 orz）；</li>
+</ul>
+</li>
+<li>假设：
+<ul>
+<li>将陆地看成是感染人员，每个感染人员 每天 都会感染周围的人，然后 第二天新感染的人员又会感染周围的人，问：你以上帝视角，站在人群中什么位置，才是最晚被感染的人（人类之光格陵兰）。</li>
+</ul>
+</li>
+<li>思路：
+<ul>
+<li>第一天，算出被 0 号病人感染的人，剩下没感染的还有多少人</li>
+<li>第二天，算出被 第一天感染的人 感染的人，剩下没感染多少人</li>
+<li>……</li>
+<li>第 N 天，已经没有被感染的人了</li>
+<li>得到 N</li>
+</ul>
+</li>
+</ul>
+<h2 id="题解">题解</h2>
 <pre><code class="language-javascript">/**
  * @param {number[][]} grid
  * @return {number}
  */
-var surfaceArea = function(grid) {
-    let result=0;
-    for(let i=0;i&lt;grid.length;i++){
-        for(let j=0;j&lt;grid[i].length;j++){
-            if(grid[i][j]&gt;0){
-                result+=grid[i][j]*4+2;
-            }
-            if(i&gt;0){
-                result -= Math.min(grid[i-1][j],grid[i][j])*2;
-            }
-            if(j&gt;0){
-                result -= Math.min(grid[i][j-1],grid[i][j])*2;
+var maxDistance = function (grid) {
+    let land = []; // 陆地源数组
+    let level = 0; // 返回层级
+    for (let i = 0; i &lt; grid.length; i++) {
+        for (let j = 0; j &lt; grid[i].length; j++) {
+            if (grid[i][j] === 1) {
+                land.push([i, j]);
             }
         }
     }
-    return result;
+    let ocean = grid.length * grid.length - land.length; // 海洋的格数
+    // 全是海洋或者陆地，返回 -1
+    if (land.length === 0 || ocean === 0) {
+        return -1;
+    }
+    while (ocean &gt; 0) {
+        level++;
+        const temp = [];
+        for (let i = 0; i &lt; land.length; i++) {
+            const [x, y] = [land[i][0], land[i][1]];
+            // 判断 上下左右 相邻的点是否有海洋
+            for (let j = 0; j &lt; 4; j++) {
+                // 边界条件校验
+                if (
+                    x + dx[j] &lt; 0 ||
+                    y + dy[j] &lt; 0 ||
+                    x + dx[j] &gt; grid.length - 1 ||
+                    y + dy[j] &gt; grid[0].length - 1
+                ) {
+                    continue;
+                }
+                // 如果发现是海洋，则标记 2（这里其实只要是非 0，其他数都可以，只为了跟未知海洋作区分），防止被重复计算
+                if (grid[x + dx[j]][y + dy[j]] === 0) {
+                    grid[x + dx[j]][y + dy[j]] = 2;
+                    temp.push([x + dx[j], y + dy[j]]);
+                    // 每发现一个新海洋，剩下的海洋格数就减少 1
+                    ocean--;
+                }
+            }
+        }
+        land = temp; // 一轮扩散结束后，新扩散将代替源陆地存入 land，开始新的一轮扩散
+    }
+    return level;
 };
+const dx = [1, -1, 0, 0];
+const dy = [0, 0, 1, -1];
 </code></pre>
-<h3 id="性能">性能</h3>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd7a7rj549j30p003q3yk.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb0fcx1xwj30g202ya9z.jpg" alt="" loading="lazy"></figure>
 
               </div>
               <div class="toc-container">
@@ -149,13 +182,9 @@ var surfaceArea = function(grid) {
 <li>
 <ul>
 <li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
-<li><a href="#%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B">测试用例</a></li>
-<li><a href="#%E5%88%86%E6%9E%90">分析</a>
-<ul>
+<li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
 <li><a href="#%E9%A2%98%E8%A7%A3">题解</a></li>
-<li><a href="#%E6%80%A7%E8%83%BD">性能</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -168,9 +197,9 @@ var surfaceArea = function(grid) {
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://JoelynZhou.github.io/post/macos-bi-zhi-vsc-kuai-jie-jian/">
+            <a href="https://JoelynZhou.github.io/post/820-dan-ci-de-ya-suo-bian-ma/">
               <h3 class="post-title">
-                macOS 壁纸 - VSC 快捷键
+                820. 单词的压缩编码
               </h3>
             </a>
           </div>
