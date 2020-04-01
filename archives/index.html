@@ -1,285 +1,317 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>JoelynZhou</title>
-<meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
-<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1585483469741">
+    <meta charset="utf-8" >
+
+<title>文章归档 | JoelynZhou</title>
+<meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1585707146629">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://JoelynZhou.github.io/styles/main.css">
 
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 
 
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://JoelynZhou.github.io">
-  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1585483469741" alt="">
-  </a>
-  <h1 class="site-title">
-    JoelynZhou
-  </h1>
-  <p class="site-description">
-    多读书 / 多看报 / 少吃零食 / 多睡觉
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-</div>
+    <div id="app" class="main">
 
-    
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://JoelynZhou.github.io">
+        <img src="https://JoelynZhou.github.io/images/avatar.png?v=1585707146629" class="site-logo">
+        <h1 class="site-title">JoelynZhou</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
         
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      多读书 / 多看报 / 少吃零食 / 多睡觉
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://JoelynZhou.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
 
-<div class="archives-container">
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          
+
+          <h2 class="archives-title">文章归档</h2>
+          <div class="archives-container">
+            
+              <h2 class="year" data-aos="fade-in" data-aos-delay="500">2020</h2>
+              
+                
+                  <article class="post">
+                    <a href="https://JoelynZhou.github.io/post/912-pai-xu-shu-zu/">
+                      <h2 class="post-title">
+                        912. 排序数组
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://JoelynZhou.github.io/post/mian-shi-ti-62-yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi/">
+                      <h2 class="post-title">
+                        面试题62. 圆圈中最后剩下的数字
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://JoelynZhou.github.io/post/1162-di-tu-fen-xi/">
+                      <h2 class="post-title">
+                        1162. 地图分析
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://JoelynZhou.github.io/post/820-dan-ci-de-ya-suo-bian-ma/">
+                      <h2 class="post-title">
+                        820. 单词的压缩编码
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://JoelynZhou.github.io/post/914-qia-pai-fen-zu/">
+                      <h2 class="post-title">
+                        914. 卡牌分组
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://JoelynZhou.github.io/post/1-liang-shu-zhi-he/">
+                      <h2 class="post-title">
+                        1. 两数之和
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://JoelynZhou.github.io/post/999-che-de-ke-yong-bu-huo-liang/">
+                      <h2 class="post-title">
+                        999. 车的可用捕获量
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://JoelynZhou.github.io/post/892-san-wei-xing-ti-de-biao-mian-ji/">
+                      <h2 class="post-title">
+                        892. 三维形体的表面积
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://JoelynZhou.github.io/post/macos-bi-zhi-vsc-kuai-jie-jian/">
+                      <h2 class="post-title">
+                        macOS 壁纸 - VSC 快捷键
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://JoelynZhou.github.io/post/macos-bi-zhi-xiao-he-shuang-pin/">
+                      <h2 class="post-title">
+                        macOS 壁纸 - 小鹤双拼
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            
+              <h2 class="year" data-aos="fade-in" data-aos-delay="500">2019</h2>
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <article class="post">
+                    <a href="https://JoelynZhou.github.io/post/mojave-shen-se-mo-shi-xia-jin-yong-chrome-shen-se-zhu-ti/">
+                      <h2 class="post-title">
+                        Mojave 深色模式下禁用 Chrome 深色主题
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://JoelynZhou.github.io/post/javascript-zhong-de-this-zhi-xiang-wen-ti/">
+                      <h2 class="post-title">
+                        javascript 中的 this 指向问题
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://JoelynZhou.github.io/post/xmlhttprequest-and-ajax-and-fetch-and-axios/">
+                      <h2 class="post-title">
+                        XmlHttpRequest &amp; Ajax &amp; Fetch &amp; Axios
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://JoelynZhou.github.io/post/luo-ji-tui-li-ti-cai-ming-ci/">
+                      <h2 class="post-title">
+                        逻辑推理题-猜名次
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+                
+                  <article class="post">
+                    <a href="https://JoelynZhou.github.io/post/2020-nian-du-ji-dahua-lianbiao/">
+                      <h2 class="post-title">
+                        2020 年度计（da）划（lian）表
+                      </h2>
+                    </a>
+                  </article>
+                
+              
+            
+          </div>
+
+          <div class="pagination-container">
   
-    <h2 class="year">2020</h2>
-    
-      
-        <a href="https://JoelynZhou.github.io/post/1162-di-tu-fen-xi/" class="post">
-          <h2 class="post-title">
-            1162. 地图分析
-          </h2>
-          <div class="time">2020-03-29</div>
-        </a>
-      
-    
-      
-        <a href="https://JoelynZhou.github.io/post/820-dan-ci-de-ya-suo-bian-ma/" class="post">
-          <h2 class="post-title">
-            820. 单词的压缩编码
-          </h2>
-          <div class="time">2020-03-28</div>
-        </a>
-      
-    
-      
-        <a href="https://JoelynZhou.github.io/post/914-qia-pai-fen-zu/" class="post">
-          <h2 class="post-title">
-            914. 卡牌分组
-          </h2>
-          <div class="time">2020-03-27</div>
-        </a>
-      
-    
-      
-        <a href="https://JoelynZhou.github.io/post/1-liang-shu-zhi-he/" class="post">
-          <h2 class="post-title">
-            1. 两数之和
-          </h2>
-          <div class="time">2020-03-26</div>
-        </a>
-      
-    
-      
-        <a href="https://JoelynZhou.github.io/post/999-che-de-ke-yong-bu-huo-liang/" class="post">
-          <h2 class="post-title">
-            999. 车的可用捕获量
-          </h2>
-          <div class="time">2020-03-26</div>
-        </a>
-      
-    
-      
-        <a href="https://JoelynZhou.github.io/post/892-san-wei-xing-ti-de-biao-mian-ji/" class="post">
-          <h2 class="post-title">
-            892. 三维形体的表面积
-          </h2>
-          <div class="time">2020-03-26</div>
-        </a>
-      
-    
-      
-        <a href="https://JoelynZhou.github.io/post/macos-bi-zhi-vsc-kuai-jie-jian/" class="post">
-          <h2 class="post-title">
-            macOS 壁纸 - VSC 快捷键
-          </h2>
-          <div class="time">2020-01-16</div>
-        </a>
-      
-    
-      
-        <a href="https://JoelynZhou.github.io/post/macos-bi-zhi-xiao-he-shuang-pin/" class="post">
-          <h2 class="post-title">
-            macOS 壁纸 - 小鹤双拼
-          </h2>
-          <div class="time">2020-01-16</div>
-        </a>
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  
-    <h2 class="year">2019</h2>
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-        <a href="https://JoelynZhou.github.io/post/mojave-shen-se-mo-shi-xia-jin-yong-chrome-shen-se-zhu-ti/" class="post">
-          <h2 class="post-title">
-            Mojave 深色模式下禁用 Chrome 深色主题
-          </h2>
-          <div class="time">2019-12-31</div>
-        </a>
-      
-    
-      
-        <a href="https://JoelynZhou.github.io/post/javascript-zhong-de-this-zhi-xiang-wen-ti/" class="post">
-          <h2 class="post-title">
-            javascript 中的 this 指向问题
-          </h2>
-          <div class="time">2019-11-20</div>
-        </a>
-      
-    
-      
-        <a href="https://JoelynZhou.github.io/post/xmlhttprequest-and-ajax-and-fetch-and-axios/" class="post">
-          <h2 class="post-title">
-            XmlHttpRequest &amp; Ajax &amp; Fetch &amp; Axios
-          </h2>
-          <div class="time">2019-11-18</div>
-        </a>
-      
-    
-      
-        <a href="https://JoelynZhou.github.io/post/luo-ji-tui-li-ti-cai-ming-ci/" class="post">
-          <h2 class="post-title">
-            逻辑推理题-猜名次
-          </h2>
-          <div class="time">2019-11-14</div>
-        </a>
-      
-    
-      
-        <a href="https://JoelynZhou.github.io/post/2020-nian-du-ji-dahua-lianbiao/" class="post">
-          <h2 class="post-title">
-            2020 年度计（da）划（lian）表
-          </h2>
-          <div class="time">2019-11-01</div>
-        </a>
-      
-    
   
 </div>
 
-    
-        <div class="pagination-container">
-  
-  
-</div>
+        </div>
+      </div>
+    </div>
 
-    
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
-  <a class="rss" href="https://JoelynZhou.github.io/atom.xml" target="_blank">RSS</a>
-</div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
-<script>
-  hljs.initHighlightingOnLoad()
+<script type="application/javascript">
 
-  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+AOS.init();
 
-  // This should probably be throttled.
-  // Especially because it triggers during smooth scrolling.
-  // https://lodash.com/docs/4.17.10#throttle
-  // You could do like...
-  // window.addEventListener("scroll", () => {
-  //    _.throttle(doThatStuff, 100);
-  // });
-  // Only not doing it here to keep this Pen dependency-free.
+hljs.initHighlightingOnLoad()
 
-  window.addEventListener("scroll", event => {
-    let fromTop = window.scrollY;
-
-    mainNavLinks.forEach((link, index) => {
-      let section = document.getElementById(decodeURI(link.hash).substring(1));
-      let nextSection = null
-      if (mainNavLinks[index + 1]) {
-        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-      }
-      if (section.offsetTop <= fromTop) {
-        if (nextSection) {
-          if (nextSection.offsetTop > fromTop) {
-            link.classList.add("current");
-          } else {
-            link.classList.remove("current");    
-          }
-        } else {
-          link.classList.add("current");
-        }
-      } else {
-        link.classList.remove("current");
-      }
-    });
-  });
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
 
-      </div>
-    </div>
+
+
+
   </body>
 </html>
