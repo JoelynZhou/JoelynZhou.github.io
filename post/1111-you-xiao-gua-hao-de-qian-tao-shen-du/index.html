@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>macOS 壁纸 - 小鹤双拼 | JoelynZhou</title>
+<title>1111. 有效括号的嵌套深度 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1585721615361">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -82,25 +82,91 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              macOS 壁纸 - 小鹤双拼
+              1111. 有效括号的嵌套深度
             </h2>
             <div class="post-info">
               <span>
-                2020-01-16
+                2020-04-01
               </span>
               <span>
-                0 min read
+                3 min read
               </span>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gayjkzgvvij31c00u0di9.jpg" alt="" loading="lazy"></figure>
+                <h2 id="题目">题目</h2>
+<p>有效括号字符串 定义：对于每个左括号，都能找到与之对应的右括号，反之亦然。详情参见题末「有效括号字符串」部分。</p>
+<p>嵌套深度 depth 定义：即有效括号字符串嵌套的层数，depth(A) 表示有效括号字符串 A 的嵌套深度。详情参见题末「嵌套深度」部分。</p>
+<p>给你一个「有效括号字符串」 seq，请你将其分成两个不相交的有效括号字符串，A 和 B，并使这两个字符串的深度最小。</p>
+<p>不相交：每个 seq[i] 只能分给 A 和 B 二者中的一个，不能既属于 A 也属于 B 。<br>
+A 或 B 中的元素在原字符串中可以不连续。<br>
+A.length + B.length = seq.length<br>
+max(depth(A), depth(B)) 的可能取值最小。<br>
+划分方案用一个长度为 seq.length 的答案数组 answer 表示，编码规则如下：</p>
+<p>answer[i] = 0，seq[i] 分给 A 。<br>
+answer[i] = 1，seq[i] 分给 B 。<br>
+如果存在多个满足要求的答案，只需返回其中任意 一个 即可。</p>
+<ul>
+<li>1 &lt;= text.size &lt;= 10000</li>
+</ul>
+<h2 id="示例">示例</h2>
+<pre><code>输入：seq = &quot;(()())&quot;
+输出：[0,1,1,1,1,0]
+</code></pre>
+<pre><code>输入：seq = &quot;()(())()&quot;
+输出：[0,0,0,1,1,0,1,1]
+</code></pre>
+<h2 id="分析">分析</h2>
+<p>官方题解总结的很好，这里不做赘述，直接引用</p>
+<blockquote>
+<p>方法一：用栈进行括号匹配<br>
+思路及算法<br>
+要求划分出使得最大嵌套深度最小的分组，我们首先得知道如何计算嵌套深度。我们可以通过栈实现括号匹配来计算：<br>
+维护一个栈 s，从左至右遍历括号字符串中的每一个字符：<br>
+如果当前字符是 (，就把 ( 压入栈中，此时这个 ( 的嵌套深度为栈的高度；<br>
+如果当前字符是 )，此时这个 ) 的嵌套深度为栈的高度，随后再从栈中弹出一个 (。<br>
+下面给出了括号序列 (()(())()) 在每一个字符处的嵌套深度：</p>
+</blockquote>
+<pre><code>括号序列   ( ( ) ( ( ) ) ( ) )
+下标编号   0 1 2 3 4 5 6 7 8 9
+嵌套深度   1 2 2 2 3 3 2 2 2 1 
+</code></pre>
+<h2 id="题解">题解</h2>
+<pre><code class="language-javascript">/**
+ * @param {string} seq
+ * @return {number[]}
+ */
+var maxDepthAfterSplit = function(seq) {
+    let dep=0;
+    let res=[];
+    for(let i=0;i&lt;seq.length;i++){
+        if(seq[i]===&quot;(&quot;){
+            res.push(++dep % 2);
+        }
+        if(seq[i]===&quot;)&quot;){
+            res.push(dep-- % 2);
+        }
+    }
+    return res;
+}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gde8abnyimj30tg07sjrm.jpg" alt="" loading="lazy"></figure>
 
               </div>
               <div class="toc-container">
-                
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
+<li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
+<li><a href="#%E9%A2%98%E8%A7%A3">题解</a></li>
+</ul>
+</li>
+</ul>
+
               </div>
             </div>
           </article>
@@ -109,9 +175,9 @@
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://JoelynZhou.github.io/post/mojave-shen-se-mo-shi-xia-jin-yong-chrome-shen-se-zhu-ti/">
+            <a href="https://JoelynZhou.github.io/post/912-pai-xu-shu-zu/">
               <h3 class="post-title">
-                Mojave 深色模式下禁用 Chrome 深色主题
+                912. 排序数组
               </h3>
             </a>
           </div>
