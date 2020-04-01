@@ -1,108 +1,102 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
-
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>javascript 中的 this 指向问题 | JoelynZhou</title>
-<meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
+<meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
+<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1585710709968">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1585707146629">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://JoelynZhou.github.io/styles/main.css">
 
-
-  
-    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
-  
-
-  
-
-
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-162422542-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-162422542-1');
+</script>
 
 
   </head>
   <body>
-    <div id="app" class="main">
-
-      <div class="sidebar" :class="{ 'full-height': menuVisible }">
-  <div class="top-container" data-aos="fade-right">
-    <div class="top-header-container">
-      <a class="site-title-container" href="https://JoelynZhou.github.io">
-        <img src="https://JoelynZhou.github.io/images/avatar.png?v=1585707146629" class="site-logo">
-        <h1 class="site-title">JoelynZhou</h1>
-      </a>
-      <div class="menu-btn" @click="menuVisible = !menuVisible">
-        <div class="line"></div>
-      </div>
-    </div>
-    <div>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://JoelynZhou.github.io">
+  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1585710709968" alt="">
+  </a>
+  <h1 class="site-title">
+    JoelynZhou
+  </h1>
+  <p class="site-description">
+    多读书 / 多看报 / 少吃零食 / 多睡觉
+  </p>
+  <div class="menu-container">
+    
       
-        
-          <a href="/" class="site-nav">
-            首页
-          </a>
-        
+        <a href="/" class="menu">
+          首页
+        </a>
       
-        
-          <a href="/archives" class="site-nav">
-            归档
-          </a>
-        
+    
       
-        
-          <a href="/tags" class="site-nav">
-            标签
-          </a>
-        
+        <a href="/archives" class="menu">
+          归档
+        </a>
       
-        
-          <a href="/post/about" class="site-nav">
-            关于
-          </a>
-        
+    
       
-    </div>
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
   </div>
-  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
-    <div class="social-container">
+  <div class="social-container">
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-        
-      
-    </div>
-    <div class="site-description">
-      多读书 / 多看报 / 少吃零食 / 多睡觉
-    </div>
-    <div class="site-footer">
-      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://JoelynZhou.github.io/atom.xml" target="_blank">RSS</a>
-    </div>
+    
   </div>
 </div>
 
-
-      <div class="main-container">
-        <div class="content-container" data-aos="fade-up">
-          <div class="post-detail">
-            <h2 class="post-title">javascript 中的 this 指向问题</h2>
-            <div class="post-date">2019-11-20</div>
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              javascript 中的 this 指向问题
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-11-20
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+            </div>
             
-            <div class="post-content">
-              <h2 id="写在前面">写在前面</h2>
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="写在前面">写在前面</h2>
 <p>理解 this，记住以下两点：</p>
 <ul>
 <li>this 永远指向一个对象</li>
@@ -160,75 +154,116 @@ setInterval(&quot;obj.fun()&quot;,100);	// this 指向 obj
 <li><a href="https://zhuanlan.zhihu.com/p/42145138">彻底搞懂  JavaScript 中的 this 指向问题</a></li>
 </ul>
 
-            </div>
-            
-            
-              <div class="next-post">
-                <div class="next">下一篇</div>
-                <a href="https://JoelynZhou.github.io/post/xmlhttprequest-and-ajax-and-fetch-and-axios/">
-                  <h3 class="post-title">
-                    XmlHttpRequest &amp; Ajax &amp; Fetch &amp; Axios
-                  </h3>
-                </a>
               </div>
-            
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2">写在前面</a></li>
+<li><a href="#%E6%9B%B4%E6%B7%B1%E5%B1%82%E6%AC%A1%E7%9A%84%E5%8E%9F%E5%9B%A0">更深层次的原因</a></li>
+<li><a href="#%E8%81%8A%E4%B8%80%E8%81%8A-this-%E7%9A%84%E5%87%A0%E4%B8%AA%E5%B8%B8%E7%94%A8%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">聊一聊 this 的几个常用使用场景</a>
+<ul>
+<li><a href="#%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A">事件绑定</a></li>
+<li><a href="#%E5%AE%9A%E6%97%B6%E5%99%A8">定时器</a></li>
+<li><a href="#call-apply">call() &amp;&amp; apply()</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+</li>
+</ul>
 
-            
-              
-                <div id="gitalk-container" data-aos="fade-in"></div>
-              
-
-              
-            
-
-          </div>
-
+              </div>
+            </div>
+          </article>
         </div>
-      </div>
-    </div>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://JoelynZhou.github.io/post/xmlhttprequest-and-ajax-and-fetch-and-axios/">
+              <h3 class="post-title">
+                XmlHttpRequest &amp; Ajax &amp; Fetch &amp; Axios
+              </h3>
+            </a>
+          </div>
+        
 
-<script type="application/javascript">
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 
-AOS.init();
+<div id="gitalk-container"></div>
 
-hljs.initHighlightingOnLoad()
+<script>
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+  var gitalk = new Gitalk({
+    clientID: '150a01a7dda5bb8caf70',
+    clientSecret: 'a9c9b6ab8da566f027d10091b755c27e983e493f',
+    repo: 'JoelynZhou.github.io',
+    owner: 'JoelynZhou',
+    admin: ['JoelynZhou'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
 
 </script>
 
+          
 
+          
+        
 
-  
-    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-    <script>
+        <div class="site-footer">
+  Powered by <a href="https://github.com/JoelynZhou/JoelynZhou.github.io" target="_blank">Joelyn Zhou</a> | 
+  <a class="rss" href="https://JoelynZhou.github.io/atom.xml" target="_blank">RSS</a>
+</div>
 
-      var gitalk = new Gitalk({
-        clientID: '150a01a7dda5bb8caf70',
-        clientSecret: 'a9c9b6ab8da566f027d10091b755c27e983e493f',
-        repo: 'JoelynZhou.github.io',
-        owner: 'JoelynZhou',
-        admin: ['JoelynZhou'],
-        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-        distractionFreeMode: false  // Facebook-like distraction free mode
-      })
+<script>
+  hljs.initHighlightingOnLoad()
 
-      gitalk.render('gitalk-container')
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
 
-    </script>
-  
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
 
-  
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
 
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
 
+</script>
 
-
+      </div>
+    </div>
   </body>
 </html>
