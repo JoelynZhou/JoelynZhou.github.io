@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-04-01T06:14:07.814Z</updated>
+    <updated>2020-04-01T07:08:03.988Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,52 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[20. 有效的括号]]></title>
+        <id>https://JoelynZhou.github.io/post/20-you-xiao-de-gua-hao/</id>
+        <link href="https://JoelynZhou.github.io/post/20-you-xiao-de-gua-hao/">
+        </link>
+        <updated>2020-04-01T07:00:08.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。</p>
+<p>有效字符串需满足：</p>
+<p>左括号必须用相同类型的右括号闭合。<br>
+左括号必须以正确的顺序闭合。<br>
+注意空字符串可被认为是有效字符串。</p>
+<h2 id="示例">示例</h2>
+<pre><code>输入: &quot;()&quot;
+输出: true
+</code></pre>
+<pre><code>输入: &quot;([)]&quot;
+输出: false
+</code></pre>
+<h2 id="分析">分析</h2>
+<h2 id="题解">题解</h2>
+<pre><code class="language-javascript">/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+	let stack = [];
+	for (let i = 0; i &lt; s.length; i++) {
+		if (s[i] === '(' || s[i] === '{' || s[i] === '[') {
+			stack.push(s[i]);
+		} else if (
+			(s[i] === ')' &amp;&amp; stack[stack.length - 1] === '(') ||
+			(s[i] === '}' &amp;&amp; stack[stack.length - 1] === '{') ||
+			(s[i] === ']' &amp;&amp; stack[stack.length - 1] === '[')
+		) {
+			stack.pop();
+		} else {
+			return false;
+		}
+	}
+	return stack.length===0;
+};
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gde9zldzldj30uq072jrm.jpg" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1111. 有效括号的嵌套深度]]></title>
         <id>https://JoelynZhou.github.io/post/1111-you-xiao-gua-hao-de-qian-tao-shen-du/</id>
@@ -31,6 +77,7 @@ answer[i] = 1，seq[i] 分给 B 。<br>
 <ul>
 <li>1 &lt;= text.size &lt;= 10000</li>
 </ul>
+<p><strong>关于有效括号的问题可以参考 20 题，在下一节会讲到</strong></p>
 <h2 id="示例">示例</h2>
 <pre><code>输入：seq = &quot;(()())&quot;
 输出：[0,1,1,1,1,0]
@@ -473,15 +520,6 @@ var surfaceArea = function(grid) {
 </code></pre>
 <h3 id="性能">性能</h3>
 <figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd7a7rj549j30p003q3yk.jpg" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[macOS 壁纸 - VSC 快捷键]]></title>
-        <id>https://JoelynZhou.github.io/post/macos-bi-zhi-vsc-kuai-jie-jian/</id>
-        <link href="https://JoelynZhou.github.io/post/macos-bi-zhi-vsc-kuai-jie-jian/">
-        </link>
-        <updated>2020-01-16T09:46:00.000Z</updated>
-        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gayjtquzr5j31uz0u0gnn.jpg" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
 </feed>
