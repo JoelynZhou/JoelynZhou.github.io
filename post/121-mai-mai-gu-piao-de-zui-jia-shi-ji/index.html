@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>121. 买卖股票的最佳时机 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
-<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1585832473800">
+<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1585833049249">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://JoelynZhou.github.io/styles/main.css">
@@ -29,7 +29,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://JoelynZhou.github.io">
-  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1585832473800" alt="">
+  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1585833049249" alt="">
   </a>
   <h1 class="site-title">
     JoelynZhou
@@ -104,6 +104,12 @@
 <p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
 <p>如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。</p>
 <p>注意：你不能在买入股票前卖出股票。</p>
+<h2 id="分析">分析</h2>
+<ul>
+<li>假设第一天买入价最低，同时收益为 0；</li>
+<li>如果第二天更低，则将第二天视为买入价，比较收益，更新收益最大值；</li>
+<li>如果第二天更高，则更新收益最大值；</li>
+</ul>
 <h2 id="示例">示例</h2>
 <pre><code>输入: [7,1,5,3,6,4]
 输出: 5
@@ -139,6 +145,7 @@ var maxProfit = function(prices) {
 <li>
 <ul>
 <li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
 <li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
 <li><a href="#%E9%A2%98%E8%A7%A3">题解</a></li>
 </ul>
