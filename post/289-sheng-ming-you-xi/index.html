@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>914. 卡牌分组 | JoelynZhou</title>
+<title>289. 生命游戏 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1585806129094">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -82,14 +82,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              914. 卡牌分组
+              289. 生命游戏
             </h2>
             <div class="post-info">
               <span>
-                2020-03-27
+                2020-04-02
               </span>
               <span>
-                2 min read
+                3 min read
               </span>
               
                 <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
@@ -101,43 +101,81 @@
             <div class="post-content-wrapper">
               <div class="post-content">
                 <h2 id="题目">题目</h2>
-<p>给定一副牌，每张牌上都写着一个整数。</p>
-<p>此时，你需要选定一个数字 X，使我们可以将整副牌按下述规则分成 1 组或更多组：</p>
-<p>每组都有 X 张牌。<br>
-组内所有的牌上都写着相同的整数。<br>
-仅当你可选的 X &gt;= 2 时返回 true。</p>
+<p>根据 百度百科 ，生命游戏，简称为生命，是英国数学家约翰·何顿·康威在 1970 年发明的细胞自动机。</p>
+<p>给定一个包含 m × n 个格子的面板，每一个格子都可以看成是一个细胞。每个细胞都具有一个初始状态：1 即为活细胞（live），或 0 即为死细胞（dead）。每个细胞与其八个相邻位置（水平，垂直，对角线）的细胞都遵循以下四条生存定律：</p>
+<p>如果活细胞周围八个位置的活细胞数少于两个，则该位置活细胞死亡；<br>
+如果活细胞周围八个位置有两个或三个活细胞，则该位置活细胞仍然存活；<br>
+如果活细胞周围八个位置有超过三个活细胞，则该位置活细胞死亡；<br>
+如果死细胞周围正好有三个活细胞，则该位置死细胞复活；<br>
+根据当前状态，写一个函数来计算面板上所有细胞的下一个（一次更新后的）状态。下一个状态是通过将上述规则同时应用于当前状态下的每个细胞所形成的，其中细胞的出生和死亡是同时发生的。</p>
 <h2 id="示例">示例</h2>
-<pre><code>输入：[1,2,3,4,4,3,2,1]
-输出：true
-解释：可行的分组是 [1,1]，[2,2]，[3,3]，[4,4]
+<pre><code>输入： 
+[
+  [0,1,0],
+  [0,0,1],
+  [1,1,1],
+  [0,0,0]
+]
+输出：
+[
+  [0,0,0],
+  [1,0,1],
+  [0,1,1],
+  [0,1,0]
+]
 </code></pre>
-<pre><code>输入：[1,1,2,2,2,2]
-输出：true
-解释：可行的分组是 [1,1]，[2,2]，[2,2]
-</code></pre>
-<h2 id="分析">分析</h2>
-<p>本质是求每张牌个数组成的数组的最大公约数是否大于2。<br>
-求最大公约数：</p>
-<ol>
-<li>辗转相除法</li>
-</ol>
 <h2 id="题解">题解</h2>
-<pre><code class="language-javascript">/**
- * @param {number[]} deck
- * @return {boolean}
+<pre><code class="language-javascript">/* eslint-disable indent */
+/**
+ * @param {number[][]} board
+ * @return {void} Do not return anything, modify board in-place instead.
+ * 细胞自动机模型
+ * 分析：
+ * 根据百度百科描述，生存规律总结如下：
+ * 1. 细胞周围有三个细胞为生，则该细胞为生
+ * 2. 细胞周围有两个细胞为生，则该细胞维持原状态
+ * 3. 其他情况则死
+ * 
+ * 这一题最主要的问题在于，不需要 return 新数组，而是修改源数组，
+ * 但是每个细胞的状态是依赖于其他细胞的初始状态，如果修改源数组，会影响到后面的计算结果。
+ * 除了提示中提到的原地算法，最简单的会想到复制一份源数组，用于计算
  */
-var hasGroupsSizeX = function(deck) {
-    let map = new Map();
-    for(let n of deck){
-        map.set(n,map.has(n)?map.get(n)+1:1);
-    }
-    const arr = [...map.values()];
-    let res = arr[0];
-    return arr.every(i =&gt; (res = gcd(res, i)) &gt; 1);
+var gameOfLife = function(board) {
+	if (board.length === 0) {
+		return board;
+	}
+	const copyBoard = JSON.parse(JSON.stringify(board)); // 二维数组的拷贝不能用 Array.slice(0)
+	for (let i = 0; i &lt; board.length; i++) {
+		for (let j = 0; j &lt; board[i].length; j++) {
+			const num = nearAliveNum(copyBoard, i, j); //周围的活细胞个数
+			if (num === 3) {
+				board[i][j] = 1;
+			} else if (num !== 2) {
+				board[i][j] = 0;
+			}
+		}
+	}
+	return board;
 };
-const gcd = (a, b) =&gt; (b === 0 ? a : gcd(b, a % b));
+// 查询单个细胞周围的活细胞个数
+const nearAliveNum = (origin, x, y) =&gt; {
+	let count = 0;
+	const step = [ -1, 0, 1 ];
+	for (let m = 0; m &lt; 3; m++) {
+		for (let n = 0; n &lt; 3; n++) {
+			const a = x + step[m];
+			const b = y + step[n];
+			if (a &lt; 0 || a &gt;= origin.length || b &lt; 0 || b &gt;= origin[0].length) {
+				continue;
+			} else if (origin[a][b] === 1) {
+				count++;
+			}
+		}
+	}
+	return count - origin[x][y];
+};
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd8vq9ma1sj30oo05imxa.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdfa9f3o2wj30v207cq36.jpg" alt="" loading="lazy"></figure>
 
               </div>
               <div class="toc-container">
@@ -146,7 +184,6 @@ const gcd = (a, b) =&gt; (b === 0 ? a : gcd(b, a % b));
 <ul>
 <li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
 <li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
-<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
 <li><a href="#%E9%A2%98%E8%A7%A3">题解</a></li>
 </ul>
 </li>
@@ -160,9 +197,9 @@ const gcd = (a, b) =&gt; (b === 0 ? a : gcd(b, a % b));
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://JoelynZhou.github.io/post/1-liang-shu-zhi-he/">
+            <a href="https://JoelynZhou.github.io/post/20-you-xiao-de-gua-hao/">
               <h3 class="post-title">
-                1. 两数之和
+                20. 有效的括号
               </h3>
             </a>
           </div>

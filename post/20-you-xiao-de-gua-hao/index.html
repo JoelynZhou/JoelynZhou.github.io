@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>20. 有效的括号 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
-<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1585724566035">
+<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1585806129094">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://JoelynZhou.github.io/styles/main.css">
@@ -29,7 +29,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://JoelynZhou.github.io">
-  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1585724566035" alt="">
+  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1585806129094" alt="">
   </a>
   <h1 class="site-title">
     JoelynZhou
@@ -92,6 +92,10 @@
                 1 min read
               </span>
               
+                <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
+                  # LeetCode
+                </a>
+              
             </div>
             
             <div class="post-content-wrapper">
@@ -116,21 +120,19 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-	let stack = [];
-	for (let i = 0; i &lt; s.length; i++) {
-		if (s[i] === '(' || s[i] === '{' || s[i] === '[') {
-			stack.push(s[i]);
-		} else if (
-			(s[i] === ')' &amp;&amp; stack[stack.length - 1] === '(') ||
-			(s[i] === '}' &amp;&amp; stack[stack.length - 1] === '{') ||
-			(s[i] === ']' &amp;&amp; stack[stack.length - 1] === '[')
-		) {
-			stack.pop();
-		} else {
-			return false;
-		}
-	}
-	return stack.length===0;
+    let stack = [];
+    for (let i = 0; i &lt; s.length; i++) {
+        if (s[i] === '(' || s[i] === '{' || s[i] === '[') {
+            stack.push(s[i]);
+        } else if (
+            (s[i] === ')' &amp;&amp; stack.pop() !== '(') ||
+			(s[i] === '}' &amp;&amp; stack.pop() !== '{') ||
+			(s[i] === ']' &amp;&amp; stack.pop() !== '[')
+        ) {
+            return false;
+        }
+    }
+    return stack.length===0;
 };
 </code></pre>
 <figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gde9zldzldj30uq072jrm.jpg" alt="" loading="lazy"></figure>
