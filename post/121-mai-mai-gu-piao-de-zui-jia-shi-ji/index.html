@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>1111. 有效括号的嵌套深度 | JoelynZhou</title>
+<title>121. 买卖股票的最佳时机 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1585832473800">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -82,14 +82,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              1111. 有效括号的嵌套深度
+              121. 买卖股票的最佳时机
             </h2>
             <div class="post-info">
               <span>
-                2020-04-01
+                2020-04-02
               </span>
               <span>
-                3 min read
+                2 min read
               </span>
               
                 <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
@@ -101,63 +101,37 @@
             <div class="post-content-wrapper">
               <div class="post-content">
                 <h2 id="题目">题目</h2>
-<p>有效括号字符串 定义：对于每个左括号，都能找到与之对应的右括号，反之亦然。详情参见题末「有效括号字符串」部分。</p>
-<p>嵌套深度 depth 定义：即有效括号字符串嵌套的层数，depth(A) 表示有效括号字符串 A 的嵌套深度。详情参见题末「嵌套深度」部分。</p>
-<p>给你一个「有效括号字符串」 seq，请你将其分成两个不相交的有效括号字符串，A 和 B，并使这两个字符串的深度最小。</p>
-<p>不相交：每个 seq[i] 只能分给 A 和 B 二者中的一个，不能既属于 A 也属于 B 。<br>
-A 或 B 中的元素在原字符串中可以不连续。<br>
-A.length + B.length = seq.length<br>
-max(depth(A), depth(B)) 的可能取值最小。<br>
-划分方案用一个长度为 seq.length 的答案数组 answer 表示，编码规则如下：</p>
-<p>answer[i] = 0，seq[i] 分给 A 。<br>
-answer[i] = 1，seq[i] 分给 B 。<br>
-如果存在多个满足要求的答案，只需返回其中任意 一个 即可。</p>
-<ul>
-<li>1 &lt;= text.size &lt;= 10000</li>
-</ul>
-<p><strong>关于有效括号的问题可以参考 20 题，在下一节会讲到</strong></p>
+<p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。</p>
+<p>如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），设计一个算法来计算你所能获取的最大利润。</p>
+<p>注意：你不能在买入股票前卖出股票。</p>
 <h2 id="示例">示例</h2>
-<pre><code>输入：seq = &quot;(()())&quot;
-输出：[0,1,1,1,1,0]
+<pre><code>输入: [7,1,5,3,6,4]
+输出: 5
+解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
+     注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格。
 </code></pre>
-<pre><code>输入：seq = &quot;()(())()&quot;
-输出：[0,0,0,1,1,0,1,1]
-</code></pre>
-<h2 id="分析">分析</h2>
-<p>官方题解总结的很好，这里不做赘述，直接引用</p>
-<blockquote>
-<p>方法一：用栈进行括号匹配<br>
-思路及算法<br>
-要求划分出使得最大嵌套深度最小的分组，我们首先得知道如何计算嵌套深度。我们可以通过栈实现括号匹配来计算：<br>
-维护一个栈 s，从左至右遍历括号字符串中的每一个字符：<br>
-如果当前字符是 (，就把 ( 压入栈中，此时这个 ( 的嵌套深度为栈的高度；<br>
-如果当前字符是 )，此时这个 ) 的嵌套深度为栈的高度，随后再从栈中弹出一个 (。<br>
-下面给出了括号序列 (()(())()) 在每一个字符处的嵌套深度：</p>
-</blockquote>
-<pre><code>括号序列   ( ( ) ( ( ) ) ( ) )
-下标编号   0 1 2 3 4 5 6 7 8 9
-嵌套深度   1 2 2 2 3 3 2 2 2 1 
+<pre><code>输入: [7,6,4,3,1]
+输出: 0
+解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。
 </code></pre>
 <h2 id="题解">题解</h2>
 <pre><code class="language-javascript">/**
- * @param {string} seq
- * @return {number[]}
+ * @param {number[]} prices
+ * @return {number}
  */
-var maxDepthAfterSplit = function(seq) {
-    let dep=0;
-    let res=[];
-    for(let i=0;i&lt;seq.length;i++){
-        if(seq[i]===&quot;(&quot;){
-            res.push(++dep % 2);
+var maxProfit = function(prices) {
+    let min=prices[0];  //假设第一天为最低价
+    let profit=0; //收益
+    for(let i=1;i&lt;prices.length;i++){
+        if(prices[i]&lt; min){
+            min=prices[i];
         }
-        if(seq[i]===&quot;)&quot;){
-            res.push(dep-- % 2);
-        }
+        profit=Math.max(profit,prices[i]-min);
     }
-    return res;
-}
+    return profit;
+};
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gde8abnyimj30tg07sjrm.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdfpzdve0qj30u606wt8y.jpg" alt="" loading="lazy"></figure>
 
               </div>
               <div class="toc-container">
@@ -166,7 +140,6 @@ var maxDepthAfterSplit = function(seq) {
 <ul>
 <li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
 <li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
-<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
 <li><a href="#%E9%A2%98%E8%A7%A3">题解</a></li>
 </ul>
 </li>
@@ -180,9 +153,9 @@ var maxDepthAfterSplit = function(seq) {
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://JoelynZhou.github.io/post/912-pai-xu-shu-zu/">
+            <a href="https://JoelynZhou.github.io/post/289-sheng-ming-you-xi/">
               <h3 class="post-title">
-                912. 排序数组
+                289. 生命游戏
               </h3>
             </a>
           </div>
