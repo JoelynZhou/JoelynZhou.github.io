@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>1162. 地图分析 | JoelynZhou</title>
+<title>8. 字符串转换整数 (atoi) | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1586313189791">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -82,14 +82,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              1162. 地图分析
+              8. 字符串转换整数 (atoi)
             </h2>
             <div class="post-info">
               <span>
-                2020-03-29
+                2020-04-03
               </span>
               <span>
-                4 min read
+                3 min read
               </span>
               
                 <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
@@ -101,93 +101,75 @@
             <div class="post-content-wrapper">
               <div class="post-content">
                 <h2 id="题目">题目</h2>
-<p>你现在手里有一份大小为 N x N 的『地图』（网格） grid，上面的每个『区域』（单元格）都用 0 和 1 标记好了。其中 0 代表海洋，1 代表陆地，你知道距离陆地区域最远的海洋区域是是哪一个吗？请返回该海洋区域到离它最近的陆地区域的距离。</p>
-<p>我们这里说的距离是『曼哈顿距离』（ Manhattan Distance）：(x0, y0) 和 (x1, y1) 这两个区域之间的距离是 |x0 - x1| + |y0 - y1| 。</p>
-<p>如果我们的地图上只有陆地或者海洋，请返回 -1。</p>
-<h2 id="示例">示例</h2>
-<p>输入：[[1,0,1],[0,0,0],[1,0,1]]<br>
-输出：2<br>
-解释：<br>
-海洋区域 (1, 1) 和所有陆地区域之间的距离都达到最大，最大距离为 2。<br>
-<img src="https://pic.leetcode-cn.com/23e21821e14238829dd7021a620895f40a8e42127cfe372e4791d025bb655afc.jpg" alt="" loading="lazy"></p>
+<p>请你来实现一个 atoi 函数，使其能将字符串转换成整数。</p>
+<p>首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。接下来的转化规则如下：</p>
+<p>如果第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字字符组合起来，形成一个有符号整数。<br>
+假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成一个整数。<br>
+该字符串在有效的整数部分之后也可能会存在多余的字符，那么这些字符可以被忽略，它们对函数不应该造成影响。<br>
+注意：假如该字符串中的第一个非空格字符不是一个有效整数字符、字符串为空或字符串仅包含空白字符时，则你的函数不需要进行转换，即无法进行有效转换。</p>
+<p>在任何情况下，若函数不能进行有效的转换时，请返回 0 。</p>
+<p>提示：</p>
+<p>本题中的空白字符只包括空格字符 ' ' 。<br>
+假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−231,  231 − 1]。如果数值超过这个范围，请返回  INT_MAX (231 − 1) 或 INT_MIN (−231) 。</p>
 <h2 id="分析">分析</h2>
-<p>参考链接：<a href="https://leetcode-cn.com/problems/as-far-from-land-as-possible/solution/zhen-liang-yan-sou-huan-neng-duo-yuan-kan-wan-miao/">参考链接点这里</a></p>
-<p>花了好长时间去理解题意，距离最近的陆地区域的最远距离，究竟是最远距离还是最近距离，后来看了链接中大佬画的 GIF 瞬间明白了，这道题或许换个模型更容易理解。</p>
-<p>我脑补的模型：</p>
 <ul>
-<li>背景：
+<li>规则概括：
 <ul>
-<li>病毒在封闭人群中的传播（可能是最近瘟疫公司玩多了的缘故 orz）；</li>
-</ul>
-</li>
-<li>假设：
-<ul>
-<li>将陆地看成是感染人员，每个感染人员 每天 都会感染周围的人，然后 第二天新感染的人员又会感染周围的人，问：你以上帝视角，站在人群中什么位置，才是最晚被感染的人（人类之光格陵兰）。</li>
-</ul>
-</li>
-<li>思路：
-<ul>
-<li>第一天，算出被 0 号病人感染的人，剩下没感染的还有多少人</li>
-<li>第二天，算出被 第一天感染的人 感染的人，剩下没感染多少人</li>
-<li>……</li>
-<li>第 N 天，已经没有被感染的人了</li>
-<li>得到 N</li>
+<li>去除开头空格</li>
+<li>返回有符号整数</li>
+<li>无视整数后面的字符</li>
+<li>边界校验</li>
+<li>其他情况返回 0</li>
 </ul>
 </li>
 </ul>
-<h2 id="题解">题解</h2>
+<p>思路 1：parseInt()</p>
+<blockquote>
+<p>MDN:<br>
+如果parseInt的字符不是指定基数中的数字，则忽略该字符和所有后续字符，并返回解析到该点的整数值。parseInt将数字<strong>截断为整数值</strong>。允许使用<strong>前导空格</strong>和尾随空格。</p>
+</blockquote>
+<p>思路 2： 正则匹配+边界校验</p>
+<p>思路 3：有穷自动机（DFA）</p>
+<h2 id="题解1">题解1</h2>
 <pre><code class="language-javascript">/**
- * @param {number[][]} grid
+ * @param {string} str
  * @return {number}
  */
-var maxDistance = function (grid) {
-    let land = []; // 陆地源数组
-    let level = 0; // 返回层级
-    for (let i = 0; i &lt; grid.length; i++) {
-        for (let j = 0; j &lt; grid[i].length; j++) {
-            if (grid[i][j] === 1) {
-                land.push([i, j]);
-            }
-        }
-    }
-    let ocean = grid.length * grid.length - land.length; // 海洋的格数
-    // 全是海洋或者陆地，返回 -1
-    if (land.length === 0 || ocean === 0) {
-        return -1;
-    }
-    while (ocean &gt; 0) {
-        level++;
-        const temp = [];
-        for (let i = 0; i &lt; land.length; i++) {
-            const [x, y] = [land[i][0], land[i][1]];
-            // 判断 上下左右 相邻的点是否有海洋
-            for (let j = 0; j &lt; 4; j++) {
-                // 边界条件校验
-                if (
-                    x + dx[j] &lt; 0 ||
-                    y + dy[j] &lt; 0 ||
-                    x + dx[j] &gt; grid.length - 1 ||
-                    y + dy[j] &gt; grid[0].length - 1
-                ) {
-                    continue;
-                }
-                // 如果发现是海洋，则标记 2（这里其实只要是非 0，其他数都可以，只为了跟未知海洋作区分），防止被重复计算
-                if (grid[x + dx[j]][y + dy[j]] === 0) {
-                    grid[x + dx[j]][y + dy[j]] = 2;
-                    temp.push([x + dx[j], y + dy[j]]);
-                    // 每发现一个新海洋，剩下的海洋格数就减少 1
-                    ocean--;
-                }
-            }
-        }
-        land = temp; // 一轮扩散结束后，新扩散将代替源陆地存入 land，开始新的一轮扩散
-    }
-    return level;
+var myAtoi = function(str) {
+	const num = parseInt(str, 10);
+	if (isNaN(num)) {
+		return 0;
+	} else if (num &lt; Math.pow(-2, 31) || num &gt;= Math.pow(2, 31)) {
+		return num &lt; Math.pow(-2, 31) ? Math.pow(-2, 31) : Math.pow(2, 31) - 1;
+	} else {
+		return num;
+	}
 };
-const dx = [1, -1, 0, 0];
-const dy = [0, 0, 1, -1];
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb0fcx1xwj30g202ya9z.jpg" alt="" loading="lazy"></figure>
+<h2 id="题解-2">题解 2</h2>
+<pre><code class="language-javascript">/**
+ * @param {string} str
+ * @return {number}
+ */
+var myAtoi = function(str) {
+	let res = str.trim().match(/^(\-|\+)?\d+/g);
+	if (isNaN(res)) {
+		return 0;
+	} else if (res &lt; Math.pow(-2, 31)) {
+		return Math.pow(-2, 31);
+	} else if (res &gt;= Math.pow(2, 31)) {
+		return Math.pow(2, 31) - 1;
+	} else {
+		return res;
+	}
+};
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdgwyzemojj30f603jmx3.jpg" alt="" loading="lazy"></figure>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/30009083">有穷自动机DFA&amp;NFA (学习笔记)</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/parseInt">MDN-parseInt</a></li>
+</ul>
 
               </div>
               <div class="toc-container">
@@ -195,9 +177,10 @@ const dy = [0, 0, 1, -1];
 <li>
 <ul>
 <li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
-<li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
 <li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
-<li><a href="#%E9%A2%98%E8%A7%A3">题解</a></li>
+<li><a href="#%E9%A2%98%E8%A7%A31">题解1</a></li>
+<li><a href="#%E9%A2%98%E8%A7%A3-2">题解 2</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
 </ul>
 </li>
 </ul>
@@ -210,9 +193,9 @@ const dy = [0, 0, 1, -1];
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://JoelynZhou.github.io/post/820-dan-ci-de-ya-suo-bian-ma/">
+            <a href="https://JoelynZhou.github.io/post/121-mai-mai-gu-piao-de-zui-jia-shi-ji/">
               <h3 class="post-title">
-                820. 单词的压缩编码
+                121. 买卖股票的最佳时机
               </h3>
             </a>
           </div>

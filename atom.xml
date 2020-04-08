@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-04-02T13:10:57.171Z</updated>
+    <updated>2020-04-08T02:33:12.516Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,138 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[面试题 01.07. 旋转矩阵]]></title>
+        <id>https://JoelynZhou.github.io/post/mian-shi-ti-0107-xuan-zhuan-ju-zhen/</id>
+        <link href="https://JoelynZhou.github.io/post/mian-shi-ti-0107-xuan-zhuan-ju-zhen/">
+        </link>
+        <updated>2020-04-07T02:49:18.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>给你一幅由 N × N 矩阵表示的图像，其中每个像素的大小为 4 字节。请你设计一种算法，将图像旋转 90 度。</p>
+<p>不占用额外内存空间能否做到？</p>
+<h2 id="示例">示例</h2>
+<pre><code class="language-javascript">给定 matrix =
+[
+  [ 5, 1, 9,11],
+  [ 2, 4, 8,10],
+  [13, 3, 6, 7],
+  [15,14,12,16]
+], 
+
+原地旋转输入矩阵，使其变为:
+[
+  [15,13, 2, 5],
+  [14, 3, 4, 1],
+  [12, 6, 8, 9],
+  [16, 7,10,11]
+]
+</code></pre>
+<h2 id="分析">分析</h2>
+<ul>
+<li>对第 i 行的元素旋转 90 度，变为第 i.length - i 列<br>
+步骤：</li>
+</ul>
+<ol>
+<li>矩阵转置，第 i 行变为第 i 列</li>
+<li>行翻转，第 i 列 变为第 i.length - i 列</li>
+</ol>
+<h2 id="题解">题解</h2>
+<pre><code class="language-javascript">/**
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
+ * 分析：
+ * 矩阵的旋转可以通过 矩阵转置+翻转 实现
+ */
+var rotate = function(matrix) {
+    for(let i=0;i&lt;matrix.length;i++){
+        for(let j=i;j&lt;matrix.length;j++){
+            [matrix[i][j],matrix[j][i]]=[matrix[j][i],matrix[i][j]];
+        }
+    }
+    matrix.map(row=&gt; row.reverse())
+};
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdl0givggkj30uy07ot8y.jpg" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[8. 字符串转换整数 (atoi)]]></title>
+        <id>https://JoelynZhou.github.io/post/8-zi-fu-chuan-zhuan-huan-zheng-shu-atoi/</id>
+        <link href="https://JoelynZhou.github.io/post/8-zi-fu-chuan-zhuan-huan-zheng-shu-atoi/">
+        </link>
+        <updated>2020-04-03T13:46:31.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>请你来实现一个 atoi 函数，使其能将字符串转换成整数。</p>
+<p>首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。接下来的转化规则如下：</p>
+<p>如果第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字字符组合起来，形成一个有符号整数。<br>
+假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成一个整数。<br>
+该字符串在有效的整数部分之后也可能会存在多余的字符，那么这些字符可以被忽略，它们对函数不应该造成影响。<br>
+注意：假如该字符串中的第一个非空格字符不是一个有效整数字符、字符串为空或字符串仅包含空白字符时，则你的函数不需要进行转换，即无法进行有效转换。</p>
+<p>在任何情况下，若函数不能进行有效的转换时，请返回 0 。</p>
+<p>提示：</p>
+<p>本题中的空白字符只包括空格字符 ' ' 。<br>
+假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−231,  231 − 1]。如果数值超过这个范围，请返回  INT_MAX (231 − 1) 或 INT_MIN (−231) 。</p>
+<h2 id="分析">分析</h2>
+<ul>
+<li>规则概括：
+<ul>
+<li>去除开头空格</li>
+<li>返回有符号整数</li>
+<li>无视整数后面的字符</li>
+<li>边界校验</li>
+<li>其他情况返回 0</li>
+</ul>
+</li>
+</ul>
+<p>思路 1：parseInt()</p>
+<blockquote>
+<p>MDN:<br>
+如果parseInt的字符不是指定基数中的数字，则忽略该字符和所有后续字符，并返回解析到该点的整数值。parseInt将数字<strong>截断为整数值</strong>。允许使用<strong>前导空格</strong>和尾随空格。</p>
+</blockquote>
+<p>思路 2： 正则匹配+边界校验</p>
+<p>思路 3：有穷自动机（DFA）</p>
+<h2 id="题解1">题解1</h2>
+<pre><code class="language-javascript">/**
+ * @param {string} str
+ * @return {number}
+ */
+var myAtoi = function(str) {
+	const num = parseInt(str, 10);
+	if (isNaN(num)) {
+		return 0;
+	} else if (num &lt; Math.pow(-2, 31) || num &gt;= Math.pow(2, 31)) {
+		return num &lt; Math.pow(-2, 31) ? Math.pow(-2, 31) : Math.pow(2, 31) - 1;
+	} else {
+		return num;
+	}
+};
+</code></pre>
+<h2 id="题解-2">题解 2</h2>
+<pre><code class="language-javascript">/**
+ * @param {string} str
+ * @return {number}
+ */
+var myAtoi = function(str) {
+	let res = str.trim().match(/^(\-|\+)?\d+/g);
+	if (isNaN(res)) {
+		return 0;
+	} else if (res &lt; Math.pow(-2, 31)) {
+		return Math.pow(-2, 31);
+	} else if (res &gt;= Math.pow(2, 31)) {
+		return Math.pow(2, 31) - 1;
+	} else {
+		return res;
+	}
+};
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdgwyzemojj30f603jmx3.jpg" alt="" loading="lazy"></figure>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/30009083">有穷自动机DFA&amp;NFA (学习笔记)</a></li>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/parseInt">MDN-parseInt</a></li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[121. 买卖股票的最佳时机]]></title>
         <id>https://JoelynZhou.github.io/post/121-mai-mai-gu-piao-de-zui-jia-shi-ji/</id>
@@ -430,98 +562,6 @@ var minimumLengthEncoding = function (words) {
 };
 </code></pre>
 <figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gda2e0qzo9j30i60370sp.jpg" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[914. 卡牌分组]]></title>
-        <id>https://JoelynZhou.github.io/post/914-qia-pai-fen-zu/</id>
-        <link href="https://JoelynZhou.github.io/post/914-qia-pai-fen-zu/">
-        </link>
-        <updated>2020-03-27T14:58:55.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
-<p>给定一副牌，每张牌上都写着一个整数。</p>
-<p>此时，你需要选定一个数字 X，使我们可以将整副牌按下述规则分成 1 组或更多组：</p>
-<p>每组都有 X 张牌。<br>
-组内所有的牌上都写着相同的整数。<br>
-仅当你可选的 X &gt;= 2 时返回 true。</p>
-<h2 id="示例">示例</h2>
-<pre><code>输入：[1,2,3,4,4,3,2,1]
-输出：true
-解释：可行的分组是 [1,1]，[2,2]，[3,3]，[4,4]
-</code></pre>
-<pre><code>输入：[1,1,2,2,2,2]
-输出：true
-解释：可行的分组是 [1,1]，[2,2]，[2,2]
-</code></pre>
-<h2 id="分析">分析</h2>
-<p>本质是求每张牌个数组成的数组的最大公约数是否大于2。<br>
-求最大公约数：</p>
-<ol>
-<li>辗转相除法</li>
-</ol>
-<h2 id="题解">题解</h2>
-<pre><code class="language-javascript">/**
- * @param {number[]} deck
- * @return {boolean}
- */
-var hasGroupsSizeX = function(deck) {
-    let map = new Map();
-    for(let n of deck){
-        map.set(n,map.has(n)?map.get(n)+1:1);
-    }
-    const arr = [...map.values()];
-    let res = arr[0];
-    return arr.every(i =&gt; (res = gcd(res, i)) &gt; 1);
-};
-const gcd = (a, b) =&gt; (b === 0 ? a : gcd(b, a % b));
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd8vq9ma1sj30oo05imxa.jpg" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1. 两数之和]]></title>
-        <id>https://JoelynZhou.github.io/post/1-liang-shu-zhi-he/</id>
-        <link href="https://JoelynZhou.github.io/post/1-liang-shu-zhi-he/">
-        </link>
-        <updated>2020-03-26T14:02:19.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
-<p>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p>
-<p>你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。</p>
-<h2 id="示例">示例</h2>
-<pre><code>给定 nums = [2, 7, 11, 15], target = 9
-
-因为 nums[0] + nums[1] = 2 + 7 = 9
-所以返回 [0, 1]
-</code></pre>
-<h2 id="分析">分析</h2>
-<ol>
-<li>粗暴遍历：<br>
-算法复杂度 O(n^2)</li>
-<li>Hash 查找：<br>
-哈希表的查找复杂度是 O(1)，<br>
-所以整体复杂度 O(n)</li>
-</ol>
-<h2 id="题解">题解</h2>
-<pre><code class="language-javascript">/**
- * @param {number[]} nums
- * @param {number} target
- * @return {number[]}
- * 分析：
- * 基于 哈希表的查找复杂度是 O(1)
- * 通过哈希表，遍历一次，算法复杂度O(n)
- */
-var twoSum = function(nums, target) {
-    const hashMap=new Map();
-    for(let i=0;i&lt;nums.length;i++){
-        if(hashMap.has(target-nums[i])){
-            return [hashMap.get(target-nums[i]),i];
-        }
-        hashMap.set(nums[i],i);
-    }
-    return [];
-};
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd7ohikwrnj30pu04474c.jpg" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
 </feed>

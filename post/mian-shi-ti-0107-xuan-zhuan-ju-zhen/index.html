@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>1162. 地图分析 | JoelynZhou</title>
+<title>面试题 01.07. 旋转矩阵 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1586313189791">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -82,14 +82,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              1162. 地图分析
+              面试题 01.07. 旋转矩阵
             </h2>
             <div class="post-info">
               <span>
-                2020-03-29
+                2020-04-07
               </span>
               <span>
-                4 min read
+                2 min read
               </span>
               
                 <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
@@ -101,93 +101,51 @@
             <div class="post-content-wrapper">
               <div class="post-content">
                 <h2 id="题目">题目</h2>
-<p>你现在手里有一份大小为 N x N 的『地图』（网格） grid，上面的每个『区域』（单元格）都用 0 和 1 标记好了。其中 0 代表海洋，1 代表陆地，你知道距离陆地区域最远的海洋区域是是哪一个吗？请返回该海洋区域到离它最近的陆地区域的距离。</p>
-<p>我们这里说的距离是『曼哈顿距离』（ Manhattan Distance）：(x0, y0) 和 (x1, y1) 这两个区域之间的距离是 |x0 - x1| + |y0 - y1| 。</p>
-<p>如果我们的地图上只有陆地或者海洋，请返回 -1。</p>
+<p>给你一幅由 N × N 矩阵表示的图像，其中每个像素的大小为 4 字节。请你设计一种算法，将图像旋转 90 度。</p>
+<p>不占用额外内存空间能否做到？</p>
 <h2 id="示例">示例</h2>
-<p>输入：[[1,0,1],[0,0,0],[1,0,1]]<br>
-输出：2<br>
-解释：<br>
-海洋区域 (1, 1) 和所有陆地区域之间的距离都达到最大，最大距离为 2。<br>
-<img src="https://pic.leetcode-cn.com/23e21821e14238829dd7021a620895f40a8e42127cfe372e4791d025bb655afc.jpg" alt="" loading="lazy"></p>
+<pre><code class="language-javascript">给定 matrix =
+[
+  [ 5, 1, 9,11],
+  [ 2, 4, 8,10],
+  [13, 3, 6, 7],
+  [15,14,12,16]
+], 
+
+原地旋转输入矩阵，使其变为:
+[
+  [15,13, 2, 5],
+  [14, 3, 4, 1],
+  [12, 6, 8, 9],
+  [16, 7,10,11]
+]
+</code></pre>
 <h2 id="分析">分析</h2>
-<p>参考链接：<a href="https://leetcode-cn.com/problems/as-far-from-land-as-possible/solution/zhen-liang-yan-sou-huan-neng-duo-yuan-kan-wan-miao/">参考链接点这里</a></p>
-<p>花了好长时间去理解题意，距离最近的陆地区域的最远距离，究竟是最远距离还是最近距离，后来看了链接中大佬画的 GIF 瞬间明白了，这道题或许换个模型更容易理解。</p>
-<p>我脑补的模型：</p>
 <ul>
-<li>背景：
-<ul>
-<li>病毒在封闭人群中的传播（可能是最近瘟疫公司玩多了的缘故 orz）；</li>
+<li>对第 i 行的元素旋转 90 度，变为第 i.length - i 列<br>
+步骤：</li>
 </ul>
-</li>
-<li>假设：
-<ul>
-<li>将陆地看成是感染人员，每个感染人员 每天 都会感染周围的人，然后 第二天新感染的人员又会感染周围的人，问：你以上帝视角，站在人群中什么位置，才是最晚被感染的人（人类之光格陵兰）。</li>
-</ul>
-</li>
-<li>思路：
-<ul>
-<li>第一天，算出被 0 号病人感染的人，剩下没感染的还有多少人</li>
-<li>第二天，算出被 第一天感染的人 感染的人，剩下没感染多少人</li>
-<li>……</li>
-<li>第 N 天，已经没有被感染的人了</li>
-<li>得到 N</li>
-</ul>
-</li>
-</ul>
+<ol>
+<li>矩阵转置，第 i 行变为第 i 列</li>
+<li>行翻转，第 i 列 变为第 i.length - i 列</li>
+</ol>
 <h2 id="题解">题解</h2>
 <pre><code class="language-javascript">/**
- * @param {number[][]} grid
- * @return {number}
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
+ * 分析：
+ * 矩阵的旋转可以通过 矩阵转置+翻转 实现
  */
-var maxDistance = function (grid) {
-    let land = []; // 陆地源数组
-    let level = 0; // 返回层级
-    for (let i = 0; i &lt; grid.length; i++) {
-        for (let j = 0; j &lt; grid[i].length; j++) {
-            if (grid[i][j] === 1) {
-                land.push([i, j]);
-            }
+var rotate = function(matrix) {
+    for(let i=0;i&lt;matrix.length;i++){
+        for(let j=i;j&lt;matrix.length;j++){
+            [matrix[i][j],matrix[j][i]]=[matrix[j][i],matrix[i][j]];
         }
     }
-    let ocean = grid.length * grid.length - land.length; // 海洋的格数
-    // 全是海洋或者陆地，返回 -1
-    if (land.length === 0 || ocean === 0) {
-        return -1;
-    }
-    while (ocean &gt; 0) {
-        level++;
-        const temp = [];
-        for (let i = 0; i &lt; land.length; i++) {
-            const [x, y] = [land[i][0], land[i][1]];
-            // 判断 上下左右 相邻的点是否有海洋
-            for (let j = 0; j &lt; 4; j++) {
-                // 边界条件校验
-                if (
-                    x + dx[j] &lt; 0 ||
-                    y + dy[j] &lt; 0 ||
-                    x + dx[j] &gt; grid.length - 1 ||
-                    y + dy[j] &gt; grid[0].length - 1
-                ) {
-                    continue;
-                }
-                // 如果发现是海洋，则标记 2（这里其实只要是非 0，其他数都可以，只为了跟未知海洋作区分），防止被重复计算
-                if (grid[x + dx[j]][y + dy[j]] === 0) {
-                    grid[x + dx[j]][y + dy[j]] = 2;
-                    temp.push([x + dx[j], y + dy[j]]);
-                    // 每发现一个新海洋，剩下的海洋格数就减少 1
-                    ocean--;
-                }
-            }
-        }
-        land = temp; // 一轮扩散结束后，新扩散将代替源陆地存入 land，开始新的一轮扩散
-    }
-    return level;
+    matrix.map(row=&gt; row.reverse())
 };
-const dx = [1, -1, 0, 0];
-const dy = [0, 0, 1, -1];
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb0fcx1xwj30g202ya9z.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdl0givggkj30uy07ot8y.jpg" alt="" loading="lazy"></figure>
 
               </div>
               <div class="toc-container">
@@ -210,9 +168,9 @@ const dy = [0, 0, 1, -1];
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://JoelynZhou.github.io/post/820-dan-ci-de-ya-suo-bian-ma/">
+            <a href="https://JoelynZhou.github.io/post/8-zi-fu-chuan-zhuan-huan-zheng-shu-atoi/">
               <h3 class="post-title">
-                820. 单词的压缩编码
+                8. 字符串转换整数 (atoi)
               </h3>
             </a>
           </div>
