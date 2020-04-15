@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>1111. 有效括号的嵌套深度 | JoelynZhou</title>
+<title>542. 01 矩阵 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1586930260236">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -82,14 +82,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              1111. 有效括号的嵌套深度
+              542. 01 矩阵
             </h2>
             <div class="post-info">
               <span>
-                2020-04-01
+                2020-04-15
               </span>
               <span>
-                3 min read
+                2 min read
               </span>
               
                 <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
@@ -101,63 +101,64 @@
             <div class="post-content-wrapper">
               <div class="post-content">
                 <h2 id="题目">题目</h2>
-<p>有效括号字符串 定义：对于每个左括号，都能找到与之对应的右括号，反之亦然。详情参见题末「有效括号字符串」部分。</p>
-<p>嵌套深度 depth 定义：即有效括号字符串嵌套的层数，depth(A) 表示有效括号字符串 A 的嵌套深度。详情参见题末「嵌套深度」部分。</p>
-<p>给你一个「有效括号字符串」 seq，请你将其分成两个不相交的有效括号字符串，A 和 B，并使这两个字符串的深度最小。</p>
-<p>不相交：每个 seq[i] 只能分给 A 和 B 二者中的一个，不能既属于 A 也属于 B 。<br>
-A 或 B 中的元素在原字符串中可以不连续。<br>
-A.length + B.length = seq.length<br>
-max(depth(A), depth(B)) 的可能取值最小。<br>
-划分方案用一个长度为 seq.length 的答案数组 answer 表示，编码规则如下：</p>
-<p>answer[i] = 0，seq[i] 分给 A 。<br>
-answer[i] = 1，seq[i] 分给 B 。<br>
-如果存在多个满足要求的答案，只需返回其中任意 一个 即可。</p>
-<ul>
-<li>1 &lt;= text.size &lt;= 10000</li>
-</ul>
-<p><strong>关于有效括号的问题可以参考 20 题，在下一节会讲到</strong></p>
+<p>给定一个由 0 和 1 组成的矩阵，找出每个元素到最近的 0 的距离。</p>
+<p>两个相邻元素间的距离为 1 。</p>
+<ol>
+<li>给定矩阵的元素个数不超过 10000。</li>
+<li>给定矩阵中至少有一个元素是 0。</li>
+<li>矩阵中的元素只在四个方向上相邻: 上、下、左、右。</li>
+</ol>
 <h2 id="示例">示例</h2>
-<pre><code>输入：seq = &quot;(()())&quot;
-输出：[0,1,1,1,1,0]
+<pre><code>输入
+0 0 0
+0 1 0
+1 1 1
 </code></pre>
-<pre><code>输入：seq = &quot;()(())()&quot;
-输出：[0,0,0,1,1,0,1,1]
-</code></pre>
-<h2 id="分析">分析</h2>
-<p>官方题解总结的很好，这里不做赘述，直接引用</p>
-<blockquote>
-<p>方法一：用栈进行括号匹配<br>
-思路及算法<br>
-要求划分出使得最大嵌套深度最小的分组，我们首先得知道如何计算嵌套深度。我们可以通过栈实现括号匹配来计算：<br>
-维护一个栈 s，从左至右遍历括号字符串中的每一个字符：<br>
-如果当前字符是 (，就把 ( 压入栈中，此时这个 ( 的嵌套深度为栈的高度；<br>
-如果当前字符是 )，此时这个 ) 的嵌套深度为栈的高度，随后再从栈中弹出一个 (。<br>
-下面给出了括号序列 (()(())()) 在每一个字符处的嵌套深度：</p>
-</blockquote>
-<pre><code>括号序列   ( ( ) ( ( ) ) ( ) )
-下标编号   0 1 2 3 4 5 6 7 8 9
-嵌套深度   1 2 2 2 3 3 2 2 2 1 
+<pre><code>输出
+0 0 0
+0 1 0
+1 2 1
 </code></pre>
 <h2 id="题解">题解</h2>
 <pre><code class="language-javascript">/**
- * @param {string} seq
- * @return {number[]}
+ * @param {number[][]} matrix
+ * @return {number[][]}
  */
-var maxDepthAfterSplit = function(seq) {
-    let dep=0;
-    let res=[];
-    for(let i=0;i&lt;seq.length;i++){
-        if(seq[i]===&quot;(&quot;){
-            res.push(++dep % 2);
-        }
-        if(seq[i]===&quot;)&quot;){
-            res.push(dep-- % 2);
-        }
-    }
-    return res;
-}
+var updateMatrix = function(matrix) {
+	const m = matrix.length;
+	const n = matrix[0].length;
+	let count = 0; //当前层级
+	let queue = []; //存放当前层级下的数据
+	let identity = new Array(m).fill(false).map(() =&gt; new Array(n).fill(false)); // 用于存放标记过的数据
+	for (let i = 0; i &lt; m; i++) {
+		for (let j = 0; j &lt; n; j++) {
+			if (matrix[i][j] === 0) {
+				queue.push([ i, j ]);
+				identity[i][j] = true;
+			}
+		}
+	}
+	const direction = [ [ 1, 0 ], [ -1, 0 ], [ 0, 1 ], [ 0, -1 ] ]; // 四个方向
+	while (queue.length &gt; 0) {
+		count++;
+		let temp = [];
+		for (let i = 0; i &lt; queue.length; i++) {
+			for (let j = 0; j &lt; direction.length; j++) {
+				const x = queue[i][0] + direction[j][0];
+				const y = queue[i][1] + direction[j][1];
+				if (x &gt;= 0 &amp;&amp; y &gt;= 0 &amp;&amp; x &lt; m &amp;&amp; y &lt; n &amp;&amp; identity[x][y] === false) {
+					identity[x][y] = true;
+					temp.push([ x, y ]);
+					matrix[x][y] = count;
+				}
+			}
+		}
+		queue = temp; //当前扩散的数组作为下一次遍历的数据源
+	}
+	return matrix;
+};
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gde8abnyimj30tg07sjrm.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gdublyxu1jj30gl040dft.jpg" alt="" loading="lazy"></figure>
 
               </div>
               <div class="toc-container">
@@ -166,7 +167,6 @@ var maxDepthAfterSplit = function(seq) {
 <ul>
 <li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
 <li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
-<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
 <li><a href="#%E9%A2%98%E8%A7%A3">题解</a></li>
 </ul>
 </li>
@@ -180,9 +180,9 @@ var maxDepthAfterSplit = function(seq) {
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://JoelynZhou.github.io/post/912-pai-xu-shu-zu/">
+            <a href="https://JoelynZhou.github.io/post/mian-shi-ti-0107-xuan-zhuan-ju-zhen/">
               <h3 class="post-title">
-                912. 排序数组
+                面试题 01.07. 旋转矩阵
               </h3>
             </a>
           </div>

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-04-08T02:33:12.516Z</updated>
+    <updated>2020-04-15T05:57:48.528Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,73 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[542. 01 矩阵]]></title>
+        <id>https://JoelynZhou.github.io/post/542-01-ju-zhen/</id>
+        <link href="https://JoelynZhou.github.io/post/542-01-ju-zhen/">
+        </link>
+        <updated>2020-04-15T04:05:15.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>给定一个由 0 和 1 组成的矩阵，找出每个元素到最近的 0 的距离。</p>
+<p>两个相邻元素间的距离为 1 。</p>
+<ol>
+<li>给定矩阵的元素个数不超过 10000。</li>
+<li>给定矩阵中至少有一个元素是 0。</li>
+<li>矩阵中的元素只在四个方向上相邻: 上、下、左、右。</li>
+</ol>
+<h2 id="示例">示例</h2>
+<pre><code>输入
+0 0 0
+0 1 0
+1 1 1
+</code></pre>
+<pre><code>输出
+0 0 0
+0 1 0
+1 2 1
+</code></pre>
+<h2 id="题解">题解</h2>
+<pre><code class="language-javascript">/**
+ * @param {number[][]} matrix
+ * @return {number[][]}
+ */
+var updateMatrix = function(matrix) {
+	const m = matrix.length;
+	const n = matrix[0].length;
+	let count = 0; //当前层级
+	let queue = []; //存放当前层级下的数据
+	let identity = new Array(m).fill(false).map(() =&gt; new Array(n).fill(false)); // 用于存放标记过的数据
+	for (let i = 0; i &lt; m; i++) {
+		for (let j = 0; j &lt; n; j++) {
+			if (matrix[i][j] === 0) {
+				queue.push([ i, j ]);
+				identity[i][j] = true;
+			}
+		}
+	}
+	const direction = [ [ 1, 0 ], [ -1, 0 ], [ 0, 1 ], [ 0, -1 ] ]; // 四个方向
+	while (queue.length &gt; 0) {
+		count++;
+		let temp = [];
+		for (let i = 0; i &lt; queue.length; i++) {
+			for (let j = 0; j &lt; direction.length; j++) {
+				const x = queue[i][0] + direction[j][0];
+				const y = queue[i][1] + direction[j][1];
+				if (x &gt;= 0 &amp;&amp; y &gt;= 0 &amp;&amp; x &lt; m &amp;&amp; y &lt; n &amp;&amp; identity[x][y] === false) {
+					identity[x][y] = true;
+					temp.push([ x, y ]);
+					matrix[x][y] = count;
+				}
+			}
+		}
+		queue = temp; //当前扩散的数组作为下一次遍历的数据源
+	}
+	return matrix;
+};
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gdublyxu1jj30gl040dft.jpg" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[面试题 01.07. 旋转矩阵]]></title>
         <id>https://JoelynZhou.github.io/post/mian-shi-ti-0107-xuan-zhuan-ju-zhen/</id>
@@ -518,50 +585,6 @@ const dx = [1, -1, 0, 0];
 const dy = [0, 0, 1, -1];
 </code></pre>
 <figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb0fcx1xwj30g202ya9z.jpg" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[820. 单词的压缩编码]]></title>
-        <id>https://JoelynZhou.github.io/post/820-dan-ci-de-ya-suo-bian-ma/</id>
-        <link href="https://JoelynZhou.github.io/post/820-dan-ci-de-ya-suo-bian-ma/">
-        </link>
-        <updated>2020-03-28T15:34:54.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
-<p>给定一个单词列表，我们将这个列表编码成一个索引字符串 S 与一个索引列表 A。</p>
-<p>例如，如果这个列表是 [&quot;time&quot;, &quot;me&quot;, &quot;bell&quot;]，我们就可以将其表示为 S = &quot;time#bell#&quot; 和 indexes = [0, 2, 5]。</p>
-<p>对于每一个索引，我们可以通过从字符串 S 中索引的位置开始读取字符串，直到 &quot;#&quot; 结束，来恢复我们之前的单词列表。</p>
-<p>那么成功对给定单词列表进行编码的最小字符串长度是多少呢？</p>
-<h2 id="示例">示例</h2>
-<p>输入: words = [&quot;time&quot;, &quot;me&quot;, &quot;bell&quot;]<br>
-输出: 10<br>
-说明: S = &quot;time#bell#&quot; ， indexes = [0, 2, 5] 。</p>
-<h2 id="分析">分析</h2>
-<ol>
-<li>最初想法<br>
-首先匹配子串会让人想到 Trie 树，但本题题意是匹配后缀，所以会想到把单词翻转，构造前缀树条件，生成前缀树，计算每一个子节点到父节点的距离（ # 相当于根节点，所以需要算上根节点的个数 1 ）。</li>
-<li>在此基础上的思考<br>
-既然每个节点的共享部分都需要反复计算，那么是不是可以理解为，其实过滤掉不用计算的是<strong>整个单词能匹配到其他单词</strong>的情况（包含关系，而不是半包含关系），那么只需要遍历每个单词，过滤掉当前单词的所有后缀以独立单词存在的情况，再对剩下的单词长度求和（别忘了根节点）即可。</li>
-</ol>
-<h2 id="题解">题解</h2>
-<pre><code class="language-javascript">/**
- * @param {string[]} words
- * @return {number}
- */
-var minimumLengthEncoding = function (words) {
-    let set = new Set(words);
-    for (let word of set) {
-        for (let i = 1; i &lt; word.length; i++) {
-            let temp = word.slice(i);
-            set.has(temp) &amp;&amp; set.delete(temp);
-        }
-    }
-    let res = [...set].reduce((acc,cur)=&gt;{
-        return acc+cur.length+1;
-    },0)
-    return res;
-};
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gda2e0qzo9j30i60370sp.jpg" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
 </feed>
