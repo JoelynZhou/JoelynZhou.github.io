@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-04-15T05:57:48.528Z</updated>
+    <updated>2020-04-16T12:08:54.129Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,57 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[56. 合并区间]]></title>
+        <id>https://JoelynZhou.github.io/post/56-he-bing-qu-jian/</id>
+        <link href="https://JoelynZhou.github.io/post/56-he-bing-qu-jian/">
+        </link>
+        <updated>2020-04-16T12:06:38.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>给出一个区间的集合，请合并所有重叠的区间。</p>
+<h2 id="示例">示例</h2>
+<pre><code>输入: [[1,3],[2,6],[8,10],[15,18]]
+输出: [[1,6],[8,10],[15,18]]
+解释: 区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6].
+
+输入: [[1,4],[4,5]]
+输出: [[1,5]]
+解释: 区间 [1,4] 和 [4,5] 可被视为重叠区间。
+</code></pre>
+<h2 id="分析">分析</h2>
+<ul>
+<li>先排序，再依次合并</li>
+</ul>
+<h2 id="题解">题解</h2>
+<pre><code class="language-javascript">/**
+ * @param {number[][]} intervals
+ * @return {number[][]}
+ */
+var merge = function(intervals) {
+    // 区间集合长度小于 1时，不需要合并，返回自身
+    if(intervals.length&lt;=1){
+        return intervals;
+    }
+    // 对区间集合按照开始区间由小到大进行排序
+    intervals=intervals.sort((a,b)=&gt; a[0]-b[0]);
+    // 将最小的区间放入集合开头
+    let res=intervals.slice(0,1);
+    // 从第二个元素开始，遍历整个区间集合，依次与开始区间较小的那个区间（输出集合的最后一个区间）进行比较
+    for(let i=1;i&lt;intervals.length;i++){
+        // 如果待比较的两个区间有重合，则将两个区间合并（更新 输出集合的最后一个区间）
+        // 即：较大的开始区间 小于等于 较小区间的结束区间
+        if(intervals[i][0]&lt;=res[res.length-1][1]){
+            res[res.length-1][1]=Math.max(res[res.length-1][1],intervals[i][1]);
+        }else{
+            res.push(intervals[i]); // 待比较的两个区间没有交集，不做合并，直接存入输出集合末尾
+        }
+    }
+    return res;
+};
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdvv53k20dj30ez03ot8o.jpg" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[542. 01 矩阵]]></title>
         <id>https://JoelynZhou.github.io/post/542-01-ju-zhen/</id>
@@ -489,102 +540,6 @@ var sortArray = function(nums) {
 <pre><code class="language-javascript">输入: n = 10, m = 17
 输出: 2
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[1162. 地图分析]]></title>
-        <id>https://JoelynZhou.github.io/post/1162-di-tu-fen-xi/</id>
-        <link href="https://JoelynZhou.github.io/post/1162-di-tu-fen-xi/">
-        </link>
-        <updated>2020-03-29T11:12:46.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
-<p>你现在手里有一份大小为 N x N 的『地图』（网格） grid，上面的每个『区域』（单元格）都用 0 和 1 标记好了。其中 0 代表海洋，1 代表陆地，你知道距离陆地区域最远的海洋区域是是哪一个吗？请返回该海洋区域到离它最近的陆地区域的距离。</p>
-<p>我们这里说的距离是『曼哈顿距离』（ Manhattan Distance）：(x0, y0) 和 (x1, y1) 这两个区域之间的距离是 |x0 - x1| + |y0 - y1| 。</p>
-<p>如果我们的地图上只有陆地或者海洋，请返回 -1。</p>
-<h2 id="示例">示例</h2>
-<p>输入：[[1,0,1],[0,0,0],[1,0,1]]<br>
-输出：2<br>
-解释：<br>
-海洋区域 (1, 1) 和所有陆地区域之间的距离都达到最大，最大距离为 2。<br>
-<img src="https://pic.leetcode-cn.com/23e21821e14238829dd7021a620895f40a8e42127cfe372e4791d025bb655afc.jpg" alt="" loading="lazy"></p>
-<h2 id="分析">分析</h2>
-<p>参考链接：<a href="https://leetcode-cn.com/problems/as-far-from-land-as-possible/solution/zhen-liang-yan-sou-huan-neng-duo-yuan-kan-wan-miao/">参考链接点这里</a></p>
-<p>花了好长时间去理解题意，距离最近的陆地区域的最远距离，究竟是最远距离还是最近距离，后来看了链接中大佬画的 GIF 瞬间明白了，这道题或许换个模型更容易理解。</p>
-<p>我脑补的模型：</p>
-<ul>
-<li>背景：
-<ul>
-<li>病毒在封闭人群中的传播（可能是最近瘟疫公司玩多了的缘故 orz）；</li>
-</ul>
-</li>
-<li>假设：
-<ul>
-<li>将陆地看成是感染人员，每个感染人员 每天 都会感染周围的人，然后 第二天新感染的人员又会感染周围的人，问：你以上帝视角，站在人群中什么位置，才是最晚被感染的人（人类之光格陵兰）。</li>
-</ul>
-</li>
-<li>思路：
-<ul>
-<li>第一天，算出被 0 号病人感染的人，剩下没感染的还有多少人</li>
-<li>第二天，算出被 第一天感染的人 感染的人，剩下没感染多少人</li>
-<li>……</li>
-<li>第 N 天，已经没有被感染的人了</li>
-<li>得到 N</li>
-</ul>
-</li>
-</ul>
-<h2 id="题解">题解</h2>
-<pre><code class="language-javascript">/**
- * @param {number[][]} grid
- * @return {number}
- */
-var maxDistance = function (grid) {
-    let land = []; // 陆地源数组
-    let level = 0; // 返回层级
-    for (let i = 0; i &lt; grid.length; i++) {
-        for (let j = 0; j &lt; grid[i].length; j++) {
-            if (grid[i][j] === 1) {
-                land.push([i, j]);
-            }
-        }
-    }
-    let ocean = grid.length * grid.length - land.length; // 海洋的格数
-    // 全是海洋或者陆地，返回 -1
-    if (land.length === 0 || ocean === 0) {
-        return -1;
-    }
-    while (ocean &gt; 0) {
-        level++;
-        const temp = [];
-        for (let i = 0; i &lt; land.length; i++) {
-            const [x, y] = [land[i][0], land[i][1]];
-            // 判断 上下左右 相邻的点是否有海洋
-            for (let j = 0; j &lt; 4; j++) {
-                // 边界条件校验
-                if (
-                    x + dx[j] &lt; 0 ||
-                    y + dy[j] &lt; 0 ||
-                    x + dx[j] &gt; grid.length - 1 ||
-                    y + dy[j] &gt; grid[0].length - 1
-                ) {
-                    continue;
-                }
-                // 如果发现是海洋，则标记 2（这里其实只要是非 0，其他数都可以，只为了跟未知海洋作区分），防止被重复计算
-                if (grid[x + dx[j]][y + dy[j]] === 0) {
-                    grid[x + dx[j]][y + dy[j]] = 2;
-                    temp.push([x + dx[j], y + dy[j]]);
-                    // 每发现一个新海洋，剩下的海洋格数就减少 1
-                    ocean--;
-                }
-            }
-        }
-        land = temp; // 一轮扩散结束后，新扩散将代替源陆地存入 land，开始新的一轮扩散
-    }
-    return level;
-};
-const dx = [1, -1, 0, 0];
-const dy = [0, 0, 1, -1];
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb0fcx1xwj30g202ya9z.jpg" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
 </feed>
