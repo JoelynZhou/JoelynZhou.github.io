@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-04-17T04:41:41.819Z</updated>
+    <updated>2020-04-17T05:38:52.608Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,82 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[55. 跳跃游戏]]></title>
+        <id>https://JoelynZhou.github.io/post/55-tiao-yue-you-xi/</id>
+        <link href="https://JoelynZhou.github.io/post/55-tiao-yue-you-xi/">
+        </link>
+        <updated>2020-04-17T05:06:18.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>给定一个非负整数数组，你最初位于数组的第一个位置。</p>
+<p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p>
+<p>判断你是否能够到达最后一个位置。</p>
+<h2 id="示例">示例</h2>
+<pre><code>输入: [2,3,1,1,4]
+输出: true
+解释: 我们可以先跳 1 步，从位置 0 到达 位置 1, 然后再从位置 1 跳 3 步到达最后一个位置。
+
+输入: [3,2,1,0,4]
+输出: false
+解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。
+</code></pre>
+<h2 id="分析">分析</h2>
+<p>思路 1：贪心算法</p>
+<ul>
+<li>遍历每一个能调到的最远距离内的点</li>
+<li>更新最远距离</li>
+<li>如果遍历的点超出了最远距离，则说明当前最远距离无法到达最后，return false</li>
+<li>否则，return true</li>
+</ul>
+<p>思路 2：动态规划</p>
+<ul>
+<li>从后往前，判断倒数第二个元素能否到达最后一个元素，如果可以，则将最后一个元素移出考虑范围</li>
+</ul>
+<h2 id="题解-1">题解 1</h2>
+<pre><code class="language-javascript">/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = function(nums) {
+    let k=0; // 能跳的最远距离
+    for(let i=0;i&lt;nums.length;i++){
+        if(i&gt;k){
+            return false;
+        }
+        k=Math.max(k,i+nums[i]);
+    }
+    return true;
+};
+</code></pre>
+<h2 id="题解-2">题解 2</h2>
+<pre><code class="language-javascript">/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = function(nums) {
+    if(nums.length===0){
+        return false;
+    }
+    let dp=new Array(nums.length).fill(false);
+    dp[0]=true; // 第 0 个位置可达
+    for(let i=1;i&lt;nums.length;i++){
+        for(let j=0;j&lt;i;j++){
+            if(dp[j] &amp;&amp; nums[j]+j &gt;= i){
+                dp[i]=true;
+                break;  // 第 i 个位置可达，则不用再判断 dp[i]，调到下一个循环
+            }
+        }
+    }
+    return dp[nums.length-1];
+};
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdwom2sfoqj30i404qjrf.jpg" alt="" loading="lazy"></figure>
+<h2 id="参考">参考</h2>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/jump-game/solution/55-by-ikaruga/">【跳跃游戏】别想那么多，就挨着跳吧</a></li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[57. 插入区间]]></title>
         <id>https://JoelynZhou.github.io/post/57-cha-ru-qu-jian/</id>
@@ -557,30 +633,6 @@ var maxDepthAfterSplit = function(seq) {
 }
 </code></pre>
 <figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gde8abnyimj30tg07sjrm.jpg" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[912. 排序数组]]></title>
-        <id>https://JoelynZhou.github.io/post/912-pai-xu-shu-zu/</id>
-        <link href="https://JoelynZhou.github.io/post/912-pai-xu-shu-zu/">
-        </link>
-        <updated>2020-03-31T15:11:17.000Z</updated>
-        <content type="html"><![CDATA[<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gde1ljl9dwj31ca0u0jvt.jpg" alt="" loading="lazy"></figure>
-<h2 id="题解-1">题解 1</h2>
-<pre><code class="language-javascript">/**
- * @param {number[]} nums
- * @return {number[]}
- */
-var sortArray = function(nums) {
-    return nums.sort((a,b)=&gt; a-b);
-};
-</code></pre>
-<figure data-type="image" tabindex="2"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gddikgsevej30ey02dq2v.jpg" alt="" loading="lazy"></figure>
-<h2 id="题解-2">题解 2</h2>
-<h2 id="参考">参考</h2>
-<ul>
-<li><a href="https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">维基百科-排序算法</a></li>
-</ul>
 ]]></content>
     </entry>
 </feed>
