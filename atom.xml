@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-04-16T12:08:54.129Z</updated>
+    <updated>2020-04-17T04:41:41.819Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,63 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[57. 插入区间]]></title>
+        <id>https://JoelynZhou.github.io/post/57-cha-ru-qu-jian/</id>
+        <link href="https://JoelynZhou.github.io/post/57-cha-ru-qu-jian/">
+        </link>
+        <updated>2020-04-16T12:51:03.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>给出一个无重叠的 ，按照区间起始端点排序的区间列表。</p>
+<p>在列表中插入一个新的区间，你需要确保列表中的区间仍然有序且不重叠（如果有必要的话，可以合并区间）。</p>
+<h2 id="示例">示例</h2>
+<pre><code>输入: intervals = [[1,3],[6,9]], newInterval = [2,5]
+输出: [[1,5],[6,9]]
+
+输入: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
+输出: [[1,2],[3,10],[12,16]]
+解释: 这是因为新的区间 [4,8] 与 [3,5],[6,7],[8,10] 重叠。
+</code></pre>
+<h2 id="分析-1">分析 1</h2>
+<p>用 56 题合并区间的思路解决：<br>
+- 插入的区间与原区间集合合并（不考虑顺序）<br>
+- 排序 并 合并区间</p>
+<h2 id="题解-1">题解 1</h2>
+<pre><code class="language-javascript">/**
+ * @param {number[][]} intervals
+ * @param {number[]} newInterval
+ * @return {number[][]}
+ */
+var insert = function(intervals, newInterval) {
+    // 过滤掉区间集合中被新区间包含的点
+    intervals=intervals.filter(x=&gt; x[0]&lt; newInterval[0] || x[1]&gt;newInterval[1])
+    intervals.splice(intervals.length,0,newInterval);
+    intervals=intervals.sort((a,b)=&gt; a[0]-b[0]);
+    return merge(intervals);
+};
+
+var merge = function(intervals) {
+    // 区间集合长度小于 1时，不需要合并，返回自身
+    if(intervals.length&lt;=1){
+        return intervals;
+    }
+    // 将最小的区间放入集合开头
+    let res=intervals.slice(0,1);
+    // 从第二个元素开始，遍历整个区间集合，依次与开始区间较小的那个区间（输出集合的最后一个区间）进行比较
+    for(let i=1;i&lt;intervals.length;i++){
+        // 如果待比较的两个区间有重合，则将两个区间合并（更新 输出集合的最后一个区间）
+        // 即：较大的开始区间 小于等于 较小区间的结束区间
+        if(intervals[i][0]&lt;=res[res.length-1][1]){
+            res[res.length-1][1]=Math.max(res[res.length-1][1],intervals[i][1]);
+        }else{
+            res.push(intervals[i]); // 待比较的两个区间没有交集，不做合并，直接存入输出集合末尾
+        }
+    }
+    return res;
+};
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[56. 合并区间]]></title>
         <id>https://JoelynZhou.github.io/post/56-he-bing-qu-jian/</id>
@@ -59,6 +116,8 @@ var merge = function(intervals) {
 };
 </code></pre>
 <figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdvv53k20dj30ez03ot8o.jpg" alt="" loading="lazy"></figure>
+<h2 id="引申">引申</h2>
+<p>类似的问题<a href="https://leetcode-cn.com/problems/insert-interval/submissions/">57. 插入区间</a>也可以用上述思路解决。</p>
 ]]></content>
     </entry>
     <entry>
@@ -522,24 +581,6 @@ var sortArray = function(nums) {
 <ul>
 <li><a href="https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">维基百科-排序算法</a></li>
 </ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[面试题62. 圆圈中最后剩下的数字]]></title>
-        <id>https://JoelynZhou.github.io/post/mian-shi-ti-62-yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi/</id>
-        <link href="https://JoelynZhou.github.io/post/mian-shi-ti-62-yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi/">
-        </link>
-        <updated>2020-03-30T14:11:28.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
-<p>0,1,,n-1这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字。求出这个圆圈里剩下的最后一个数字。</p>
-<p>例如，0、1、2、3、4这5个数字组成一个圆圈，从数字0开始每次删除第3个数字，则删除的前4个数字依次是2、0、4、1，因此最后剩下的数字是3。</p>
-<h2 id="示例">示例</h2>
-<pre><code class="language-javascript">输入: n = 5, m = 3
-输出: 3
-</code></pre>
-<pre><code class="language-javascript">输入: n = 10, m = 17
-输出: 2
-</code></pre>
 ]]></content>
     </entry>
 </feed>
