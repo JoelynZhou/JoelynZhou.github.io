@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>1. 两数之和 | JoelynZhou</title>
+<title>11. 盛最多水的容器 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1587281802123">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -82,62 +82,52 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              1. 两数之和
+              11. 盛最多水的容器
             </h2>
             <div class="post-info">
               <span>
-                2020-03-26
+                2020-04-19
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
-              
-                <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
-                  # LeetCode
-                </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
                 <h2 id="题目">题目</h2>
-<p>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p>
-<p>你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。</p>
+<p>给你 n 个非负整数 a1，a2，...，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0)。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</p>
+<p>说明：你不能倾斜容器，且 n 的值至少为 2。</p>
+<figure data-type="image" tabindex="1"><img src="https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/07/25/question_11.jpg" alt="" loading="lazy"></figure>
+<p>图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。</p>
 <h2 id="示例">示例</h2>
-<pre><code>给定 nums = [2, 7, 11, 15], target = 9
-
-因为 nums[0] + nums[1] = 2 + 7 = 9
-所以返回 [0, 1]
+<pre><code>输入：[1,8,6,2,5,4,8,3,7]
+输出：49
 </code></pre>
 <h2 id="分析">分析</h2>
-<ol>
-<li>粗暴遍历：<br>
-算法复杂度 O(n^2)</li>
-<li>Hash 查找：<br>
-哈希表的查找复杂度是 O(1)，<br>
-所以整体复杂度 O(n)</li>
-</ol>
+<p>考点：双指针</p>
+<p>跟接雨水的题很像，但是比那道题更简单，接雨水本质上是若干柱子组成的不规则图形的面积，而这里只需要考虑首尾柱子构成的矩形面积。</p>
 <h2 id="题解">题解</h2>
 <pre><code class="language-javascript">/**
- * @param {number[]} nums
- * @param {number} target
- * @return {number[]}
- * 分析：
- * 基于 哈希表的查找复杂度是 O(1)
- * 通过哈希表，遍历一次，算法复杂度O(n)
+ * @param {number[]} height
+ * @return {number}
  */
-var twoSum = function(nums, target) {
-    const hashMap=new Map();
-    for(let i=0;i&lt;nums.length;i++){
-        if(hashMap.has(target-nums[i])){
-            return [hashMap.get(target-nums[i]),i];
+var maxArea = function (height) {
+    let m=0;n=height.length-1;
+    let max=0;
+    while(m&lt;n){
+        max=Math.max(max,(n-m)*Math.min(height[m],height[n]));
+        if(height[m]&gt;=height[n]){
+            n--;
+        }else{
+            m++;
         }
-        hashMap.set(nums[i],i);
     }
-    return [];
+    return max;
 };
 </code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd7ohikwrnj30pu04474c.jpg" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdz42k4vtjj30ic04eglm.jpg" alt="" loading="lazy"></figure>
 
               </div>
               <div class="toc-container">
@@ -160,9 +150,9 @@ var twoSum = function(nums, target) {
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://JoelynZhou.github.io/post/999-che-de-ke-yong-bu-huo-liang/">
+            <a href="https://JoelynZhou.github.io/post/55-tiao-yue-you-xi/">
               <h3 class="post-title">
-                999. 车的可用捕获量
+                55. 跳跃游戏
               </h3>
             </a>
           </div>
