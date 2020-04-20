@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-04-19T07:36:47.578Z</updated>
+    <updated>2020-04-20T13:25:46.849Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,99 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[200. 岛屿数量]]></title>
+        <id>https://JoelynZhou.github.io/post/200-dao-yu-shu-liang/</id>
+        <link href="https://JoelynZhou.github.io/post/200-dao-yu-shu-liang/">
+        </link>
+        <updated>2020-04-20T13:20:42.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。</p>
+<p>岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。</p>
+<p>此外，你可以假设该网格的四条边均被水包围。</p>
+<h2 id="示例">示例</h2>
+<pre><code>输入:
+11110
+11010
+11000
+00000
+输出: 1
+
+输入:
+11000
+11000
+00100
+00011
+输出: 3
+解释: 每座岛屿只能由水平和/或竖直方向上相邻的陆地连接而成。
+</code></pre>
+<h2 id="分析">分析</h2>
+<p>思路：DFS<br>
+跟离陆地最远的海洋问题类似。<br>
+一旦发现岛屿，计数，沉岛，查看岛屿边界；</p>
+<h2 id="题解">题解</h2>
+<pre><code class="language-javascript">/**
+ * @param {character[][]} grid
+ * @return {number}
+ */
+var numIslands = function(grid) {
+   const mark=(x,y)=&gt;{
+        if(x&lt;0 || y&lt;0 || x&gt;=m || y&gt;=n){
+            return;
+        }
+        if(grid[x][y]===&quot;1&quot;){
+            grid[x][y]=&quot;0&quot;;
+            mark(x-1,y);
+            mark(x+1,y);
+            mark(x,y-1);
+            mark(x,y+1);
+        }
+    }
+
+    if(grid.length===0){
+        return 0;
+    }
+    const m=grid.length;const n=grid[0].length;
+    let count=0;
+    for(let i=0;i&lt;m;i++){
+        for(let j=0;j&lt;n;j++){
+            if(grid[i][j]===&quot;1&quot;){
+                count++;    //发现一块新岛屿
+                // 标记岛屿直到边界
+                mark(i,j);
+            }
+        }
+    }
+    return count;
+};
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[466. 统计重复个数]]></title>
+        <id>https://JoelynZhou.github.io/post/466-tong-ji-chong-fu-ge-shu/</id>
+        <link href="https://JoelynZhou.github.io/post/466-tong-ji-chong-fu-ge-shu/">
+        </link>
+        <updated>2020-04-19T08:10:26.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>由 n 个连接的字符串 s 组成字符串 S，记作 S = [s,n]。例如，[&quot;abc&quot;,3]=“abcabcabc”。</p>
+<p>如果我们可以从 s2 中删除某些字符使其变为 s1，则称字符串 s1 可以从字符串 s2 获得。例如，根据定义，&quot;abc&quot; 可以从 “abdbec” 获得，但不能从 “acbbe” 获得。</p>
+<p>现在给你两个非空字符串 s1 和 s2（每个最多 100 个字符长）和两个整数 0 ≤ n1 ≤ 10^6 和 1 ≤ n2 ≤ 10^6。现在考虑字符串 S1 和 S2，其中 S1=[s1,n1] 、S2=[s2,n2] 。</p>
+<p>请你找出一个可以满足使[S2,M] 从 S1 获得的最大整数 M 。</p>
+<h2 id="示例">示例</h2>
+<pre><code class="language-javascript">输入：
+s1 =&quot;acb&quot;,n1 = 4
+s2 =&quot;ab&quot;,n2 = 2
+
+返回：
+2
+</code></pre>
+<h2 id="分析">分析</h2>
+<ul>
+<li>n1,n2 很大，没有办法吧 S1,S2 按照循环写出链式结果</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[11. 盛最多水的容器]]></title>
         <id>https://JoelynZhou.github.io/post/11-sheng-zui-duo-shui-de-rong-qi/</id>
@@ -479,134 +572,6 @@ var maxProfit = function(prices) {
 };
 </code></pre>
 <figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdfpzdve0qj30u606wt8y.jpg" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[289. 生命游戏]]></title>
-        <id>https://JoelynZhou.github.io/post/289-sheng-ming-you-xi/</id>
-        <link href="https://JoelynZhou.github.io/post/289-sheng-ming-you-xi/">
-        </link>
-        <updated>2020-04-02T03:55:13.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
-<p>根据 百度百科 ，生命游戏，简称为生命，是英国数学家约翰·何顿·康威在 1970 年发明的细胞自动机。</p>
-<p>给定一个包含 m × n 个格子的面板，每一个格子都可以看成是一个细胞。每个细胞都具有一个初始状态：1 即为活细胞（live），或 0 即为死细胞（dead）。每个细胞与其八个相邻位置（水平，垂直，对角线）的细胞都遵循以下四条生存定律：</p>
-<p>如果活细胞周围八个位置的活细胞数少于两个，则该位置活细胞死亡；<br>
-如果活细胞周围八个位置有两个或三个活细胞，则该位置活细胞仍然存活；<br>
-如果活细胞周围八个位置有超过三个活细胞，则该位置活细胞死亡；<br>
-如果死细胞周围正好有三个活细胞，则该位置死细胞复活；<br>
-根据当前状态，写一个函数来计算面板上所有细胞的下一个（一次更新后的）状态。下一个状态是通过将上述规则同时应用于当前状态下的每个细胞所形成的，其中细胞的出生和死亡是同时发生的。</p>
-<h2 id="示例">示例</h2>
-<pre><code>输入： 
-[
-  [0,1,0],
-  [0,0,1],
-  [1,1,1],
-  [0,0,0]
-]
-输出：
-[
-  [0,0,0],
-  [1,0,1],
-  [0,1,1],
-  [0,1,0]
-]
-</code></pre>
-<h2 id="题解">题解</h2>
-<pre><code class="language-javascript">/* eslint-disable indent */
-/**
- * @param {number[][]} board
- * @return {void} Do not return anything, modify board in-place instead.
- * 细胞自动机模型
- * 分析：
- * 根据百度百科描述，生存规律总结如下：
- * 1. 细胞周围有三个细胞为生，则该细胞为生
- * 2. 细胞周围有两个细胞为生，则该细胞维持原状态
- * 3. 其他情况则死
- * 
- * 这一题最主要的问题在于，不需要 return 新数组，而是修改源数组，
- * 但是每个细胞的状态是依赖于其他细胞的初始状态，如果修改源数组，会影响到后面的计算结果。
- * 除了提示中提到的原地算法，最简单的会想到复制一份源数组，用于计算
- */
-var gameOfLife = function(board) {
-	if (board.length === 0) {
-		return board;
-	}
-	const copyBoard = JSON.parse(JSON.stringify(board)); // 二维数组的拷贝不能用 Array.slice(0)
-	for (let i = 0; i &lt; board.length; i++) {
-		for (let j = 0; j &lt; board[i].length; j++) {
-			const num = nearAliveNum(copyBoard, i, j); //周围的活细胞个数
-			if (num === 3) {
-				board[i][j] = 1;
-			} else if (num !== 2) {
-				board[i][j] = 0;
-			}
-		}
-	}
-	return board;
-};
-// 查询单个细胞周围的活细胞个数
-const nearAliveNum = (origin, x, y) =&gt; {
-	let count = 0;
-	const step = [ -1, 0, 1 ];
-	for (let m = 0; m &lt; 3; m++) {
-		for (let n = 0; n &lt; 3; n++) {
-			const a = x + step[m];
-			const b = y + step[n];
-			if (a &lt; 0 || a &gt;= origin.length || b &lt; 0 || b &gt;= origin[0].length) {
-				continue;
-			} else if (origin[a][b] === 1) {
-				count++;
-			}
-		}
-	}
-	return count - origin[x][y];
-};
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdfa9f3o2wj30v207cq36.jpg" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[20. 有效的括号]]></title>
-        <id>https://JoelynZhou.github.io/post/20-you-xiao-de-gua-hao/</id>
-        <link href="https://JoelynZhou.github.io/post/20-you-xiao-de-gua-hao/">
-        </link>
-        <updated>2020-04-01T07:00:08.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
-<p>给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。</p>
-<p>有效字符串需满足：</p>
-<p>左括号必须用相同类型的右括号闭合。<br>
-左括号必须以正确的顺序闭合。<br>
-注意空字符串可被认为是有效字符串。</p>
-<h2 id="示例">示例</h2>
-<pre><code>输入: &quot;()&quot;
-输出: true
-</code></pre>
-<pre><code>输入: &quot;([)]&quot;
-输出: false
-</code></pre>
-<h2 id="分析">分析</h2>
-<h2 id="题解">题解</h2>
-<pre><code class="language-javascript">/**
- * @param {string} s
- * @return {boolean}
- */
-var isValid = function(s) {
-    let stack = [];
-    for (let i = 0; i &lt; s.length; i++) {
-        if (s[i] === '(' || s[i] === '{' || s[i] === '[') {
-            stack.push(s[i]);
-        } else if (
-            (s[i] === ')' &amp;&amp; stack.pop() !== '(') ||
-			(s[i] === '}' &amp;&amp; stack.pop() !== '{') ||
-			(s[i] === ']' &amp;&amp; stack.pop() !== '[')
-        ) {
-            return false;
-        }
-    }
-    return stack.length===0;
-};
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gde9zldzldj30uq072jrm.jpg" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
 </feed>

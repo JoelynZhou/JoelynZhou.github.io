@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>912. 排序数组 | JoelynZhou</title>
+<title>200. 岛屿数量 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1587389144307">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -82,14 +82,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              912. 排序数组
+              200. 岛屿数量
             </h2>
             <div class="post-info">
               <span>
-                2020-03-31
+                2020-04-20
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
                 <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
@@ -100,31 +100,76 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gde1ljl9dwj31ca0u0jvt.jpg" alt="" loading="lazy"></figure>
-<h2 id="题解-1">题解 1</h2>
+                <h2 id="题目">题目</h2>
+<p>给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。</p>
+<p>岛屿总是被水包围，并且每座岛屿只能由水平方向和/或竖直方向上相邻的陆地连接形成。</p>
+<p>此外，你可以假设该网格的四条边均被水包围。</p>
+<h2 id="示例">示例</h2>
+<pre><code>输入:
+11110
+11010
+11000
+00000
+输出: 1
+
+输入:
+11000
+11000
+00100
+00011
+输出: 3
+解释: 每座岛屿只能由水平和/或竖直方向上相邻的陆地连接而成。
+</code></pre>
+<h2 id="分析">分析</h2>
+<p>思路：DFS<br>
+跟离陆地最远的海洋问题类似。<br>
+一旦发现岛屿，计数，沉岛，查看岛屿边界；</p>
+<h2 id="题解">题解</h2>
 <pre><code class="language-javascript">/**
- * @param {number[]} nums
- * @return {number[]}
+ * @param {character[][]} grid
+ * @return {number}
  */
-var sortArray = function(nums) {
-    return nums.sort((a,b)=&gt; a-b);
+var numIslands = function(grid) {
+   const mark=(x,y)=&gt;{
+        if(x&lt;0 || y&lt;0 || x&gt;=m || y&gt;=n){
+            return;
+        }
+        if(grid[x][y]===&quot;1&quot;){
+            grid[x][y]=&quot;0&quot;;
+            mark(x-1,y);
+            mark(x+1,y);
+            mark(x,y-1);
+            mark(x,y+1);
+        }
+    }
+
+    if(grid.length===0){
+        return 0;
+    }
+    const m=grid.length;const n=grid[0].length;
+    let count=0;
+    for(let i=0;i&lt;m;i++){
+        for(let j=0;j&lt;n;j++){
+            if(grid[i][j]===&quot;1&quot;){
+                count++;    //发现一块新岛屿
+                // 标记岛屿直到边界
+                mark(i,j);
+            }
+        }
+    }
+    return count;
 };
 </code></pre>
-<figure data-type="image" tabindex="2"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gddikgsevej30ey02dq2v.jpg" alt="" loading="lazy"></figure>
-<h2 id="题解-2">题解 2</h2>
-<h2 id="参考">参考</h2>
-<ul>
-<li><a href="https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">维基百科-排序算法</a></li>
-</ul>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E9%A2%98%E8%A7%A3-1">题解 1</a></li>
-<li><a href="#%E9%A2%98%E8%A7%A3-2">题解 2</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+<li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
+<li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
+<li><a href="#%E9%A2%98%E8%A7%A3">题解</a></li>
 </ul>
 </li>
 </ul>
@@ -137,9 +182,9 @@ var sortArray = function(nums) {
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://JoelynZhou.github.io/post/mian-shi-ti-62-yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi/">
+            <a href="https://JoelynZhou.github.io/post/466-tong-ji-chong-fu-ge-shu/">
               <h3 class="post-title">
-                面试题62. 圆圈中最后剩下的数字
+                466. 统计重复个数
               </h3>
             </a>
           </div>

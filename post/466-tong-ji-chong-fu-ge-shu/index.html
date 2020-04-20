@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>912. 排序数组 | JoelynZhou</title>
+<title>466. 统计重复个数 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1587389144307">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -82,39 +82,36 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              912. 排序数组
+              466. 统计重复个数
             </h2>
             <div class="post-info">
               <span>
-                2020-03-31
+                2020-04-19
               </span>
               <span>
                 1 min read
               </span>
               
-                <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
-                  # LeetCode
-                </a>
-              
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gde1ljl9dwj31ca0u0jvt.jpg" alt="" loading="lazy"></figure>
-<h2 id="题解-1">题解 1</h2>
-<pre><code class="language-javascript">/**
- * @param {number[]} nums
- * @return {number[]}
- */
-var sortArray = function(nums) {
-    return nums.sort((a,b)=&gt; a-b);
-};
+                <h2 id="题目">题目</h2>
+<p>由 n 个连接的字符串 s 组成字符串 S，记作 S = [s,n]。例如，[&quot;abc&quot;,3]=“abcabcabc”。</p>
+<p>如果我们可以从 s2 中删除某些字符使其变为 s1，则称字符串 s1 可以从字符串 s2 获得。例如，根据定义，&quot;abc&quot; 可以从 “abdbec” 获得，但不能从 “acbbe” 获得。</p>
+<p>现在给你两个非空字符串 s1 和 s2（每个最多 100 个字符长）和两个整数 0 ≤ n1 ≤ 10^6 和 1 ≤ n2 ≤ 10^6。现在考虑字符串 S1 和 S2，其中 S1=[s1,n1] 、S2=[s2,n2] 。</p>
+<p>请你找出一个可以满足使[S2,M] 从 S1 获得的最大整数 M 。</p>
+<h2 id="示例">示例</h2>
+<pre><code class="language-javascript">输入：
+s1 =&quot;acb&quot;,n1 = 4
+s2 =&quot;ab&quot;,n2 = 2
+
+返回：
+2
 </code></pre>
-<figure data-type="image" tabindex="2"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gddikgsevej30ey02dq2v.jpg" alt="" loading="lazy"></figure>
-<h2 id="题解-2">题解 2</h2>
-<h2 id="参考">参考</h2>
+<h2 id="分析">分析</h2>
 <ul>
-<li><a href="https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">维基百科-排序算法</a></li>
+<li>n1,n2 很大，没有办法吧 S1,S2 按照循环写出链式结果</li>
 </ul>
 
               </div>
@@ -122,9 +119,9 @@ var sortArray = function(nums) {
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E9%A2%98%E8%A7%A3-1">题解 1</a></li>
-<li><a href="#%E9%A2%98%E8%A7%A3-2">题解 2</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+<li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
+<li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
 </ul>
 </li>
 </ul>
@@ -137,9 +134,9 @@ var sortArray = function(nums) {
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://JoelynZhou.github.io/post/mian-shi-ti-62-yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi/">
+            <a href="https://JoelynZhou.github.io/post/11-sheng-zui-duo-shui-de-rong-qi/">
               <h3 class="post-title">
-                面试题62. 圆圈中最后剩下的数字
+                11. 盛最多水的容器
               </h3>
             </a>
           </div>
