@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>912. 排序数组 | JoelynZhou</title>
+<title>1248. 统计「优美子数组」 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1587482127194">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -82,14 +82,14 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              912. 排序数组
+              1248. 统计「优美子数组」
             </h2>
             <div class="post-info">
               <span>
-                2020-03-31
+                2020-04-21
               </span>
               <span>
-                1 min read
+                2 min read
               </span>
               
                 <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
@@ -100,31 +100,57 @@
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gde1ljl9dwj31ca0u0jvt.jpg" alt="" loading="lazy"></figure>
-<h2 id="题解-1">题解 1</h2>
+                <h2 id="题目">题目</h2>
+<p>给你一个整数数组 nums 和一个整数 k。</p>
+<p>如果某个 连续 子数组中恰好有 k 个奇数数字，我们就认为这个子数组是「优美子数组」。</p>
+<p>请返回这个数组中「优美子数组」的数目。</p>
+<h2 id="示例">示例</h2>
+<pre><code>输入：nums = [1,1,2,1,1], k = 3
+输出：2
+解释：包含 3 个奇数的子数组是 [1,1,2,1] 和 [1,2,1,1] 。
+
+输入：nums = [2,2,2,1,2,2,1,2,2,2], k = 2
+输出：16
+</code></pre>
+<h2 id="分析">分析</h2>
+<p>本题难在考察边界条件。</p>
+<h2 id="题解">题解</h2>
 <pre><code class="language-javascript">/**
  * @param {number[]} nums
- * @return {number[]}
+ * @param {number} k
+ * @return {number}
  */
-var sortArray = function(nums) {
-    return nums.sort((a,b)=&gt; a-b);
+var numberOfSubarrays = function(nums, k) {
+	let count = 0;
+	let arr = []; // 用于放置奇数下标
+	for (let i = 0; i &lt; nums.length; i++) {
+		if (nums[i] % 2 === 1) {
+			arr.push(i);
+		}
+	}
+	if (arr.length &lt; k) {
+		return count;
+	}
+	for (let i = 0; i + k - 1 &lt; arr.length; i++) {
+		const j = i + k - 1; // 左下标 i，右下标 i+k-1
+		const left = i === 0 ? arr[i] + 1 : arr[i] - arr[i - 1];
+		const right = j === arr.length - 1 ? nums.length - arr[j] : arr[j + 1] - arr[j];
+		count += left * right;
+	}
+	return count;
 };
 </code></pre>
-<figure data-type="image" tabindex="2"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gddikgsevej30ey02dq2v.jpg" alt="" loading="lazy"></figure>
-<h2 id="题解-2">题解 2</h2>
-<h2 id="参考">参考</h2>
-<ul>
-<li><a href="https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">维基百科-排序算法</a></li>
-</ul>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge1sl1096vj30j604vwei.jpg" alt="" loading="lazy"></figure>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E9%A2%98%E8%A7%A3-1">题解 1</a></li>
-<li><a href="#%E9%A2%98%E8%A7%A3-2">题解 2</a></li>
-<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+<li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
+<li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
+<li><a href="#%E9%A2%98%E8%A7%A3">题解</a></li>
 </ul>
 </li>
 </ul>
@@ -137,9 +163,9 @@ var sortArray = function(nums) {
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://JoelynZhou.github.io/post/mian-shi-ti-62-yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi/">
+            <a href="https://JoelynZhou.github.io/post/200-dao-yu-shu-liang/">
               <h3 class="post-title">
-                面试题62. 圆圈中最后剩下的数字
+                200. 岛屿数量
               </h3>
             </a>
           </div>
