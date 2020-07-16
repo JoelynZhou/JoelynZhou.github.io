@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-04-21T15:15:30.576Z</updated>
+    <updated>2020-07-16T12:19:48.760Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,171 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[浏览器新开 tab 遇到的问题记录]]></title>
+        <id>https://JoelynZhou.github.io/post/liu-lan-qi-xin-kai-tab-yu-dao-de-wen-ti-ji-lu/</id>
+        <link href="https://JoelynZhou.github.io/post/liu-lan-qi-xin-kai-tab-yu-dao-de-wen-ti-ji-lu/">
+        </link>
+        <updated>2020-07-16T12:19:08.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="页面跳转的两种方法">页面跳转的两种方法</h2>
+<h3 id="onclick-跳转">Onclick 跳转</h3>
+<pre><code class="language-javascript">window.location.href=&quot;URL&quot;;//覆盖当前页
+</code></pre>
+<pre><code class="language-javascript">window.open(&quot;URL&quot;,&quot;_blank&quot;);//新窗口打开
+window.open(&quot;URL&quot;,&quot;_self&quot;);//覆盖当前页
+</code></pre>
+<p>若一直通过新窗口打开，会打开很多相同的页面，根据当前页面是否打开决定是新开标签页还是跳转：</p>
+<pre><code class="language-javascript">window.open(&quot;URL&quot;,&quot;PageTitle&quot;);
+</code></pre>
+<p>上述代码存在问题：</p>
+<ul>
+<li><strong>Firefox 下存在兼容性问题，对已打开的页面不能成功跳转！！！</strong></li>
+</ul>
+<h4 id="解决方案">解决方案：</h4>
+<pre><code class="language-javascript">const winRef=window.open(&quot;URL&quot;,&quot;PageTitle&quot;);
+winRef.focus(); // 兼容 Firefox 无法跳转问题
+</code></pre>
+<h3 id="a-标签跳转">a 标签跳转</h3>
+<pre><code class="language-html">&lt;!--新窗口打开--&gt;
+&lt;a href=&quot;URL&quot; target=&quot;_blank&quot;&gt;&lt;/a&gt;
+</code></pre>
+<pre><code class="language-html">&lt;!--覆盖当前页--&gt;
+&lt;a href=&quot;URL&quot; target=&quot;_self&quot;&gt;&lt;/a&gt;
+</code></pre>
+<h4 id="a-标签下实现页面不重复的打开">a 标签下实现页面不重复的打开：</h4>
+<pre><code class="language-html">&lt;!--覆盖当前页--&gt;
+&lt;a href=&quot;URL&quot; target=&quot;PageTitle&quot;&gt;&lt;/a&gt;
+</code></pre>
+<p>上述方案无需考虑兼容性。</p>
+<p><em><strong>注意：PageTitle 为当前页面的 title，URL为当前页面的链接。</strong></em></p>
+<h3 id="demo">DEMO</h3>
+<h4 id="目录结构">目录结构：</h4>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggt2uctn0yj309o05kglo.jpg" alt="image-20200716201741837" loading="lazy"></figure>
+<h4 id="ahtml">a.html</h4>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Page1&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;a href=&quot;b.html&quot; target=&quot;Page2&quot;&gt;Page a&lt;/a&gt;
+    &lt;button onclick={openWin()}&gt;openWindow&lt;/button&gt;
+    &lt;script&gt;
+        function openWin(){
+            const ref=window.open(&quot;b.html&quot;,&quot;Page2&quot;);
+            ref.focus();
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h4 id="bhtml">b.html</h4>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Page2&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;a href=&quot;a.html&quot; target=&quot;Page1&quot;&gt;Page b&lt;/a&gt;
+    &lt;button onclick={openWin()}&gt;openWindow&lt;/button&gt;
+    &lt;script&gt;
+        function openWin(){
+            const ref=window.open(&quot;a.html&quot;,&quot;Page1&quot;);
+            ref.focus();
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[面试题51. 数组中的逆序对]]></title>
+        <id>https://JoelynZhou.github.io/post/mian-shi-ti-51-shu-zu-zhong-de-ni-xu-dui/</id>
+        <link href="https://JoelynZhou.github.io/post/mian-shi-ti-51-shu-zu-zhong-de-ni-xu-dui/">
+        </link>
+        <updated>2020-04-24T02:49:24.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。</p>
+<ul>
+<li>0 &lt;= 数组长度 &lt;= 50000</li>
+</ul>
+<h2 id="示例">示例</h2>
+<pre><code>输入: [7,5,6,4]
+输出: 5
+</code></pre>
+<h2 id="分析">分析</h2>
+<ul>
+<li>逆序对反映了一个数组的有序程度。</li>
+</ul>
+<p>思路 1：暴力解法</p>
+<ul>
+<li>遍历求出每个数字后面比他小的数字个数和</li>
+<li>时间复杂度 O(n^2)</li>
+<li>空间复杂度 O(1)</li>
+<li>结果：计算结果超时</li>
+</ul>
+<p>思路 2：归并排序</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[199. 二叉树的右视图]]></title>
+        <id>https://JoelynZhou.github.io/post/199-er-cha-shu-de-you-shi-tu/</id>
+        <link href="https://JoelynZhou.github.io/post/199-er-cha-shu-de-you-shi-tu/">
+        </link>
+        <updated>2020-04-23T02:17:51.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
+<p>给定一棵二叉树，想象自己站在它的右侧，按照从顶部到底部的顺序，返回从右侧所能看到的节点值。</p>
+<h2 id="示例">示例</h2>
+<pre><code>输入: [1,2,3,null,5,null,4]
+输出: [1, 3, 4]
+解释:
+
+   1            &lt;---
+ /   \
+2     3         &lt;---
+ \     \
+  5     4       &lt;---
+</code></pre>
+<h2 id="分析">分析</h2>
+<p>本题可以看成是求二叉树每层的最后一个数据组成的数组。</p>
+<h2 id="题解">题解</h2>
+<pre><code class="language-javascript">/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+var rightSideView = function(root) {
+	if (!root) return [];
+	let arr = []; // 暂存每层数据
+	let res = []; // 存储每层最后一个数据
+	arr.push(root);
+	while (arr.length &gt; 0) {
+		res.push(arr[arr.length - 1].val); //将每层最后一个数据存入数组
+		let len = arr.length;
+		while (len &gt; 0) {
+			let now = arr.shift();
+			if (now.left != null) arr.push(now.left);
+			if (now.right != null) arr.push(now.right);
+			len--;
+		}
+	}
+	return res;
+};
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge3hgpt46gj30s6078aa8.jpg" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[1248. 统计「优美子数组」]]></title>
         <id>https://JoelynZhou.github.io/post/1248-tong-ji-you-mei-zi-shu-zu/</id>
@@ -376,205 +541,6 @@ var merge = function(intervals) {
 <figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdvv53k20dj30ez03ot8o.jpg" alt="" loading="lazy"></figure>
 <h2 id="引申">引申</h2>
 <p>类似的问题<a href="https://leetcode-cn.com/problems/insert-interval/submissions/">57. 插入区间</a>也可以用上述思路解决。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[542. 01 矩阵]]></title>
-        <id>https://JoelynZhou.github.io/post/542-01-ju-zhen/</id>
-        <link href="https://JoelynZhou.github.io/post/542-01-ju-zhen/">
-        </link>
-        <updated>2020-04-15T04:05:15.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
-<p>给定一个由 0 和 1 组成的矩阵，找出每个元素到最近的 0 的距离。</p>
-<p>两个相邻元素间的距离为 1 。</p>
-<ol>
-<li>给定矩阵的元素个数不超过 10000。</li>
-<li>给定矩阵中至少有一个元素是 0。</li>
-<li>矩阵中的元素只在四个方向上相邻: 上、下、左、右。</li>
-</ol>
-<h2 id="示例">示例</h2>
-<pre><code>输入
-0 0 0
-0 1 0
-1 1 1
-</code></pre>
-<pre><code>输出
-0 0 0
-0 1 0
-1 2 1
-</code></pre>
-<h2 id="题解">题解</h2>
-<pre><code class="language-javascript">/**
- * @param {number[][]} matrix
- * @return {number[][]}
- */
-var updateMatrix = function(matrix) {
-	const m = matrix.length;
-	const n = matrix[0].length;
-	let count = 0; //当前层级
-	let queue = []; //存放当前层级下的数据
-	let identity = new Array(m).fill(false).map(() =&gt; new Array(n).fill(false)); // 用于存放标记过的数据
-	for (let i = 0; i &lt; m; i++) {
-		for (let j = 0; j &lt; n; j++) {
-			if (matrix[i][j] === 0) {
-				queue.push([ i, j ]);
-				identity[i][j] = true;
-			}
-		}
-	}
-	const direction = [ [ 1, 0 ], [ -1, 0 ], [ 0, 1 ], [ 0, -1 ] ]; // 四个方向
-	while (queue.length &gt; 0) {
-		count++;
-		let temp = [];
-		for (let i = 0; i &lt; queue.length; i++) {
-			for (let j = 0; j &lt; direction.length; j++) {
-				const x = queue[i][0] + direction[j][0];
-				const y = queue[i][1] + direction[j][1];
-				if (x &gt;= 0 &amp;&amp; y &gt;= 0 &amp;&amp; x &lt; m &amp;&amp; y &lt; n &amp;&amp; identity[x][y] === false) {
-					identity[x][y] = true;
-					temp.push([ x, y ]);
-					matrix[x][y] = count;
-				}
-			}
-		}
-		queue = temp; //当前扩散的数组作为下一次遍历的数据源
-	}
-	return matrix;
-};
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gdublyxu1jj30gl040dft.jpg" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[面试题 01.07. 旋转矩阵]]></title>
-        <id>https://JoelynZhou.github.io/post/mian-shi-ti-0107-xuan-zhuan-ju-zhen/</id>
-        <link href="https://JoelynZhou.github.io/post/mian-shi-ti-0107-xuan-zhuan-ju-zhen/">
-        </link>
-        <updated>2020-04-07T02:49:18.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
-<p>给你一幅由 N × N 矩阵表示的图像，其中每个像素的大小为 4 字节。请你设计一种算法，将图像旋转 90 度。</p>
-<p>不占用额外内存空间能否做到？</p>
-<h2 id="示例">示例</h2>
-<pre><code class="language-javascript">给定 matrix =
-[
-  [ 5, 1, 9,11],
-  [ 2, 4, 8,10],
-  [13, 3, 6, 7],
-  [15,14,12,16]
-], 
-
-原地旋转输入矩阵，使其变为:
-[
-  [15,13, 2, 5],
-  [14, 3, 4, 1],
-  [12, 6, 8, 9],
-  [16, 7,10,11]
-]
-</code></pre>
-<h2 id="分析">分析</h2>
-<ul>
-<li>对第 i 行的元素旋转 90 度，变为第 i.length - i 列<br>
-步骤：</li>
-</ul>
-<ol>
-<li>矩阵转置，第 i 行变为第 i 列</li>
-<li>行翻转，第 i 列 变为第 i.length - i 列</li>
-</ol>
-<h2 id="题解">题解</h2>
-<pre><code class="language-javascript">/**
- * @param {number[][]} matrix
- * @return {void} Do not return anything, modify matrix in-place instead.
- * 分析：
- * 矩阵的旋转可以通过 矩阵转置+翻转 实现
- */
-var rotate = function(matrix) {
-    for(let i=0;i&lt;matrix.length;i++){
-        for(let j=i;j&lt;matrix.length;j++){
-            [matrix[i][j],matrix[j][i]]=[matrix[j][i],matrix[i][j]];
-        }
-    }
-    matrix.map(row=&gt; row.reverse())
-};
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdl0givggkj30uy07ot8y.jpg" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[8. 字符串转换整数 (atoi)]]></title>
-        <id>https://JoelynZhou.github.io/post/8-zi-fu-chuan-zhuan-huan-zheng-shu-atoi/</id>
-        <link href="https://JoelynZhou.github.io/post/8-zi-fu-chuan-zhuan-huan-zheng-shu-atoi/">
-        </link>
-        <updated>2020-04-03T13:46:31.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
-<p>请你来实现一个 atoi 函数，使其能将字符串转换成整数。</p>
-<p>首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。接下来的转化规则如下：</p>
-<p>如果第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字字符组合起来，形成一个有符号整数。<br>
-假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成一个整数。<br>
-该字符串在有效的整数部分之后也可能会存在多余的字符，那么这些字符可以被忽略，它们对函数不应该造成影响。<br>
-注意：假如该字符串中的第一个非空格字符不是一个有效整数字符、字符串为空或字符串仅包含空白字符时，则你的函数不需要进行转换，即无法进行有效转换。</p>
-<p>在任何情况下，若函数不能进行有效的转换时，请返回 0 。</p>
-<p>提示：</p>
-<p>本题中的空白字符只包括空格字符 ' ' 。<br>
-假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−231,  231 − 1]。如果数值超过这个范围，请返回  INT_MAX (231 − 1) 或 INT_MIN (−231) 。</p>
-<h2 id="分析">分析</h2>
-<ul>
-<li>规则概括：
-<ul>
-<li>去除开头空格</li>
-<li>返回有符号整数</li>
-<li>无视整数后面的字符</li>
-<li>边界校验</li>
-<li>其他情况返回 0</li>
-</ul>
-</li>
-</ul>
-<p>思路 1：parseInt()</p>
-<blockquote>
-<p>MDN:<br>
-如果parseInt的字符不是指定基数中的数字，则忽略该字符和所有后续字符，并返回解析到该点的整数值。parseInt将数字<strong>截断为整数值</strong>。允许使用<strong>前导空格</strong>和尾随空格。</p>
-</blockquote>
-<p>思路 2： 正则匹配+边界校验</p>
-<p>思路 3：有穷自动机（DFA）</p>
-<h2 id="题解1">题解1</h2>
-<pre><code class="language-javascript">/**
- * @param {string} str
- * @return {number}
- */
-var myAtoi = function(str) {
-	const num = parseInt(str, 10);
-	if (isNaN(num)) {
-		return 0;
-	} else if (num &lt; Math.pow(-2, 31) || num &gt;= Math.pow(2, 31)) {
-		return num &lt; Math.pow(-2, 31) ? Math.pow(-2, 31) : Math.pow(2, 31) - 1;
-	} else {
-		return num;
-	}
-};
-</code></pre>
-<h2 id="题解-2">题解 2</h2>
-<pre><code class="language-javascript">/**
- * @param {string} str
- * @return {number}
- */
-var myAtoi = function(str) {
-	let res = str.trim().match(/^(\-|\+)?\d+/g);
-	if (isNaN(res)) {
-		return 0;
-	} else if (res &lt; Math.pow(-2, 31)) {
-		return Math.pow(-2, 31);
-	} else if (res &gt;= Math.pow(2, 31)) {
-		return Math.pow(2, 31) - 1;
-	} else {
-		return res;
-	}
-};
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdgwyzemojj30f603jmx3.jpg" alt="" loading="lazy"></figure>
-<h2 id="参考">参考</h2>
-<ul>
-<li><a href="https://zhuanlan.zhihu.com/p/30009083">有穷自动机DFA&amp;NFA (学习笔记)</a></li>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/parseInt">MDN-parseInt</a></li>
-</ul>
 ]]></content>
     </entry>
 </feed>

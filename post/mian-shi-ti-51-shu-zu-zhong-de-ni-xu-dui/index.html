@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>20. 有效的括号 | JoelynZhou</title>
+<title>面试题51. 数组中的逆序对 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1594901984066">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -82,60 +82,41 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              20. 有效的括号
+              面试题51. 数组中的逆序对
             </h2>
             <div class="post-info">
               <span>
-                2020-04-01
+                2020-04-24
               </span>
               <span>
                 1 min read
               </span>
-              
-                <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
-                  # LeetCode
-                </a>
               
             </div>
             
             <div class="post-content-wrapper">
               <div class="post-content">
                 <h2 id="题目">题目</h2>
-<p>给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。</p>
-<p>有效字符串需满足：</p>
-<p>左括号必须用相同类型的右括号闭合。<br>
-左括号必须以正确的顺序闭合。<br>
-注意空字符串可被认为是有效字符串。</p>
+<p>在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。</p>
+<ul>
+<li>0 &lt;= 数组长度 &lt;= 50000</li>
+</ul>
 <h2 id="示例">示例</h2>
-<pre><code>输入: &quot;()&quot;
-输出: true
-</code></pre>
-<pre><code>输入: &quot;([)]&quot;
-输出: false
+<pre><code>输入: [7,5,6,4]
+输出: 5
 </code></pre>
 <h2 id="分析">分析</h2>
-<h2 id="题解">题解</h2>
-<pre><code class="language-javascript">/**
- * @param {string} s
- * @return {boolean}
- */
-var isValid = function(s) {
-    let stack = [];
-    for (let i = 0; i &lt; s.length; i++) {
-        if (s[i] === '(' || s[i] === '{' || s[i] === '[') {
-            stack.push(s[i]);
-        } else if (
-            (s[i] === ')' &amp;&amp; stack.pop() !== '(') ||
-			(s[i] === '}' &amp;&amp; stack.pop() !== '{') ||
-			(s[i] === ']' &amp;&amp; stack.pop() !== '[')
-        ) {
-            return false;
-        }
-    }
-    return stack.length===0;
-};
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gde9zldzldj30uq072jrm.jpg" alt="" loading="lazy"></figure>
+<ul>
+<li>逆序对反映了一个数组的有序程度。</li>
+</ul>
+<p>思路 1：暴力解法</p>
+<ul>
+<li>遍历求出每个数字后面比他小的数字个数和</li>
+<li>时间复杂度 O(n^2)</li>
+<li>空间复杂度 O(1)</li>
+<li>结果：计算结果超时</li>
+</ul>
+<p>思路 2：归并排序</p>
 
               </div>
               <div class="toc-container">
@@ -145,7 +126,6 @@ var isValid = function(s) {
 <li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
 <li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
 <li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
-<li><a href="#%E9%A2%98%E8%A7%A3">题解</a></li>
 </ul>
 </li>
 </ul>
@@ -158,9 +138,9 @@ var isValid = function(s) {
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://JoelynZhou.github.io/post/1111-you-xiao-gua-hao-de-qian-tao-shen-du/">
+            <a href="https://JoelynZhou.github.io/post/199-er-cha-shu-de-you-shi-tu/">
               <h3 class="post-title">
-                1111. 有效括号的嵌套深度
+                199. 二叉树的右视图
               </h3>
             </a>
           </div>

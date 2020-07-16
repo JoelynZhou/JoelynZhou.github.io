@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>20. 有效的括号 | JoelynZhou</title>
+<title>JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1594901984066">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -79,121 +79,68 @@
   </div>
 </div>
 
-        <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              20. 有效的括号
-            </h2>
-            <div class="post-info">
-              <span>
-                2020-04-01
-              </span>
-              <span>
-                1 min read
-              </span>
-              
-                <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
-                  # LeetCode
-                </a>
-              
-            </div>
-            
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <h2 id="题目">题目</h2>
-<p>给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。</p>
-<p>有效字符串需满足：</p>
-<p>左括号必须用相同类型的右括号闭合。<br>
-左括号必须以正确的顺序闭合。<br>
-注意空字符串可被认为是有效字符串。</p>
-<h2 id="示例">示例</h2>
-<pre><code>输入: &quot;()&quot;
-输出: true
-</code></pre>
-<pre><code>输入: &quot;([)]&quot;
-输出: false
-</code></pre>
-<h2 id="分析">分析</h2>
-<h2 id="题解">题解</h2>
-<pre><code class="language-javascript">/**
- * @param {string} s
- * @return {boolean}
- */
-var isValid = function(s) {
-    let stack = [];
-    for (let i = 0; i &lt; s.length; i++) {
-        if (s[i] === '(' || s[i] === '{' || s[i] === '[') {
-            stack.push(s[i]);
-        } else if (
-            (s[i] === ')' &amp;&amp; stack.pop() !== '(') ||
-			(s[i] === '}' &amp;&amp; stack.pop() !== '{') ||
-			(s[i] === ']' &amp;&amp; stack.pop() !== '[')
-        ) {
-            return false;
-        }
-    }
-    return stack.length===0;
-};
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gde9zldzldj30uq072jrm.jpg" alt="" loading="lazy"></figure>
-
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
-<li><a href="#%E7%A4%BA%E4%BE%8B">示例</a></li>
-<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
-<li><a href="#%E9%A2%98%E8%A7%A3">题解</a></li>
-</ul>
-</li>
-</ul>
-
-              </div>
-            </div>
-          </article>
-        </div>
-
+    
+        <div class="post-container">
+  
+    <article class="post">
+      <a href="https://JoelynZhou.github.io/post/luo-ji-tui-li-ti-cai-ming-ci/">
+        <h2 class="post-title">逻辑推理题-猜名次</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-11-14
+        </span>
+        <span>
+          4 min read
+        </span>
         
-          <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://JoelynZhou.github.io/post/1111-you-xiao-gua-hao-de-qian-tao-shen-du/">
-              <h3 class="post-title">
-                1111. 有效括号的嵌套深度
-              </h3>
-            </a>
-          </div>
+          <a href="https://JoelynZhou.github.io/tag/Edh7j7yJ1F/" class="post-tag">
+            # 逻辑推理
+          </a>
         
-
+      </div>
+      
+        <a href="https://JoelynZhou.github.io/post/luo-ji-tui-li-ti-cai-ming-ci/" class="post-feature-image" style="background-image: url('https://JoelynZhou.github.io/post-images/luo-ji-tui-li-ti-cai-ming-ci.jpg')">
+        </a>
+      
+      <div class="post-abstract">
         
-          
-            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<div id="gitalk-container"></div>
-
-<script>
-
-  var gitalk = new Gitalk({
-    clientID: '150a01a7dda5bb8caf70',
-    clientSecret: 'a9c9b6ab8da566f027d10091b755c27e983e493f',
-    repo: 'JoelynZhou.github.io',
-    owner: 'JoelynZhou',
-    admin: ['JoelynZhou'],
-    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-
-  gitalk.render('gitalk-container')
-
-</script>
-
-          
-
-          
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://JoelynZhou.github.io/post/2020-nian-du-ji-dahua-lianbiao/">
+        <h2 class="post-title">2020 年度计（da）划（lian）表</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2019-11-01
+        </span>
+        <span>
+          2 min read
+        </span>
         
+      </div>
+      
+        <a href="https://JoelynZhou.github.io/post/2020-nian-du-ji-dahua-lianbiao/" class="post-feature-image" style="background-image: url('https://JoelynZhou.github.io/post-images/2020-nian-du-ji-dahua-lianbiao.JPG')">
+        </a>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+</div>
 
+    
+        <div class="pagination-container">
+  
+    <a href="https://JoelynZhou.github.io/page/3/" class="prev-page">上一页</a>
+  
+  
+</div>
+
+    
         <div class="site-footer">
   Powered by <a href="https://github.com/JoelynZhou/JoelynZhou.github.io" target="_blank">Joelyn Zhou</a> | 
   <a class="rss" href="https://JoelynZhou.github.io/atom.xml" target="_blank">RSS</a>
