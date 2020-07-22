@@ -1,0 +1,300 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>【Git】git stash 相关记录 | JoelynZhou</title>
+<meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
+<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1595411811875">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://JoelynZhou.github.io/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-162422542-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-162422542-1');
+</script>
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://JoelynZhou.github.io">
+  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1595411811875" alt="">
+  </a>
+  <h1 class="site-title">
+    JoelynZhou
+  </h1>
+  <p class="site-description">
+    多读书 / 多看报 / 少吃零食 / 多睡觉
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              【Git】git stash 相关记录
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-07-22
+              </span>
+              <span>
+                3 min read
+              </span>
+              
+                <a href="https://JoelynZhou.github.io/tag/bn6zMu6ZT/" class="post-tag">
+                  # Git
+                </a>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h3 id="alias-相关配置">alias 相关配置</h3>
+<pre><code class="language-cmd">➜  gridea git:(master) ag gst
+gst='git status'
+gsta='git stash push'
+gstaa='git stash apply'
+gstall='git stash --all'
+gstc='git stash clear'
+gstd='git stash drop'
+gstl='git stash list'
+gstp='git stash pop'
+gsts='git stash save'
+gstss='git stash show --text'
+gstu='git stash --include-untracked'
+</code></pre>
+<p>以上是我的 git stash 相关的 alias 配置，包括 zsh 自带的配置以及自己在.bashrc 里面的自定义配置，如何配置这里就不展开讲了。</p>
+<p>下面介绍一下我们常用的几条 stash 命令：</p>
+<p>(这里就直接用设置的快捷命令了)</p>
+<ul>
+<li>
+<p><code>gstc</code> 清空栈</p>
+</li>
+<li>
+<p><code>gsta</code> 将本地修改的代码推到栈内</p>
+<pre><code class="language-cmd">➜  gridea git:(master) ✗ ga .
+➜  gridea git:(master) ✗ gsta
+Saved working directory and index state WIP on master: abe8de5 docs: update changelog
+</code></pre>
+</li>
+<li>
+<p><code>gstl</code> 查看栈</p>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzu1rr18hj30rs03m3z7.jpg" alt="image-20200722163219458" loading="lazy"></figure>
+</li>
+<li>
+<p><code>gsts</code> 在 <code>gsta</code> 的基础上可以自定义备注</p>
+<pre><code class="language-cmd">➜  gridea git:(master) ✗ ga .
+➜  gridea git:(master) ✗ gsts &quot;save 2222&quot;
+Saved working directory and index state On master: save 2222
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzucbk7o9j30rw06a75d.jpg" alt="image-20200722164230962" loading="lazy"></figure>
+<ul>
+<li>相比第一次提交，加了备注的提交更清晰</li>
+<li>同时根据序列号也可以看出，stash 符合 <em><strong>先进先出</strong></em> 的规则</li>
+</ul>
+</li>
+<li>
+<p>查看某一次提交</p>
+<figure data-type="image" tabindex="3"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzuwaflrnj30dq043wer.jpg" alt="image-20200722170142682" loading="lazy"></figure>
+<p>如上图，目前栈内有三次提交记录。</p>
+<p><code>gstss</code> 默认查看最近的一次提交，相当于<code>gstss stash@{0}</code></p>
+<p>如果想针对查看特定的提交，如 &quot;save 2222&quot; 的提交记录，需要在后面加上特定提交的序号<code>gstss stash@{1}</code> ，下面讲到的其他操作也是同理。</p>
+<figure data-type="image" tabindex="4"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzvhteg0nj30dx06fdga.jpg" alt="image-20200722172224034" loading="lazy"></figure>
+</li>
+<li>
+<p>找到某次的提交记录后，需要将提交记录拷贝到本地，有两种方法：</p>
+<ul>
+<li><code>gstaa</code> 从栈中拷贝出提交到本地（栈中的记录仍保留）</li>
+</ul>
+<figure data-type="image" tabindex="5"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzvpfmxrpj30b604vt90.jpg" alt="image-20200722172942558" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzvq0q6otj30dn04hdg4.jpg" alt="image-20200722173017326" loading="lazy"></figure>
+<ul>
+<li>
+<p><code>gstp</code> 从栈中推出某次提交（推出后，栈中不再留有这次提交记录）</p>
+<figure data-type="image" tabindex="7"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzvrxzfwhj30h905gwf5.jpg" alt="image-20200722173208224" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzvscl25rj30dj033t8w.jpg" alt="image-20200722173231801" loading="lazy"></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>由 <code>gstp</code> 操作也可以看出，<code>gstd</code> 其实就是删除栈内特定的提交记录，如删除 <code>stash@{1}</code> 的记录</p>
+<pre><code class="language-cmd">➜  gridea git:(master) ✗ gstd stash@{1}
+Dropped stash@{1} (95485801bdcb11f2e81c916529b447ff4f1da02f)
+</code></pre>
+<figure data-type="image" tabindex="9"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzw3yv09uj30ag02y74c.jpg" alt="image-20200722174340839" loading="lazy"></figure>
+</li>
+</ul>
+<h3 id="总结">总结</h3>
+<pre><code class="language-javascript">gst='git status'
+gsta='git stash push'	//保存（不加说明）
+gsts='git stash save'	//保存（加说明）
+gstaa='git stash apply'	//复制某次提交到本地
+gstp='git stash pop'	//复制某次提交到本地，并删除栈内记录
+gstall='git stash --all'
+gstc='git stash clear'	//清空栈
+gstd='git stash drop'	//删除栈内某次提交记录
+gstl='git stash list'	//查看栈内提交列表
+gstss='git stash show --text'	//查看栈内某次提交记录
+gstu='git stash --include-untracked'
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#alias-%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE">alias 相关配置</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://JoelynZhou.github.io/post/liu-lan-qi-xin-kai-tab-yu-dao-de-wen-ti-ji-lu/">
+              <h3 class="post-title">
+                浏览器新开 tab 遇到的问题记录
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '150a01a7dda5bb8caf70',
+    clientSecret: 'a9c9b6ab8da566f027d10091b755c27e983e493f',
+    repo: 'JoelynZhou.github.io',
+    owner: 'JoelynZhou',
+    admin: ['JoelynZhou'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/JoelynZhou/JoelynZhou.github.io" target="_blank">Joelyn Zhou</a> | 
+  <a class="rss" href="https://JoelynZhou.github.io/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>

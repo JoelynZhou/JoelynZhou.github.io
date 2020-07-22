@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-07-16T12:19:48.760Z</updated>
+    <updated>2020-07-22T09:56:57.464Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -10,6 +10,102 @@
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, JoelynZhou</rights>
+    <entry>
+        <title type="html"><![CDATA[【Git】git stash 相关记录]]></title>
+        <id>https://JoelynZhou.github.io/post/git-git-stash-xiang-guan-ji-lu/</id>
+        <link href="https://JoelynZhou.github.io/post/git-git-stash-xiang-guan-ji-lu/">
+        </link>
+        <updated>2020-07-22T09:54:29.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="alias-相关配置">alias 相关配置</h3>
+<pre><code class="language-cmd">➜  gridea git:(master) ag gst
+gst='git status'
+gsta='git stash push'
+gstaa='git stash apply'
+gstall='git stash --all'
+gstc='git stash clear'
+gstd='git stash drop'
+gstl='git stash list'
+gstp='git stash pop'
+gsts='git stash save'
+gstss='git stash show --text'
+gstu='git stash --include-untracked'
+</code></pre>
+<p>以上是我的 git stash 相关的 alias 配置，包括 zsh 自带的配置以及自己在.bashrc 里面的自定义配置，如何配置这里就不展开讲了。</p>
+<p>下面介绍一下我们常用的几条 stash 命令：</p>
+<p>(这里就直接用设置的快捷命令了)</p>
+<ul>
+<li>
+<p><code>gstc</code> 清空栈</p>
+</li>
+<li>
+<p><code>gsta</code> 将本地修改的代码推到栈内</p>
+<pre><code class="language-cmd">➜  gridea git:(master) ✗ ga .
+➜  gridea git:(master) ✗ gsta
+Saved working directory and index state WIP on master: abe8de5 docs: update changelog
+</code></pre>
+</li>
+<li>
+<p><code>gstl</code> 查看栈</p>
+<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzu1rr18hj30rs03m3z7.jpg" alt="image-20200722163219458" loading="lazy"></figure>
+</li>
+<li>
+<p><code>gsts</code> 在 <code>gsta</code> 的基础上可以自定义备注</p>
+<pre><code class="language-cmd">➜  gridea git:(master) ✗ ga .
+➜  gridea git:(master) ✗ gsts &quot;save 2222&quot;
+Saved working directory and index state On master: save 2222
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzucbk7o9j30rw06a75d.jpg" alt="image-20200722164230962" loading="lazy"></figure>
+<ul>
+<li>相比第一次提交，加了备注的提交更清晰</li>
+<li>同时根据序列号也可以看出，stash 符合 <em><strong>先进先出</strong></em> 的规则</li>
+</ul>
+</li>
+<li>
+<p>查看某一次提交</p>
+<figure data-type="image" tabindex="3"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzuwaflrnj30dq043wer.jpg" alt="image-20200722170142682" loading="lazy"></figure>
+<p>如上图，目前栈内有三次提交记录。</p>
+<p><code>gstss</code> 默认查看最近的一次提交，相当于<code>gstss stash@{0}</code></p>
+<p>如果想针对查看特定的提交，如 &quot;save 2222&quot; 的提交记录，需要在后面加上特定提交的序号<code>gstss stash@{1}</code> ，下面讲到的其他操作也是同理。</p>
+<figure data-type="image" tabindex="4"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzvhteg0nj30dx06fdga.jpg" alt="image-20200722172224034" loading="lazy"></figure>
+</li>
+<li>
+<p>找到某次的提交记录后，需要将提交记录拷贝到本地，有两种方法：</p>
+<ul>
+<li><code>gstaa</code> 从栈中拷贝出提交到本地（栈中的记录仍保留）</li>
+</ul>
+<figure data-type="image" tabindex="5"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzvpfmxrpj30b604vt90.jpg" alt="image-20200722172942558" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzvq0q6otj30dn04hdg4.jpg" alt="image-20200722173017326" loading="lazy"></figure>
+<ul>
+<li>
+<p><code>gstp</code> 从栈中推出某次提交（推出后，栈中不再留有这次提交记录）</p>
+<figure data-type="image" tabindex="7"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzvrxzfwhj30h905gwf5.jpg" alt="image-20200722173208224" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzvscl25rj30dj033t8w.jpg" alt="image-20200722173231801" loading="lazy"></figure>
+</li>
+</ul>
+</li>
+<li>
+<p>由 <code>gstp</code> 操作也可以看出，<code>gstd</code> 其实就是删除栈内特定的提交记录，如删除 <code>stash@{1}</code> 的记录</p>
+<pre><code class="language-cmd">➜  gridea git:(master) ✗ gstd stash@{1}
+Dropped stash@{1} (95485801bdcb11f2e81c916529b447ff4f1da02f)
+</code></pre>
+<figure data-type="image" tabindex="9"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzw3yv09uj30ag02y74c.jpg" alt="image-20200722174340839" loading="lazy"></figure>
+</li>
+</ul>
+<h3 id="总结">总结</h3>
+<pre><code class="language-javascript">gst='git status'
+gsta='git stash push'	//保存（不加说明）
+gsts='git stash save'	//保存（加说明）
+gstaa='git stash apply'	//复制某次提交到本地
+gstp='git stash pop'	//复制某次提交到本地，并删除栈内记录
+gstall='git stash --all'
+gstc='git stash clear'	//清空栈
+gstd='git stash drop'	//删除栈内某次提交记录
+gstl='git stash list'	//查看栈内提交列表
+gstss='git stash show --text'	//查看栈内某次提交记录
+gstu='git stash --include-untracked'
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[浏览器新开 tab 遇到的问题记录]]></title>
         <id>https://JoelynZhou.github.io/post/liu-lan-qi-xin-kai-tab-yu-dao-de-wen-ti-ji-lu/</id>
@@ -488,59 +584,6 @@ var merge = function(intervals) {
     return res;
 };
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[56. 合并区间]]></title>
-        <id>https://JoelynZhou.github.io/post/56-he-bing-qu-jian/</id>
-        <link href="https://JoelynZhou.github.io/post/56-he-bing-qu-jian/">
-        </link>
-        <updated>2020-04-16T12:06:38.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="题目">题目</h2>
-<p>给出一个区间的集合，请合并所有重叠的区间。</p>
-<h2 id="示例">示例</h2>
-<pre><code>输入: [[1,3],[2,6],[8,10],[15,18]]
-输出: [[1,6],[8,10],[15,18]]
-解释: 区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6].
-
-输入: [[1,4],[4,5]]
-输出: [[1,5]]
-解释: 区间 [1,4] 和 [4,5] 可被视为重叠区间。
-</code></pre>
-<h2 id="分析">分析</h2>
-<ul>
-<li>先排序，再依次合并</li>
-</ul>
-<h2 id="题解">题解</h2>
-<pre><code class="language-javascript">/**
- * @param {number[][]} intervals
- * @return {number[][]}
- */
-var merge = function(intervals) {
-    // 区间集合长度小于 1时，不需要合并，返回自身
-    if(intervals.length&lt;=1){
-        return intervals;
-    }
-    // 对区间集合按照开始区间由小到大进行排序
-    intervals=intervals.sort((a,b)=&gt; a[0]-b[0]);
-    // 将最小的区间放入集合开头
-    let res=intervals.slice(0,1);
-    // 从第二个元素开始，遍历整个区间集合，依次与开始区间较小的那个区间（输出集合的最后一个区间）进行比较
-    for(let i=1;i&lt;intervals.length;i++){
-        // 如果待比较的两个区间有重合，则将两个区间合并（更新 输出集合的最后一个区间）
-        // 即：较大的开始区间 小于等于 较小区间的结束区间
-        if(intervals[i][0]&lt;=res[res.length-1][1]){
-            res[res.length-1][1]=Math.max(res[res.length-1][1],intervals[i][1]);
-        }else{
-            res.push(intervals[i]); // 待比较的两个区间没有交集，不做合并，直接存入输出集合末尾
-        }
-    }
-    return res;
-};
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdvv53k20dj30ez03ot8o.jpg" alt="" loading="lazy"></figure>
-<h2 id="引申">引申</h2>
-<p>类似的问题<a href="https://leetcode-cn.com/problems/insert-interval/submissions/">57. 插入区间</a>也可以用上述思路解决。</p>
 ]]></content>
     </entry>
 </feed>
