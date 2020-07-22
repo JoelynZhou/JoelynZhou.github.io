@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>【Git】git stash 相关记录 | JoelynZhou</title>
 <meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
-<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1595411811875">
+<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1595411930214">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://JoelynZhou.github.io/styles/main.css">
@@ -29,7 +29,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://JoelynZhou.github.io">
-  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1595411811875" alt="">
+  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1595411930214" alt="">
   </a>
   <h1 class="site-title">
     JoelynZhou
@@ -101,7 +101,7 @@
             <div class="post-content-wrapper">
               <div class="post-content">
                 <h3 id="alias-相关配置">alias 相关配置</h3>
-<pre><code class="language-cmd">➜  gridea git:(master) ag gst
+<pre><code class="language-javascript">➜  gridea git:(master) ag gst
 gst='git status'
 gsta='git stash push'
 gstaa='git stash apply'
@@ -123,7 +123,7 @@ gstu='git stash --include-untracked'
 </li>
 <li>
 <p><code>gsta</code> 将本地修改的代码推到栈内</p>
-<pre><code class="language-cmd">➜  gridea git:(master) ✗ ga .
+<pre><code class="language-javascript">➜  gridea git:(master) ✗ ga .
 ➜  gridea git:(master) ✗ gsta
 Saved working directory and index state WIP on master: abe8de5 docs: update changelog
 </code></pre>
@@ -134,7 +134,7 @@ Saved working directory and index state WIP on master: abe8de5 docs: update chan
 </li>
 <li>
 <p><code>gsts</code> 在 <code>gsta</code> 的基础上可以自定义备注</p>
-<pre><code class="language-cmd">➜  gridea git:(master) ✗ ga .
+<pre><code class="language-javascript">➜  gridea git:(master) ✗ ga .
 ➜  gridea git:(master) ✗ gsts &quot;save 2222&quot;
 Saved working directory and index state On master: save 2222
 </code></pre>
@@ -169,7 +169,7 @@ Saved working directory and index state On master: save 2222
 </li>
 <li>
 <p>由 <code>gstp</code> 操作也可以看出，<code>gstd</code> 其实就是删除栈内特定的提交记录，如删除 <code>stash@{1}</code> 的记录</p>
-<pre><code class="language-cmd">➜  gridea git:(master) ✗ gstd stash@{1}
+<pre><code class="language-javascript">➜  gridea git:(master) ✗ gstd stash@{1}
 Dropped stash@{1} (95485801bdcb11f2e81c916529b447ff4f1da02f)
 </code></pre>
 <figure data-type="image" tabindex="9"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzw3yv09uj30ag02y74c.jpg" alt="image-20200722174340839" loading="lazy"></figure>

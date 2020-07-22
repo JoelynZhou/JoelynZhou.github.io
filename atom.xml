@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-07-22T09:56:57.464Z</updated>
+    <updated>2020-07-22T09:58:52.806Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
@@ -17,7 +17,7 @@
         </link>
         <updated>2020-07-22T09:54:29.000Z</updated>
         <content type="html"><![CDATA[<h3 id="alias-相关配置">alias 相关配置</h3>
-<pre><code class="language-cmd">➜  gridea git:(master) ag gst
+<pre><code class="language-javascript">➜  gridea git:(master) ag gst
 gst='git status'
 gsta='git stash push'
 gstaa='git stash apply'
@@ -39,7 +39,7 @@ gstu='git stash --include-untracked'
 </li>
 <li>
 <p><code>gsta</code> 将本地修改的代码推到栈内</p>
-<pre><code class="language-cmd">➜  gridea git:(master) ✗ ga .
+<pre><code class="language-javascript">➜  gridea git:(master) ✗ ga .
 ➜  gridea git:(master) ✗ gsta
 Saved working directory and index state WIP on master: abe8de5 docs: update changelog
 </code></pre>
@@ -50,7 +50,7 @@ Saved working directory and index state WIP on master: abe8de5 docs: update chan
 </li>
 <li>
 <p><code>gsts</code> 在 <code>gsta</code> 的基础上可以自定义备注</p>
-<pre><code class="language-cmd">➜  gridea git:(master) ✗ ga .
+<pre><code class="language-javascript">➜  gridea git:(master) ✗ ga .
 ➜  gridea git:(master) ✗ gsts &quot;save 2222&quot;
 Saved working directory and index state On master: save 2222
 </code></pre>
@@ -85,7 +85,7 @@ Saved working directory and index state On master: save 2222
 </li>
 <li>
 <p>由 <code>gstp</code> 操作也可以看出，<code>gstd</code> 其实就是删除栈内特定的提交记录，如删除 <code>stash@{1}</code> 的记录</p>
-<pre><code class="language-cmd">➜  gridea git:(master) ✗ gstd stash@{1}
+<pre><code class="language-javascript">➜  gridea git:(master) ✗ gstd stash@{1}
 Dropped stash@{1} (95485801bdcb11f2e81c916529b447ff4f1da02f)
 </code></pre>
 <figure data-type="image" tabindex="9"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzw3yv09uj30ag02y74c.jpg" alt="image-20200722174340839" loading="lazy"></figure>
