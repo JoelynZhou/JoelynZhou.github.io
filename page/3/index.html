@@ -1,361 +1,505 @@
 <html>
-  <head>
+<head>
     <meta charset="utf-8" />
+<meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>JoelynZhou</title>
-<meta name="description" content="多读书 / 多看报 / 少吃零食 / 多睡觉" />
-<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1595411930214">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-<link rel="stylesheet" href="https://JoelynZhou.github.io/styles/main.css">
 
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+<title>JoelynZhou</title>
+
+<link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1615951550614">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://JoelynZhou.github.io/styles/main.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"> -->
+
+<style>
+    hr {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script> -->
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162422542-1"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'UA-162422542-1');
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'UA-162422542-1');
 </script>
 
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <div class="main-content">
+        <style>
+    /* 导航栏样式 */
+    .navbar {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+    }
 
-  </head>
-  <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://JoelynZhou.github.io">
-  <img class="avatar" src="https://JoelynZhou.github.io/images/avatar.png?v=1595411930214" alt="">
-  </a>
-  <h1 class="site-title">
-    JoelynZhou
-  </h1>
-  <p class="site-description">
-    多读书 / 多看报 / 少吃零食 / 多睡觉
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
+    .navbar-brand {
+        display: inline-block;
+        padding-top: 0.3125rem;
+        padding-bottom: 0.3125rem;
+        margin-right: 1rem;
+        font-size: 1.25rem;
+        line-height: inherit;
+        white-space: nowrap;
+    }
+
+    .navbar-brand:hover,
+    .navbar-brand:focus {
+        text-decoration: none;
+    }
+
+    .navbar-nav {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+
+    .navbar-collapse {
+        -ms-flex-preferred-size: 100%;
+        flex-basis: 100%;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+    .navbar-toggler {
+        padding: 0.25rem 0.75rem;
+        font-size: 1.25rem;
+        line-height: 1;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+    }
+
+    .navbar-toggler:hover,
+    .navbar-toggler:focus {
+        text-decoration: none;
+    }
+
+    @media (min-width: 992px) {
+        .navbar-expand-lg {
+            -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+            -ms-flex-pack: start;
+            justify-content: flex-start;
+        }
+
+        .navbar-expand-lg .navbar-nav {
+            -ms-flex-direction: row;
+            flex-direction: row;
+        }
+
+        .navbar-expand-lg .navbar-collapse {
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -ms-flex-preferred-size: auto;
+            flex-basis: auto;
+        }
+
+        .navbar-expand-lg .navbar-toggler {
+            display: none;
+        }
+    }
+
+    @media (max-width: 991px) {
+        #navbarSupportedContent {
+            display: none;
+        }
+    }
+</style>
+<nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            JoelynZhou
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+            <div class="nav-item">
+                
+                <a href="/" class="menu gt-a-link">
+                    首页
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/archives" class="menu gt-a-link">
+                    归档
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/tags" class="menu gt-a-link">
+                    标签
+                </a>
+                
+            </div>
+            
+            <div class="nav-item">
+                
+                <a href="/post/about" class="menu gt-a-link">
+                    关于
+                </a>
+                
+            </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615951550614"
+                action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+<script>
+    /* 移动端导航栏展开/收起切换 */
+    document.getElementById('changeNavbar').onclick = function () {
+        var element = document.getElementById('navbarSupportedContent');
+        if (element.style.display === 'none' || element.style.display === '') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    }
+</script>
+
+        <div class="post-list-container">
+    <div class="post-inner">
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://JoelynZhou.github.io/post/1162-di-tu-fen-xi/">
+                            <span class="post-title gt-c-content-color-first">1162. 地图分析</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2020-03-29 ·
+                        </time>
+                        
+                            <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
+                                # LeetCode
+                            </a>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://JoelynZhou.github.io/post/820-dan-ci-de-ya-suo-bian-ma/">
+                            <span class="post-title gt-c-content-color-first">820. 单词的压缩编码</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2020-03-28 ·
+                        </time>
+                        
+                            <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
+                                # LeetCode
+                            </a>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://JoelynZhou.github.io/post/914-qia-pai-fen-zu/">
+                            <span class="post-title gt-c-content-color-first">914. 卡牌分组</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2020-03-27 ·
+                        </time>
+                        
+                            <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
+                                # LeetCode
+                            </a>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://JoelynZhou.github.io/post/1-liang-shu-zhi-he/">
+                            <span class="post-title gt-c-content-color-first">1. 两数之和</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2020-03-26 ·
+                        </time>
+                        
+                            <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
+                                # LeetCode
+                            </a>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://JoelynZhou.github.io/post/999-che-de-ke-yong-bu-huo-liang/">
+                            <span class="post-title gt-c-content-color-first">999. 车的可用捕获量</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2020-03-26 ·
+                        </time>
+                        
+                            <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
+                                # LeetCode
+                            </a>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://JoelynZhou.github.io/post/892-san-wei-xing-ti-de-biao-mian-ji/">
+                            <span class="post-title gt-c-content-color-first">892. 三维形体的表面积</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2020-03-26 ·
+                        </time>
+                        
+                            <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
+                                # LeetCode
+                            </a>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://JoelynZhou.github.io/post/macos-bi-zhi-vsc-kuai-jie-jian/">
+                            <span class="post-title gt-c-content-color-first">macOS 壁纸 - VSC 快捷键</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2020-01-16 ·
+                        </time>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://JoelynZhou.github.io/post/macos-bi-zhi-xiao-he-shuang-pin/">
+                            <span class="post-title gt-c-content-color-first">macOS 壁纸 - 小鹤双拼</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2020-01-16 ·
+                        </time>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://JoelynZhou.github.io/post/mojave-shen-se-mo-shi-xia-jin-yong-chrome-shen-se-zhu-ti/">
+                            <span class="post-title gt-c-content-color-first">Mojave 深色模式下禁用 Chrome 深色主题</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2019-12-31 ·
+                        </time>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://JoelynZhou.github.io/post/javascript-zhong-de-this-zhi-xiang-wen-ti/">
+                            <span class="post-title gt-c-content-color-first">javascript 中的 this 指向问题</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2019-11-20 ·
+                        </time>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        
+    </div>
 </div>
 
-    
-        <div class="post-container">
-  
-    <article class="post">
-      <a href="https://JoelynZhou.github.io/post/1162-di-tu-fen-xi/">
-        <h2 class="post-title">1162. 地图分析</h2>
-      </a>
-      <div class="post-info">
-        <span>
-          2020-03-29
-        </span>
-        <span>
-          4 min read
-        </span>
-        
-          <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
-            # LeetCode
-          </a>
-        
-      </div>
-      
-      <div class="post-abstract">
-        
-      </div>
-    </article>
-  
-    <article class="post">
-      <a href="https://JoelynZhou.github.io/post/820-dan-ci-de-ya-suo-bian-ma/">
-        <h2 class="post-title">820. 单词的压缩编码</h2>
-      </a>
-      <div class="post-info">
-        <span>
-          2020-03-28
-        </span>
-        <span>
-          2 min read
-        </span>
-        
-          <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
-            # LeetCode
-          </a>
-        
-      </div>
-      
-      <div class="post-abstract">
-        
-      </div>
-    </article>
-  
-    <article class="post">
-      <a href="https://JoelynZhou.github.io/post/914-qia-pai-fen-zu/">
-        <h2 class="post-title">914. 卡牌分组</h2>
-      </a>
-      <div class="post-info">
-        <span>
-          2020-03-27
-        </span>
-        <span>
-          2 min read
-        </span>
-        
-          <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
-            # LeetCode
-          </a>
-        
-      </div>
-      
-      <div class="post-abstract">
-        
-      </div>
-    </article>
-  
-    <article class="post">
-      <a href="https://JoelynZhou.github.io/post/1-liang-shu-zhi-he/">
-        <h2 class="post-title">1. 两数之和</h2>
-      </a>
-      <div class="post-info">
-        <span>
-          2020-03-26
-        </span>
-        <span>
-          1 min read
-        </span>
-        
-          <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
-            # LeetCode
-          </a>
-        
-      </div>
-      
-      <div class="post-abstract">
-        
-      </div>
-    </article>
-  
-    <article class="post">
-      <a href="https://JoelynZhou.github.io/post/999-che-de-ke-yong-bu-huo-liang/">
-        <h2 class="post-title">999. 车的可用捕获量</h2>
-      </a>
-      <div class="post-info">
-        <span>
-          2020-03-26
-        </span>
-        <span>
-          3 min read
-        </span>
-        
-          <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
-            # LeetCode
-          </a>
-        
-      </div>
-      
-      <div class="post-abstract">
-        
-      </div>
-    </article>
-  
-    <article class="post">
-      <a href="https://JoelynZhou.github.io/post/892-san-wei-xing-ti-de-biao-mian-ji/">
-        <h2 class="post-title">892. 三维形体的表面积</h2>
-      </a>
-      <div class="post-info">
-        <span>
-          2020-03-26
-        </span>
-        <span>
-          2 min read
-        </span>
-        
-          <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tag">
-            # LeetCode
-          </a>
-        
-      </div>
-      
-      <div class="post-abstract">
-        
-      </div>
-    </article>
-  
-    <article class="post">
-      <a href="https://JoelynZhou.github.io/post/macos-bi-zhi-vsc-kuai-jie-jian/">
-        <h2 class="post-title">macOS 壁纸 - VSC 快捷键</h2>
-      </a>
-      <div class="post-info">
-        <span>
-          2020-01-16
-        </span>
-        <span>
-          0 min read
-        </span>
-        
-      </div>
-      
-      <div class="post-abstract">
-        
-      </div>
-    </article>
-  
-    <article class="post">
-      <a href="https://JoelynZhou.github.io/post/macos-bi-zhi-xiao-he-shuang-pin/">
-        <h2 class="post-title">macOS 壁纸 - 小鹤双拼</h2>
-      </a>
-      <div class="post-info">
-        <span>
-          2020-01-16
-        </span>
-        <span>
-          0 min read
-        </span>
-        
-      </div>
-      
-      <div class="post-abstract">
-        
-      </div>
-    </article>
-  
-    <article class="post">
-      <a href="https://JoelynZhou.github.io/post/mojave-shen-se-mo-shi-xia-jin-yong-chrome-shen-se-zhu-ti/">
-        <h2 class="post-title">Mojave 深色模式下禁用 Chrome 深色主题</h2>
-      </a>
-      <div class="post-info">
-        <span>
-          2019-12-31
-        </span>
-        <span>
-          1 min read
-        </span>
-        
-      </div>
-      
-      <div class="post-abstract">
-        
-      </div>
-    </article>
-  
-    <article class="post">
-      <a href="https://JoelynZhou.github.io/post/javascript-zhong-de-this-zhi-xiang-wen-ti/">
-        <h2 class="post-title">javascript 中的 this 指向问题</h2>
-      </a>
-      <div class="post-info">
-        <span>
-          2019-11-20
-        </span>
-        <span>
-          2 min read
-        </span>
-        
-      </div>
-      
-      <div class="post-abstract">
-        
-      </div>
-    </article>
-  
-</div>
-
-    
         <div class="pagination-container">
-  
-    <a href="https://JoelynZhou.github.io/page/2/" class="prev-page">上一页</a>
-  
-  
-    <a href="https://JoelynZhou.github.io/page/4/" class="next-page">下一页</a>
-  
+    
+        <a href="https://JoelynZhou.github.io/page/2/" class="prev-page gt-a-link">上一页</a>
+    
+    
+        <a href="https://JoelynZhou.github.io/page/4/" class="prev-page gt-a-link">下一页</a>
+    
 </div>
 
-    
-        <div class="site-footer">
-  Powered by <a href="https://github.com/JoelynZhou/JoelynZhou.github.io" target="_blank">Joelyn Zhou</a> | 
-  <a class="rss" href="https://JoelynZhou.github.io/atom.xml" target="_blank">RSS</a>
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">多读书 / 多看报 / 少吃零食 / 多睡觉</div>
+    <div class="social-container">
+        
+            
+                <a href="https://github.com/JoelynZhou" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/people/joelynzhou" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/JoelynZhou/JoelynZhou.github.io" target="_blank">Joelyn Zhou</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://JoelynZhou.github.io/atom.xml" target="_blank">RSS</a></a>
+    </div>
 </div>
 
 <script>
   hljs.initHighlightingOnLoad()
-
-  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
-
-  // This should probably be throttled.
-  // Especially because it triggers during smooth scrolling.
-  // https://lodash.com/docs/4.17.10#throttle
-  // You could do like...
-  // window.addEventListener("scroll", () => {
-  //    _.throttle(doThatStuff, 100);
-  // });
-  // Only not doing it here to keep this Pen dependency-free.
-
-  window.addEventListener("scroll", event => {
-    let fromTop = window.scrollY;
-
-    mainNavLinks.forEach((link, index) => {
-      let section = document.getElementById(decodeURI(link.hash).substring(1));
-      let nextSection = null
-      if (mainNavLinks[index + 1]) {
-        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-      }
-      if (section.offsetTop <= fromTop) {
-        if (nextSection) {
-          if (nextSection.offsetTop > fromTop) {
-            link.classList.add("current");
-          } else {
-            link.classList.remove("current");    
-          }
-        } else {
-          link.classList.add("current");
-        }
-      } else {
-        link.classList.remove("current");
-      }
-    });
-  });
-
 </script>
 
-      </div>
     </div>
-  </body>
+</div>
+</body>
 </html>

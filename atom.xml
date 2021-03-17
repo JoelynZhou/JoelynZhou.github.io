@@ -2,14 +2,14 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://JoelynZhou.github.io</id>
     <title>JoelynZhou</title>
-    <updated>2020-07-22T09:58:52.806Z</updated>
+    <updated>2021-03-17T03:29:37.657Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://JoelynZhou.github.io"/>
     <link rel="self" href="https://JoelynZhou.github.io/atom.xml"/>
     <subtitle>多读书 / 多看报 / 少吃零食 / 多睡觉</subtitle>
     <logo>https://JoelynZhou.github.io/images/avatar.png</logo>
     <icon>https://JoelynZhou.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, JoelynZhou</rights>
+    <rights>All rights reserved 2021, JoelynZhou</rights>
     <entry>
         <title type="html"><![CDATA[【Git】git stash 相关记录]]></title>
         <id>https://JoelynZhou.github.io/post/git-git-stash-xiang-guan-ji-lu/</id>

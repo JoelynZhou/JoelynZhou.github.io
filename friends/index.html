@@ -1,10 +1,11 @@
 <html>
+
 <head>
     <meta charset="utf-8" />
 <meta name="description" content="" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<title>289. 生命游戏 | JoelynZhou</title>
+<title>友情链接 | JoelynZhou</title>
 
 <link rel="shortcut icon" href="https://JoelynZhou.github.io/favicon.ico?v=1615951550614">
 
@@ -45,11 +46,12 @@
     gtag('config', 'UA-162422542-1');
 </script>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
+
 <body>
 <div class="main gt-bg-theme-color-first">
-    <style>
+        <div class="main-content">
+            <style>
     /* 导航栏样式 */
     .navbar {
         position: relative;
@@ -210,118 +212,38 @@
         }
     }
 </script>
-    <div class="post-container">
-        <div class="post-detail gt-bg-theme-color-second">
-            <article class="gt-post-content">
-                <h2 class="post-title">
-                    289. 生命游戏
-                </h2>
-                <div class="post-info">
-                    <time class="post-time gt-c-content-color-first">
-                        · 2020-04-02 ·
-                    </time>
-                    
-                        <a href="https://JoelynZhou.github.io/tag/B5xDL_CxK/" class="post-tags">
-                            # LeetCode
-                        </a>
-                    
+            <div class="post-container">
+                <div class="post-detail">
+                    <article>
+                        <!-- <div class="post-content-wrapper"> -->
+                            <div class="post-content">
+                                <div class="friends-desc">
+                                    
+                                </div>
+                                <h3 id="linklist">友链列表</h3>
+                                
+                                    
+                                        <div class="friend-box">
+                                            <img class="friend-avatar" src="">
+                                            <div class="flink-info">
+                                                
+                                                        <a class="gt-c-content-color-first" href="" target="_blank"></a>
+                                                        
+                                                <br />
+                                                <div class="flink-info-desc gt-c-content-color-first">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                
+                            </div>
+                        <!-- </div> -->
+                    </article>
                 </div>
-                <div class="post-content">
-                    <h2 id="题目">题目</h2>
-<p>根据 百度百科 ，生命游戏，简称为生命，是英国数学家约翰·何顿·康威在 1970 年发明的细胞自动机。</p>
-<p>给定一个包含 m × n 个格子的面板，每一个格子都可以看成是一个细胞。每个细胞都具有一个初始状态：1 即为活细胞（live），或 0 即为死细胞（dead）。每个细胞与其八个相邻位置（水平，垂直，对角线）的细胞都遵循以下四条生存定律：</p>
-<p>如果活细胞周围八个位置的活细胞数少于两个，则该位置活细胞死亡；<br>
-如果活细胞周围八个位置有两个或三个活细胞，则该位置活细胞仍然存活；<br>
-如果活细胞周围八个位置有超过三个活细胞，则该位置活细胞死亡；<br>
-如果死细胞周围正好有三个活细胞，则该位置死细胞复活；<br>
-根据当前状态，写一个函数来计算面板上所有细胞的下一个（一次更新后的）状态。下一个状态是通过将上述规则同时应用于当前状态下的每个细胞所形成的，其中细胞的出生和死亡是同时发生的。</p>
-<h2 id="示例">示例</h2>
-<pre><code>输入： 
-[
-  [0,1,0],
-  [0,0,1],
-  [1,1,1],
-  [0,0,0]
-]
-输出：
-[
-  [0,0,0],
-  [1,0,1],
-  [0,1,1],
-  [0,1,0]
-]
-</code></pre>
-<h2 id="题解">题解</h2>
-<pre><code class="language-javascript">/* eslint-disable indent */
-/**
- * @param {number[][]} board
- * @return {void} Do not return anything, modify board in-place instead.
- * 细胞自动机模型
- * 分析：
- * 根据百度百科描述，生存规律总结如下：
- * 1. 细胞周围有三个细胞为生，则该细胞为生
- * 2. 细胞周围有两个细胞为生，则该细胞维持原状态
- * 3. 其他情况则死
- * 
- * 这一题最主要的问题在于，不需要 return 新数组，而是修改源数组，
- * 但是每个细胞的状态是依赖于其他细胞的初始状态，如果修改源数组，会影响到后面的计算结果。
- * 除了提示中提到的原地算法，最简单的会想到复制一份源数组，用于计算
- */
-var gameOfLife = function(board) {
-	if (board.length === 0) {
-		return board;
-	}
-	const copyBoard = JSON.parse(JSON.stringify(board)); // 二维数组的拷贝不能用 Array.slice(0)
-	for (let i = 0; i &lt; board.length; i++) {
-		for (let j = 0; j &lt; board[i].length; j++) {
-			const num = nearAliveNum(copyBoard, i, j); //周围的活细胞个数
-			if (num === 3) {
-				board[i][j] = 1;
-			} else if (num !== 2) {
-				board[i][j] = 0;
-			}
-		}
-	}
-	return board;
-};
-// 查询单个细胞周围的活细胞个数
-const nearAliveNum = (origin, x, y) =&gt; {
-	let count = 0;
-	const step = [ -1, 0, 1 ];
-	for (let m = 0; m &lt; 3; m++) {
-		for (let n = 0; n &lt; 3; n++) {
-			const a = x + step[m];
-			const b = y + step[n];
-			if (a &lt; 0 || a &gt;= origin.length || b &lt; 0 || b &gt;= origin[0].length) {
-				continue;
-			} else if (origin[a][b] === 1) {
-				count++;
-			}
-		}
-	}
-	return count - origin[x][y];
-};
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdfa9f3o2wj30v207cq36.jpg" alt="" loading="lazy"></figure>
-
-                </div>
-            </article>
-        </div>
-
-        
-            <div class="next-post">
-                <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://JoelynZhou.github.io/post/20-you-xiao-de-gua-hao/" class="post-title gt-a-link">
-                    20. 有效的括号
-                </a>
-            </div>
-        
-
-        
-
-        
-            
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css">
+                
+                    
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css">
 <script src="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
 <script>
     // md5.min.js
@@ -364,14 +286,15 @@ const nearAliveNum = (origin, x, y) =&gt; {
 
 </script>
 
-            
+                    
 
-            
-        
+                    
+                
+            </div>
 
-        
 
-        <div class="site-footer gt-c-content-color-first">
+
+            <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">多读书 / 多看报 / 少吃零食 / 多睡觉</div>
     <div class="social-container">
         
@@ -409,7 +332,8 @@ const nearAliveNum = (origin, x, y) =&gt; {
   hljs.initHighlightingOnLoad()
 </script>
 
+        </div>
     </div>
-</div>
 </body>
+
 </html>
